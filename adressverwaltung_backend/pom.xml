@@ -9,13 +9,42 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>de.dhbw.ase</groupId>
     <artifactId>adressverwaltung_backend</artifactId>
 
+    <name>de.dhbw.ase.adressverwaltung_backend</name>
+
+
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>19</maven.compiler.source>
+        <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.dhbw.ase</groupId>
+            <artifactId>adressverwaltung_model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+        <!--        Testing-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.spotify</groupId>
+            <artifactId>hamcrest-pojo</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
