@@ -8,7 +8,7 @@ public class PhoneNumber {
     private boolean mobile;
     private String number;
 
-    private LocalDateTime created;
+    private final LocalDateTime created;
     private LocalDateTime lastModified;
 
 

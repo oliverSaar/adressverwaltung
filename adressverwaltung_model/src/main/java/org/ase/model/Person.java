@@ -10,7 +10,7 @@ public class Person {
     private List<Address> addresses;
     private List<PhoneNumber> phoneNumbers;
 
-    private LocalDateTime created;
+    private final LocalDateTime created;
     private LocalDateTime lastModified;
 
 

@@ -9,7 +9,7 @@ public class Address {
     private String city;
     private String zipCode;
     private String country;
-    private LocalDateTime created;
+    private final LocalDateTime created;
     private LocalDateTime lastModified;
 
 
