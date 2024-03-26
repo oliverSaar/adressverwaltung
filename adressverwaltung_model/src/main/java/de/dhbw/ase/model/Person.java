@@ -1,31 +1,39 @@
-package org.ase.model;
+package de.dhbw.ase.model;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class Person {
 
+    private UUID id;
     private String firstName;
     private String lastName;
     private List<Address> addresses;
     private List<PhoneNumber> phoneNumbers;
 
-    private final LocalDateTime created;
+    private LocalDateTime created;
     private LocalDateTime lastModified;
 
 
-
     public Person(String firstName, String lastName, List<Address> addresses, List<PhoneNumber> phoneNumbers) {
+
+        this.id = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
 
-        assert this.addresses != null;
-        this.addresses.addAll(addresses);
-        assert this.phoneNumbers != null;
-        this.phoneNumbers.addAll(phoneNumbers);
+        if (!addresses.isEmpty()) {
+            this.addresses.addAll(addresses);
+        }
+
+        if (!phoneNumbers.isEmpty()) {
+            this.phoneNumbers.addAll(phoneNumbers);
+        }
+
         this.created = LocalDateTime.now();
         this.lastModified = null;
     }
+
 
     public String getFirstName() {
         return firstName;
@@ -33,6 +41,8 @@ public class Person {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+        setLastModified(LocalDateTime.now());
+
     }
 
     public String getLastName() {
@@ -41,6 +51,8 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+        setLastModified(LocalDateTime.now());
+
     }
 
     public List<Address> getAddresses() {
@@ -49,6 +61,8 @@ public class Person {
 
     public void addAddress(Address address) {
         this.addresses.add(address);
+        setLastModified(LocalDateTime.now());
+
     }
 
     public List<PhoneNumber> getPhoneNumbers() {
@@ -57,6 +71,7 @@ public class Person {
 
     public void addPhoneNumber(PhoneNumber phoneNumber) {
         this.phoneNumbers.add(phoneNumber);
+        setLastModified(LocalDateTime.now());
     }
 
     public LocalDateTime getLastModified() {
@@ -70,4 +85,5 @@ public class Person {
     public LocalDateTime getCreated() {
         return created;
     }
+
 }

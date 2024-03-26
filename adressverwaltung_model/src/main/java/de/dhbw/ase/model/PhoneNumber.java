@@ -1,10 +1,11 @@
-package org.ase.model;
+package de.dhbw.ase.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class PhoneNumber {
 
-
+    private UUID id;
     private boolean mobile;
     private String number;
 
@@ -13,6 +14,7 @@ public class PhoneNumber {
 
 
     public PhoneNumber(boolean mobile, String number) {
+        this.id = UUID.randomUUID();
         this.mobile = mobile;
         this.number = number;
         this.created = LocalDateTime.now();
@@ -25,6 +27,7 @@ public class PhoneNumber {
 
     public void setMobile(boolean mobile) {
         this.mobile = mobile;
+        setLastModified(LocalDateTime.now());
     }
 
     public String getNumber() {
@@ -33,6 +36,8 @@ public class PhoneNumber {
 
     public void setNumber(String number) {
         this.number = number;
+        setLastModified(LocalDateTime.now());
+
     }
 
     public LocalDateTime getCreated() {

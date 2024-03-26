@@ -1,9 +1,11 @@
-package org.ase.model;
+package de.dhbw.ase.model;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class Address {
 
+    private UUID id;
     private String streetName;
     private String houseNumber;
     private String city;
@@ -14,6 +16,7 @@ public class Address {
 
 
     public Address(String streetName, String houseNumber, String city, String zipCode, String country) {
+        this.id = UUID.randomUUID();
         this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.city = city;
@@ -21,6 +24,7 @@ public class Address {
         this.country = country;
         this.created = LocalDateTime.now();
         this.lastModified = null;
+
     }
 
     public String getStreetName() {
@@ -29,6 +33,8 @@ public class Address {
 
     public void setStreetName(String streetName) {
         this.streetName = streetName;
+        setLastModified(LocalDateTime.now());
+
     }
 
     public String getHouseNumber() {
@@ -37,6 +43,8 @@ public class Address {
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
+        setLastModified(LocalDateTime.now());
+
     }
 
     public String getCity() {
@@ -45,6 +53,8 @@ public class Address {
 
     public void setCity(String city) {
         this.city = city;
+        setLastModified(LocalDateTime.now());
+
     }
 
     public String getZipCode() {
@@ -53,6 +63,8 @@ public class Address {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+        setLastModified(LocalDateTime.now());
+
     }
 
     public String getCountry() {
@@ -61,6 +73,8 @@ public class Address {
 
     public void setCountry(String country) {
         this.country = country;
+        setLastModified(LocalDateTime.now());
+
     }
 
     public LocalDateTime getCreated() {
@@ -71,4 +85,7 @@ public class Address {
         return lastModified;
     }
 
+    public void setLastModified(LocalDateTime lastModified) {
+        this.lastModified = lastModified;
+    }
 }
