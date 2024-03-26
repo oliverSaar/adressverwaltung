@@ -22,12 +22,16 @@ public class Person {
         this.firstName = firstName;
         this.lastName = lastName;
 
-        if (!addresses.isEmpty()) {
-            this.addresses.addAll(addresses);
+        if (addresses != null) {
+            if (!addresses.isEmpty()) {
+                this.addresses.addAll(addresses);
+            }
         }
 
-        if (!phoneNumbers.isEmpty()) {
-            this.phoneNumbers.addAll(phoneNumbers);
+        if (phoneNumbers != null){
+            if(!phoneNumbers.isEmpty()){
+                this.phoneNumbers.addAll(phoneNumbers);
+            }
         }
 
         this.created = LocalDateTime.now();
