@@ -1,26 +1,35 @@
 package de.dhbw.ase.model;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 public class Person {
 
+
+
     private UUID id;
     private String firstName;
     private String lastName;
+
+    private LocalDate dateOfBirth;
     private List<Address> addresses;
     private List<PhoneNumber> phoneNumbers;
 
+    private List<Person> following;
     private LocalDateTime created;
     private LocalDateTime lastModified;
 
 
-    public Person(String firstName, String lastName, List<Address> addresses, List<PhoneNumber> phoneNumbers) {
+
+    public Person(String firstName, String lastName, int day, int month, int year, List<Address> addresses, List<PhoneNumber> phoneNumbers) {
 
         this.id = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
+        this.dateOfBirth = LocalDate.of(year, month, day);
 
         if (addresses != null) {
             if (!addresses.isEmpty()) {
@@ -28,8 +37,8 @@ public class Person {
             }
         }
 
-        if (phoneNumbers != null){
-            if(!phoneNumbers.isEmpty()){
+        if (phoneNumbers != null) {
+            if (!phoneNumbers.isEmpty()) {
                 this.phoneNumbers.addAll(phoneNumbers);
             }
         }
@@ -39,6 +48,10 @@ public class Person {
     }
 
 
+
+    public UUID getId() {
+        return id;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -59,6 +72,14 @@ public class Person {
 
     }
 
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public List<Address> getAddresses() {
         return addresses;
     }
@@ -75,6 +96,20 @@ public class Person {
 
     public void addPhoneNumber(PhoneNumber phoneNumber) {
         this.phoneNumbers.add(phoneNumber);
+        setLastModified(LocalDateTime.now());
+    }
+
+    public List<Person> getFollowing() {
+        return following;
+    }
+
+    public void addFollowing(Person person) {
+        this.following.add(person);
+        setLastModified(LocalDateTime.now());
+    }
+
+    public void removeFollowing(Person person) {
+        this.following.remove(person);
         setLastModified(LocalDateTime.now());
     }
 
