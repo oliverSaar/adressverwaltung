@@ -9,13 +9,13 @@ public class Address {
     private String streetName;
     private String houseNumber;
     private String city;
-    private String zipCode;
+    private int zipCode;
     private String country;
     private final LocalDateTime created;
     private LocalDateTime lastModified;
 
 
-    public Address(String streetName, String houseNumber, String city, String zipCode, String country) {
+    public Address(String streetName, String houseNumber, String city, int zipCode, String country) {
         this.id = UUID.randomUUID();
         this.streetName = streetName;
         this.houseNumber = houseNumber;
@@ -57,11 +57,11 @@ public class Address {
 
     }
 
-    public String getZipCode() {
+    public int getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
+    public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
         setLastModified(LocalDateTime.now());
 
