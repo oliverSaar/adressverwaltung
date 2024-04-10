@@ -53,10 +53,13 @@ public class PersonView {
 
             case 7:
                 addAddress();
+
             case 8:
                 deleteAddress();
+
             case 9:
                 addPhoneNumber();
+
             case 10:
                 deletePhoneNumber();
 
@@ -74,6 +77,7 @@ public class PersonView {
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen");
         int phoneNumberID = scanner.nextInt();
         personRestService.deletePhoneNumber(personID, phoneNumberID);
+        scanner.close();
 
     }
 
@@ -84,6 +88,7 @@ public class PersonView {
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen");
         int phoneNumberID = scanner.nextInt();
         personRestService.addPhoneNumber(personID, phoneNumberID);
+        scanner.close();
 
     }
 
@@ -94,6 +99,7 @@ public class PersonView {
         System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen");
         int addressID = scanner.nextInt();
         personRestService.deleteAddress(personID, addressID);
+        scanner.close();
     }
 
     private void addAddress() {
@@ -103,12 +109,14 @@ public class PersonView {
         System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen");
         int addressID = scanner.nextInt();
         personRestService.addAddress(personID, addressID);
+        scanner.close();
     }
 
     private void followPerson() {
         System.out.println("Bitte geben Sie die ID der Person ein, der Sie folgen möchten: ");
         int id = scanner.nextInt();
         personRestService.followPerson(id);
+        scanner.close();
     }
 
     private void deletePerson() {
@@ -116,24 +124,18 @@ public class PersonView {
         System.out.println("Geben Sie die ID der Person ein, die gelöscht werden soll: ");
         int id = scanner.nextInt();
         personRestService.deletePerson(id);
+        scanner.close();
 
     }
 
     private void changePerson() {
-        System.out.println("Was wollen Sie an der Person ändern?");
-        System.out.println("1. Daten");
-        System.out.println("2. Adressen");
-        System.out.println("3. Telefonnummern");
 
-        int input = scanner.nextInt();
-        switch (input) {
-            case 1:
-                System.out.println("Bitte geben Sie die ID der Person ein, die Sie ändern möchten: ");
-                int id = scanner.nextInt();
-                Person person = datenEingabe();
-                personRestService.updatePerson(id, person);
-        }
+        System.out.println("Bitte geben Sie die ID der Person ein, die Sie ändern möchten: ");
+        int id = scanner.nextInt();
+        Person person = datenEingabe();
+        personRestService.updatePerson(id, person);
     }
+
 
     private Person datenEingabe() {
 
@@ -165,6 +167,8 @@ public class PersonView {
             year = scanner.nextInt();
         }
 
+        scanner.close();
+
         return new Person(firstName, lastName, day, month, year, null, null);
     }
 
@@ -178,6 +182,4 @@ public class PersonView {
         personRestService.addPerson(person);
 
     }
-
-
 }

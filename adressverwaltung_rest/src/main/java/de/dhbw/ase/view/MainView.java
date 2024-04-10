@@ -10,7 +10,8 @@ public class MainView {
     AddressView addressView = new AddressView();
 
     PhoneNumberView phoneNumberView = new PhoneNumberView();
-    public void defaultView(){
+
+    public void defaultView() {
 
         int input;
 
@@ -35,7 +36,7 @@ public class MainView {
             default:
                 break;
         }
-
+        scanner.close();
 
     }
 }

@@ -26,12 +26,16 @@ public class AddressView {
         switch (input) {
             case 1:
                 addressRestService.getAllAddresses();
+                scanner.close();
             case 2:
                 System.out.print("Bitte geben Sie die ID der Adresse ein: ");
                 addressRestService.getAddress(scanner.nextInt());
+                scanner.close();
             case 3:
                 addAddress();
+                scanner.close();
             default:
+                scanner.close();
                 break;
 
         }
