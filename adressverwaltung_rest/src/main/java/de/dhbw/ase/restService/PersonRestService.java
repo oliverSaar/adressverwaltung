@@ -22,4 +22,17 @@ public class PersonRestService {
 
     public void followPerson(int id) {
     }
+
+    public void deleteAddress(int personID, int addressID) {
+        
+    }
+
+    public void addAddress(int personID, int addressID) {
+    }
+
+    public void addPhoneNumber(int personID, int phoneNumberID) {
+    }
+
+    public void deletePhoneNumber(int personID, int phoneNumberID) {
+    }
 }

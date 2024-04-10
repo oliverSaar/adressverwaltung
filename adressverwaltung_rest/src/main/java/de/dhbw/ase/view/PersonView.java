@@ -23,6 +23,10 @@ public class PersonView {
         System.out.println("4. Eine Person aktualisieren");
         System.out.println("5. Eine Person löschen");
         System.out.println("6. Einer Person folgen");
+        System.out.println("7. Adresse zu Person hinzufügen");
+        System.out.println("8. Adresse von Person entfernen");
+        System.out.println("9. Telefonnummer zu Person hinzufügen");
+        System.out.println("10. Telefonnummer von Person entfernen");
 
 
         input = scanner.nextInt();
@@ -47,10 +51,58 @@ public class PersonView {
             case 6:
                 followPerson();
 
+            case 7:
+                addAddress();
+            case 8:
+                deleteAddress();
+            case 9:
+                addPhoneNumber();
+            case 10:
+                deletePhoneNumber();
+
             default:
+                scanner.close();
                 break;
         }
 
+    }
+
+    private void deletePhoneNumber() {
+        System.out.print("Bitte geben Sie die ID der Person an, von welcher Sie eine Telefonnummer löschen möchten: ");
+        int personID = scanner.nextInt();
+        System.out.println();
+        System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen");
+        int phoneNumberID = scanner.nextInt();
+        personRestService.deletePhoneNumber(personID, phoneNumberID);
+
+    }
+
+    private void addPhoneNumber() {
+        System.out.print("Bitte geben Sie die ID der Person an, zu der Sie eine Telefonnummer hinzufügen wollen: ");
+        int personID = scanner.nextInt();
+        System.out.println();
+        System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen");
+        int phoneNumberID = scanner.nextInt();
+        personRestService.addPhoneNumber(personID, phoneNumberID);
+
+    }
+
+    private void deleteAddress() {
+        System.out.print("Bitte geben Sie die ID der Person an, von welcher Sie eine Adresse löschen möchten: ");
+        int personID = scanner.nextInt();
+        System.out.println();
+        System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen");
+        int addressID = scanner.nextInt();
+        personRestService.deleteAddress(personID, addressID);
+    }
+
+    private void addAddress() {
+        System.out.print("Bitte geben Sie die ID der Person an, zu der Sie eine Adresse hinzufügen wollen: ");
+        int personID = scanner.nextInt();
+        System.out.println();
+        System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen");
+        int addressID = scanner.nextInt();
+        personRestService.addAddress(personID, addressID);
     }
 
     private void followPerson() {
@@ -91,8 +143,6 @@ public class PersonView {
         int month;
         int year;
 
-
-        //TODO wird geskippt
         System.out.print("Vorname: ");
         firstName = scanner.next();
         System.out.println();
