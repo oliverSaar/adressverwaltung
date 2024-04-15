@@ -3,9 +3,11 @@ package de.dhbw.ase.daoimpl;
 import de.dhbw.ase.dao.PersonDAO;
 import de.dhbw.ase.model.Person;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class PersonDAOImpl implements PersonDAO {
 
@@ -13,14 +15,10 @@ public class PersonDAOImpl implements PersonDAO {
     List<Person> persons = null;
 
     @Override
-    public Optional<Person> getPerson(final UUID id) {
-        for (Person person : persons) {
-            if (person.getId() == id) {
-                return Optional.of(person);
-            }
+    public Optional<Person> getPerson(final AtomicLong id) {
+        //TODO Null check?
+        return Optional.ofNullable(persons.get(id.intValue()));
         }
-        return Optional.empty();
-    }
 
     @Override
     public List<Person> getPersons() {
@@ -35,6 +33,15 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public void update(Person person) {
+        for(Person p : persons){
+            if(p.getId() == person.getId()){
+                p.setAddresses(person.getAddresses());
+                p.setPhoneNumbers(person.getPhoneNumbers());
+                p.setFirstName(person.getFirstName());
+                p.setLastName(person.getLastName());
+                p.setDateOfBirth(person.getDateOfBirth());
+            }
+        }
 
     }
 
