@@ -1,11 +1,11 @@
 package de.dhbw.ase.model;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Address {
 
-    private UUID id;
+    private AtomicLong id;
     private String streetName;
     private String houseNumber;
     private String city;
@@ -15,8 +15,8 @@ public class Address {
     private LocalDateTime lastModified;
 
 
-    public Address(String streetName, String houseNumber, String city, int zipCode, String country) {
-        this.id = UUID.randomUUID();
+    public Address(AtomicLong id, String streetName, String houseNumber, String city, int zipCode, String country) {
+        this.id = id;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.city = city;
@@ -25,6 +25,10 @@ public class Address {
         this.created = LocalDateTime.now();
         this.lastModified = null;
 
+    }
+
+    public AtomicLong getId() {
+        return id;
     }
 
     public String getStreetName() {

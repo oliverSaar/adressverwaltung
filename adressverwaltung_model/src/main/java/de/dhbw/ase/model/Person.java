@@ -1,16 +1,14 @@
 package de.dhbw.ase.model;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Person {
 
 
-
-    private UUID id;
+    private AtomicLong id;
     private String firstName;
     private String lastName;
 
@@ -23,10 +21,9 @@ public class Person {
     private LocalDateTime lastModified;
 
 
+    public Person(AtomicLong id, String firstName, String lastName, int day, int month, int year, List<Address> addresses, List<PhoneNumber> phoneNumbers) {
 
-    public Person(String firstName, String lastName, int day, int month, int year, List<Address> addresses, List<PhoneNumber> phoneNumbers) {
-
-        this.id = UUID.randomUUID();
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = LocalDate.of(year, month, day);
@@ -48,10 +45,10 @@ public class Person {
     }
 
 
-
-    public UUID getId() {
+    public AtomicLong getId() {
         return id;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -87,7 +84,14 @@ public class Person {
     public void addAddress(Address address) {
         this.addresses.add(address);
         setLastModified(LocalDateTime.now());
+    }
 
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+
+    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
     }
 
     public List<PhoneNumber> getPhoneNumbers() {
