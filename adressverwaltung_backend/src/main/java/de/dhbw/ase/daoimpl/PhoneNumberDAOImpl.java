@@ -21,7 +21,7 @@ public class PhoneNumberDAOImpl implements PhoneNumberDAO {
     }
 
     @Override
-    public void addPhoneNumber(PhoneNumber phoneNumber) {
+    public void insertPhoneNumber(PhoneNumber phoneNumber) {
 
         phoneNumbers.add(phoneNumber);
     }

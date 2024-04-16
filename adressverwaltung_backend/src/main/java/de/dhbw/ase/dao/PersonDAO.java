@@ -12,8 +12,8 @@ public interface PersonDAO {
     List<Person> getPersons();
 
 
-    void insert(Person person);
+    void insertPerson(Person person);
 
-    void update(Person person);
+    void updatePerson(Person person);
 
 }

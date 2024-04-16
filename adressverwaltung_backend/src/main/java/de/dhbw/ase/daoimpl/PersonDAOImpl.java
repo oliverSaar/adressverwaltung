@@ -26,13 +26,13 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public void insert(Person person) {
+    public void insertPerson(Person person) {
         persons.add(person);
 
     }
 
     @Override
-    public void update(Person person) {
+    public void updatePerson(Person person) {
         for(Person p : persons){
             if(p.getId() == person.getId()){
                 p.setAddresses(person.getAddresses());
