@@ -42,7 +42,8 @@ public class PersonService {
                 .orElseThrow(() -> new IllegalArgumentException("Person mit der ID: " + id + " konnte nicht gefunden werden"));
     }
 
-    public void addPerson(final Person person) {
+    public void addPerson(Person person) {
+        person.setId(getNextId());
         personDAO.insertPerson(person);
 
     }
