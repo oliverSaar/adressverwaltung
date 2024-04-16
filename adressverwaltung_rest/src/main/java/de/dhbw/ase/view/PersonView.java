@@ -5,6 +5,7 @@ import de.dhbw.ase.restService.PersonRestService;
 
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class PersonView {
 
@@ -138,7 +139,7 @@ public class PersonView {
 
 
     private Person datenEingabe() {
-
+        AtomicLong id = new AtomicLong(0);
         String firstName;
         String lastName;
         int day;
@@ -169,7 +170,7 @@ public class PersonView {
 
         scanner.close();
 
-        return new Person(firstName, lastName, day, month, year, null, null);
+        return new Person(id, firstName, lastName, day, month, year, null, null);
     }
 
     private void addPerson() {

@@ -4,6 +4,7 @@ import de.dhbw.ase.model.Address;
 import de.dhbw.ase.restService.AddressRestService;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class AddressView {
 
@@ -43,6 +44,7 @@ public class AddressView {
 
     private void addAddress() {
 
+        AtomicLong id = new AtomicLong(0);
         String country;
         int zipCode;
         String city;
@@ -64,7 +66,7 @@ public class AddressView {
         System.out.println("Bitte geben Sie die Hausnummer ein:");
         houseNumber = scanner.next();
 
-        Address address = new Address(streetName, houseNumber, city, zipCode, country);
+        Address address = new Address(id, streetName, houseNumber, city, zipCode, country);
         addressRestService.addAddress(address);
     }
 }
