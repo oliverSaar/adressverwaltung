@@ -11,8 +11,10 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class PersonDAOImpl implements PersonDAO {
 
-
-    List<Person> persons = null;
+AtomicLong id = new AtomicLong(0);
+    List<Person> persons = List.of(
+            new Person(id, "Hans", "Mueller", 1, 1, 1998, List.of(), List.of())
+    );
 
     @Override
     public Optional<Person> getPerson(final long id) {

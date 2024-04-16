@@ -18,8 +18,9 @@ public class PersonService {
 
     }
 
+    //TODO kann ich hier public lassen?
     @Inject
-    PersonService(final PersonDAO personDAO) {
+    public PersonService(final PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
@@ -30,7 +31,7 @@ public class PersonService {
         return ID_COUNTER.incrementAndGet();
     }
 
-    public List<Person> getPersons() {
+    public List<Person> getAllPersons() {
         return personDAO.getPersons();
     }
 

@@ -1,7 +1,11 @@
 package de.dhbw.ase.view;
 
+import de.dhbw.ase.dao.PersonDAO;
+import de.dhbw.ase.daoimpl.PersonDAOImpl;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restService.PersonRestService;
+import de.dhbw.ase.service.PersonService;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -11,7 +15,12 @@ public class PersonView {
 
     Scanner scanner = new Scanner(System.in);
 
-    PersonRestService personRestService = new PersonRestService();
+//    PersonRestService personRestService = new PersonRestService();
+
+
+    PersonDAO personDAO = new PersonDAOImpl();
+    PersonService personService = new PersonService(personDAO);
+    PersonRestHelperService personRestService = new PersonRestHelperService(personService);
 
     public void defaultView() {
 
@@ -34,36 +43,38 @@ public class PersonView {
 
         switch (input) {
             case 1:
-                personRestService.getAllPersons();
+                System.out.println(personRestService.getAllPersons().stream().toList());
+//                personRestService.getAllPersons();
+                break;
 
             case 2:
                 System.out.println("Geben Sie die ID der Person ein, die angezeigt werden soll: ");
                 personRestService.getPerson(scanner.nextInt());
-
+                break;
             case 3:
                 addPerson();
-
+                break;
             case 4:
                 changePerson();
-
+                break;
             case 5:
                 deletePerson();
-
+                break;
             case 6:
                 followPerson();
-
+                break;
             case 7:
                 addAddress();
-
+                break;
             case 8:
                 deleteAddress();
-
+                break;
             case 9:
                 addPhoneNumber();
-
+                break;
             case 10:
                 deletePhoneNumber();
-
+                break;
             default:
                 scanner.close();
                 break;
@@ -168,7 +179,7 @@ public class PersonView {
             year = scanner.nextInt();
         }
 
-        scanner.close();
+//        scanner.close();
 
         return new Person(id, firstName, lastName, day, month, year, null, null);
     }
