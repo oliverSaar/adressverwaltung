@@ -15,9 +15,9 @@ public class PersonDAOImpl implements PersonDAO {
     List<Person> persons = null;
 
     @Override
-    public Optional<Person> getPerson(final AtomicLong id) {
+    public Optional<Person> getPerson(final long id) {
         //TODO Null check?
-        return Optional.ofNullable(persons.get(id.intValue()));
+        return Optional.ofNullable(persons.get((int)id));
         }
 
     @Override

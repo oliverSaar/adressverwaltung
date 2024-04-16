@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public interface PhoneNumberDAO {
 
-    Optional<PhoneNumber> getPhoneNumber(AtomicLong id);
+    Optional<PhoneNumber> getPhoneNumber(long id);
 
     List<PhoneNumber> getPhoneNumbers();
 

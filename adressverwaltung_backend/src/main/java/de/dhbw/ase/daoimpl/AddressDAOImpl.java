@@ -14,8 +14,8 @@ public class AddressDAOImpl implements AddressDAO {
 
 
     @Override
-    public Optional<Address> getAddress(AtomicLong id) {
-        return Optional.ofNullable(addresses.get(id.intValue()));
+    public Optional<Address> getAddress(long id) {
+        return Optional.ofNullable(addresses.get((int)id));
     }
 
     @Override

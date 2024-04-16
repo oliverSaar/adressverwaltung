@@ -5,15 +5,14 @@ import de.dhbw.ase.model.PhoneNumber;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class PhoneNumberDAOImpl implements PhoneNumberDAO {
 
     private List<PhoneNumber> phoneNumbers;
 
     @Override
-    public Optional<PhoneNumber> getPhoneNumber(AtomicLong id) {
-        return Optional.ofNullable(phoneNumbers.get(id.intValue()));
+    public Optional<PhoneNumber> getPhoneNumber(long id) {
+        return Optional.ofNullable(phoneNumbers.get((int) id));
     }
 
     @Override
