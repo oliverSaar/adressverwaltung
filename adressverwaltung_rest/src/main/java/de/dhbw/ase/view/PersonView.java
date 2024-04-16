@@ -4,12 +4,11 @@ import de.dhbw.ase.dao.PersonDAO;
 import de.dhbw.ase.daoimpl.PersonDAOImpl;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
-import de.dhbw.ase.restService.PersonRestService;
 import de.dhbw.ase.service.PersonService;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class PersonView {
 
@@ -26,6 +25,58 @@ public class PersonView {
 
         int input;
 
+        consoleMenu();
+
+
+        boolean done = false;
+        while (!done) {
+
+            input = scanner.nextInt();
+            switch (input) {
+                case 1:
+                    getAllPersons();
+                    consoleMenu();
+                    break;
+                case 2:
+                    System.out.println("Geben Sie die ID der Person ein, die angezeigt werden soll: ");
+                    personRestService.getPerson(scanner.nextInt());
+                    break;
+                case 3:
+                    addPerson();
+                    break;
+                case 4:
+                    changePerson();
+                    break;
+                case 5:
+                    deletePerson();
+                    break;
+                case 6:
+                    followPerson();
+                    break;
+                case 7:
+                    addAddress();
+                    break;
+                case 8:
+                    deleteAddress();
+                    break;
+                case 9:
+                    addPhoneNumber();
+                    break;
+                case 10:
+                    deletePhoneNumber();
+                    break;
+                case 11:
+                    done = true;
+                    break;
+                default:
+                    scanner.close();
+                    break;
+            }
+        }
+
+    }
+
+    private static void consoleMenu() {
         System.out.println("Welche Operation wollen Sie ausführen? Tippen Sie dazu die Nummer ein.");
         System.out.println("1. Alle Personen anzeigen");
         System.out.println("2. Eine Person anzeigen (ID benötigt)");
@@ -37,49 +88,27 @@ public class PersonView {
         System.out.println("8. Adresse von Person entfernen");
         System.out.println("9. Telefonnummer zu Person hinzufügen");
         System.out.println("10. Telefonnummer von Person entfernen");
+    }
 
+    private void getAllPersons() {
 
-        input = scanner.nextInt();
+        List<Person> persons = personRestService.getAllPersons().stream().toList();
 
-        switch (input) {
-            case 1:
-                System.out.println(personRestService.getAllPersons().stream().toList());
-//                personRestService.getAllPersons();
-                break;
+        String leftAlignFormat = "| %-5d | %-15s | %-15s |%n";
 
-            case 2:
-                System.out.println("Geben Sie die ID der Person ein, die angezeigt werden soll: ");
-                personRestService.getPerson(scanner.nextInt());
-                break;
-            case 3:
-                addPerson();
-                break;
-            case 4:
-                changePerson();
-                break;
-            case 5:
-                deletePerson();
-                break;
-            case 6:
-                followPerson();
-                break;
-            case 7:
-                addAddress();
-                break;
-            case 8:
-                deleteAddress();
-                break;
-            case 9:
-                addPhoneNumber();
-                break;
-            case 10:
-                deletePhoneNumber();
-                break;
-            default:
-                scanner.close();
-                break;
+        System.out.format("+-------+-----------------+-----------------+%n");
+
+        System.out.format("| ID    | First Name      | Last Name       |%n");
+        System.out.format("+-------+-----------------+-----------------+%n");
+
+        for (Person p : persons) {
+
+            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName());
         }
+        System.out.format("+-------+-----------------+-----------------+%n");
 
+
+//                personRestService.getAllPersons();
     }
 
     private void deletePhoneNumber() {
@@ -150,7 +179,7 @@ public class PersonView {
 
 
     private Person datenEingabe() {
-        AtomicLong id = new AtomicLong(0);
+        long id = 0;
         String firstName;
         String lastName;
         int day;
