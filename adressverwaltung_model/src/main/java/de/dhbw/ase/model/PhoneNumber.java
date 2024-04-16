@@ -1,11 +1,10 @@
 package de.dhbw.ase.model;
 
 import java.time.LocalDateTime;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class PhoneNumber {
 
-    private AtomicLong id;
+    private long id;
     private boolean mobile;
     private String number;
 
@@ -13,7 +12,7 @@ public class PhoneNumber {
     private LocalDateTime lastModified;
 
 
-    public PhoneNumber(AtomicLong id, boolean mobile, String number) {
+    public PhoneNumber(long id, boolean mobile, String number) {
         this.id = id;
         this.mobile = mobile;
         this.number = number;
@@ -21,8 +20,12 @@ public class PhoneNumber {
         this.lastModified = null;
     }
 
-    public AtomicLong getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public boolean isMobile() {

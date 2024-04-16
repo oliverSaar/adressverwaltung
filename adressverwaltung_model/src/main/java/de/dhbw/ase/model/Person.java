@@ -3,12 +3,11 @@ package de.dhbw.ase.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class Person {
 
 
-    private AtomicLong id;
+    private long id;
     private String firstName;
     private String lastName;
 
@@ -21,7 +20,7 @@ public class Person {
     private LocalDateTime lastModified;
 
 
-    public Person(AtomicLong id, String firstName, String lastName, int day, int month, int year, List<Address> addresses, List<PhoneNumber> phoneNumbers) {
+    public Person(long id, String firstName, String lastName, int day, int month, int year, List<Address> addresses, List<PhoneNumber> phoneNumbers) {
 
         this.id = id;
         this.firstName = firstName;
@@ -45,8 +44,12 @@ public class Person {
     }
 
 
-    public AtomicLong getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstName() {

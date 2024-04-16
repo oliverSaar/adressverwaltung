@@ -44,7 +44,7 @@ public class AddressView {
 
     private void addAddress() {
 
-        AtomicLong id = new AtomicLong(0);
+        long id =0;
         String country;
         int zipCode;
         String city;
