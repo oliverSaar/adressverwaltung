@@ -2,6 +2,7 @@ package de.dhbw.ase.view;
 
 import de.dhbw.ase.dao.PersonDAO;
 import de.dhbw.ase.daoimpl.PersonDAOImpl;
+import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.service.PersonService;
@@ -14,8 +15,9 @@ public class PersonView {
 
     Scanner scanner = new Scanner(System.in);
 
-//    PersonRestService personRestService = new PersonRestService();
-
+    //    PersonRestService personRestService = new PersonRestService();
+    AddressView adressView = new AddressView();
+    PhoneNumberView phoneNumberView = new PhoneNumberView();
 
     PersonDAO personDAO = new PersonDAOImpl();
     PersonService personService = new PersonService(personDAO);
@@ -25,21 +27,20 @@ public class PersonView {
 
         int input;
 
-        consoleMenu();
-
 
         boolean done = false;
         while (!done) {
+
+            consoleMenu();
 
             input = scanner.nextInt();
             switch (input) {
                 case 1:
                     getAllPersons();
-                    consoleMenu();
                     break;
                 case 2:
                     System.out.println("Geben Sie die ID der Person ein, die angezeigt werden soll: ");
-                    personRestService.getPerson(scanner.nextInt());
+                    System.out.println(personRestService.getPerson(scanner.nextInt()).toString());
                     break;
                 case 3:
                     addPerson();
@@ -84,6 +85,7 @@ public class PersonView {
         System.out.println("4. Eine Person aktualisieren");
         System.out.println("5. Eine Person löschen");
         System.out.println("6. Einer Person folgen");
+        //TODO entfolgen
         System.out.println("7. Adresse zu Person hinzufügen");
         System.out.println("8. Adresse von Person entfernen");
         System.out.println("9. Telefonnummer zu Person hinzufügen");
@@ -92,20 +94,19 @@ public class PersonView {
 
     private void getAllPersons() {
 
-        List<Person> persons = personRestService.getAllPersons().stream().toList();
+        List<Person> persons = personRestService.getAllPersons();
 
-        String leftAlignFormat = "| %-5d | %-15s | %-15s |%n";
+        String leftAlignFormat = "| %-5d | %-15s | %-15s | %-15s | %-15s | %-15s  %n";
+        System.out.format("+-------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
 
-        System.out.format("+-------+-----------------+-----------------+%n");
-
-        System.out.format("| ID    | First Name      | Last Name       |%n");
-        System.out.format("+-------+-----------------+-----------------+%n");
+        System.out.format("| ID    | Vorname         | Nachname        | Geburtsdatum    | Adresse(n)      | Telefonnummer(n)|%n");
+        System.out.format("+-------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
 
         for (Person p : persons) {
 
-            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName());
+            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers());
         }
-        System.out.format("+-------+-----------------+-----------------+%n");
+        System.out.format("+-------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
 
 
 //                personRestService.getAllPersons();
@@ -208,9 +209,41 @@ public class PersonView {
             year = scanner.nextInt();
         }
 
+        //TODO lieber weglassen, zu viel Logik erforderlich, für unnötige Funktionalität
+
+        System.out.println("Wollen Sie direkt eine neue Adresse oder Telefonnummer hinzufügen?");
+        System.out.println("1. Adresse hinzufügen");
+        System.out.println("2. Telefonnummer hinzufügen");
+        System.out.println("3. Fertig (Sie können auch später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen)");
+        int input = scanner.nextInt();
+        switch (input) {
+            case 1:
+                addNewAddress();
+                break;
+            case 2:
+                addNewPhoneNumber();
+                break;
+            case 3:
+                break;
+        }
+
+
+
 //        scanner.close();
 
         return new Person(id, firstName, lastName, day, month, year, null, null);
+    }
+
+    private void addNewPhoneNumber() {
+
+        phoneNumberView.addPhoneNumber();
+    }
+
+    private void addNewAddress() {
+
+        Address a = adressView.addAddress();
+
+
     }
 
     private void addPerson() {

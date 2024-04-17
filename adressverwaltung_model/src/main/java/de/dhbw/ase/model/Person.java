@@ -135,4 +135,19 @@ public class Person {
     public void setCreated(LocalDateTime created) {
         this.created = created;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", addresses=" + addresses +
+                ", phoneNumbers=" + phoneNumbers +
+                ", following=" + following +
+                ", created=" + created +
+                ", lastModified=" + lastModified +
+                '}';
+    }
 }
