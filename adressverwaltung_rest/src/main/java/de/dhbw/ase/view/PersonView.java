@@ -26,7 +26,7 @@ public class PersonView {
     public void defaultView() {
 
         int input;
-
+        MainView mainView = new MainView();
 
         boolean done = false;
         while (!done) {
@@ -55,27 +55,34 @@ public class PersonView {
                     followPerson();
                     break;
                 case 7:
+                    unFollowPerson();
+                case 8:
                     addAddress();
                     break;
-                case 8:
+                case 9:
                     deleteAddress();
                     break;
-                case 9:
+                case 10:
                     addPhoneNumber();
                     break;
-                case 10:
+                case 11:
                     deletePhoneNumber();
                     break;
-                case 11:
+                case 12:
                     done = true;
                     break;
                 default:
+                    done = true;
                     scanner.close();
                     break;
             }
         }
+        scanner.close();
+        mainView.defaultView();
 
     }
+
+
 
     private static void consoleMenu() {
         System.out.println("Welche Operation wollen Sie ausführen? Tippen Sie dazu die Nummer ein.");
@@ -85,11 +92,12 @@ public class PersonView {
         System.out.println("4. Eine Person aktualisieren");
         System.out.println("5. Eine Person löschen");
         System.out.println("6. Einer Person folgen");
-        //TODO entfolgen
-        System.out.println("7. Adresse zu Person hinzufügen");
-        System.out.println("8. Adresse von Person entfernen");
-        System.out.println("9. Telefonnummer zu Person hinzufügen");
-        System.out.println("10. Telefonnummer von Person entfernen");
+        System.out.println("7. Einer Person entfolgen");
+        System.out.println("8. Adresse zu Person hinzufügen");
+        System.out.println("9. Adresse von Person entfernen");
+        System.out.println("10. Telefonnummer zu Person hinzufügen");
+        System.out.println("11. Telefonnummer von Person entfernen");
+        System.out.println("12. Zurück zum Hauptmenü");
     }
 
     private void getAllPersons() {
@@ -119,7 +127,6 @@ public class PersonView {
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen");
         int phoneNumberID = scanner.nextInt();
         personRestService.deletePhoneNumber(personID, phoneNumberID);
-        scanner.close();
 
     }
 
@@ -130,7 +137,6 @@ public class PersonView {
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen");
         int phoneNumberID = scanner.nextInt();
         personRestService.addPhoneNumber(personID, phoneNumberID);
-        scanner.close();
 
     }
 
@@ -141,7 +147,6 @@ public class PersonView {
         System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen");
         int addressID = scanner.nextInt();
         personRestService.deleteAddress(personID, addressID);
-        scanner.close();
     }
 
     private void addAddress() {
@@ -151,14 +156,19 @@ public class PersonView {
         System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen");
         int addressID = scanner.nextInt();
         personRestService.addAddress(personID, addressID);
-        scanner.close();
     }
 
     private void followPerson() {
         System.out.println("Bitte geben Sie die ID der Person ein, der Sie folgen möchten: ");
         int id = scanner.nextInt();
         personRestService.followPerson(id);
-        scanner.close();
+    }
+
+
+    private void unFollowPerson() {
+        System.out.println("Bitte geben Sie die ID der Person ein, der Sie nicht mehr folgen möchten: ");
+        int id = scanner.nextInt();
+        personRestService.unFollowPerson(id);
     }
 
     private void deletePerson() {
@@ -166,7 +176,6 @@ public class PersonView {
         System.out.println("Geben Sie die ID der Person ein, die gelöscht werden soll: ");
         int id = scanner.nextInt();
         personRestService.deletePerson(id);
-        scanner.close();
 
     }
 
@@ -209,42 +218,12 @@ public class PersonView {
             year = scanner.nextInt();
         }
 
-        //TODO lieber weglassen, zu viel Logik erforderlich, für unnötige Funktionalität
-
-        System.out.println("Wollen Sie direkt eine neue Adresse oder Telefonnummer hinzufügen?");
-        System.out.println("1. Adresse hinzufügen");
-        System.out.println("2. Telefonnummer hinzufügen");
-        System.out.println("3. Fertig (Sie können auch später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen)");
-        int input = scanner.nextInt();
-        switch (input) {
-            case 1:
-                addNewAddress();
-                break;
-            case 2:
-                addNewPhoneNumber();
-                break;
-            case 3:
-                break;
-        }
-
-
+        System.out.println("Sie können später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen");
 
 //        scanner.close();
-
         return new Person(id, firstName, lastName, day, month, year, null, null);
     }
 
-    private void addNewPhoneNumber() {
-
-        phoneNumberView.addPhoneNumber();
-    }
-
-    private void addNewAddress() {
-
-        Address a = adressView.addAddress();
-
-
-    }
 
     private void addPerson() {
 

@@ -44,8 +44,11 @@ public class PersonService {
 
     public void addPerson(Person person) {
         person.setId(getNextId());
-        personDAO.insertPerson(person);
-
+        try {
+            personDAO.insertPerson(person);
+        }catch (Exception e){
+            System.out.println("Person konnte nicht hinzugefügt werden");
+        }
     }
 
     public void updatePerson(final Person person) {
@@ -90,4 +93,11 @@ public class PersonService {
     }
 
 
+    public void followPerson(int followId) {
+//        int userId = loginService.getLoggedInUser().getId();
+//        personDAO.followPerson(userId, followId);
+    }
+
+    public void unFollowPerson(int id) {
+    }
 }
