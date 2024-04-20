@@ -11,6 +11,15 @@ public class PersonDAOImpl implements PersonDAO {
 
     List<Person> persons = new ArrayList<>();
 
+    public PersonDAOImpl() {
+        Person admin = new Person (0, "admin", "admin", 1, 10, 1990, null, null);
+        persons.add(admin);
+        Person person = new Person(0, "test", "user", 1, 1, 1999, null, null);
+        persons.add(person);
+
+
+    }
+
 
     @Override
     public Optional<Person> getPerson(final long id) {

@@ -9,9 +9,9 @@ public class UserPasswordDAOImpl implements UserPasswordDAO {
     HashMap<String, String> userPassword = new HashMap<>();
 
     public UserPasswordDAOImpl() {
-        userPassword.put("test", "abc");
-        userPassword.put("test2", "test2");
-        userPassword.put("admin", "admin");
+        userPassword.put("test user", "abc");
+        userPassword.put("test2 user", "test2");
+        userPassword.put("admin user", "admin");
         userPassword.put("Max Mustermann", "123456");
     }
     @Override
