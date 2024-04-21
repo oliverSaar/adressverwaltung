@@ -18,6 +18,7 @@ public class PersonView {
     //    PersonRestService personRestService = new PersonRestService();
     AddressView adressView = new AddressView();
     PhoneNumberView phoneNumberView = new PhoneNumberView();
+    LoginView loginView = new LoginView();
 
     PersonDAO personDAO = new PersonDAOImpl();
     PersonService personService = new PersonService(personDAO);
@@ -37,6 +38,7 @@ public class PersonView {
             switch (input) {
                 case 1:
                     getAllPersons();
+                    System.out.println("eingeloggte Person: " + loginView.getLoggedInUser().toString());
                     break;
                 case 2:
                     System.out.println("Geben Sie die ID der Person ein, die angezeigt werden soll: ");

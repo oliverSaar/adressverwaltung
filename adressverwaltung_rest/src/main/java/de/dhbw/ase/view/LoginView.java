@@ -39,9 +39,12 @@ public class LoginView {
     private void login() {
 
         System.out.print("Bitte geben Sie ihren Benutzernamen ein: ");
-        loginService.login();
-
-
+        if (loginService.login()) {
+            MainView mainView = new MainView();
+            mainView.defaultView();
+        } else {
+            defaultView();
+        }
     }
 
 
@@ -53,7 +56,7 @@ public class LoginView {
     }
 
     public Person getLoggedInUser() {
-       return loginService.getLoggedInUser();
+        return loginService.getLoggedInUser();
     }
 }
 

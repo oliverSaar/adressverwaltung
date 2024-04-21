@@ -31,7 +31,7 @@ public class LoginService {
         return userPasswordDAO.getUserPassword();
     }
 
-    public void login() {
+    public boolean login() {
         userPassword = getUserPassword();
         String username;
         String password;
@@ -54,20 +54,22 @@ public class LoginService {
                         .orElseThrow(() ->
                                 new IllegalArgumentException("Es konnte keine Person mit dem Benutzernamen: " + usernameSplit[0] + " " + usernameSplit[1] + " gefunden werden"));
 
+                System.out.println("User in login: " + user);
                 System.out.println("Login erfolgreich");
+                return true;
             } else {
                 System.out.println("Login fehlgeschlagen");
+                return false;
             }
         } else {
             System.out.println("Login fehlgeschlagen");
+            return false;
         }
 
-        scanner.close();
     }
 
     public Person getLoggedInUser() {
-        if (user != null) {
-
+        if (user!= null) {
             return user;
         } else {
             System.out.println("Keine eingeloggte Person gefunden");

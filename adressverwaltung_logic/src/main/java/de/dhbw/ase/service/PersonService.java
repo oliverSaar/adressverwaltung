@@ -25,6 +25,7 @@ public class PersonService {
     }
 
 
+    //TODO initial value anpassen, damit nicht zwei die gleiche id haben
     private final static AtomicLong ID_COUNTER = new AtomicLong();
 
     public static long getNextId() {
