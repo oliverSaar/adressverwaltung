@@ -106,7 +106,7 @@ public class PersonView {
 
         List<Person> persons = personRestService.getAllPersons();
 
-        String leftAlignFormat = "| %-5d | %-15s | %-15s | %-15s | %-15s | %-15s  %n";
+        String leftAlignFormat = "| %-5d | %-15s | %-15s | %-15s | %-15s | %-15s |%n";
         System.out.format("+-------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
 
         System.out.format("| ID    | Vorname         | Nachname        | Geburtsdatum    | Adresse(n)      | Telefonnummer(n)|%n");
