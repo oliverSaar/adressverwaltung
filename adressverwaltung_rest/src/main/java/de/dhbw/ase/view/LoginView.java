@@ -1,57 +1,48 @@
 package de.dhbw.ase.view;
 
-import de.dhbw.ase.dao.PersonDAO;
-import de.dhbw.ase.dao.UserPasswordDAO;
-import de.dhbw.ase.daoimpl.PersonDAOImpl;
-import de.dhbw.ase.daoimpl.UserPasswordDAOImpl;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.service.LoginService;
-import de.dhbw.ase.service.PersonService;
 
 import java.util.Scanner;
 
 
-public class LoginView {
+public class LoginView implements View {
 
     Scanner scanner = new Scanner(System.in);
 
-    UserPasswordDAO userPasswordDAO = new UserPasswordDAOImpl();
-    PersonDAO personDAO = new PersonDAOImpl();
-    PersonService personService = new PersonService(personDAO);
-    LoginService loginService = new LoginService(userPasswordDAO, personService);
+    private final LoginService loginService;
+    private final PersonRestHelperService personRestHelperService;
+
+    public LoginView(LoginService loginService, PersonRestHelperService personRestHelperService) {
+        this.loginService = loginService;
+        this.personRestHelperService = personRestHelperService;
+    }
 
     public void defaultView() {
 
-        int input;
 
-        System.out.println("Haben Sie schon ein Konto?");
-        System.out.println("1. Ja");
-        System.out.println("2. Nein");
-        input = scanner.nextInt();
-        if (input == 1) {
-            login();
-        } else {
-            register();
-        }
     }
 
 
-    private void login() {
+    public boolean login() {
 
         System.out.print("Bitte geben Sie ihren Benutzernamen ein: ");
         if (loginService.login()) {
-            MainView mainView = new MainView();
-            mainView.defaultView();
+
+            return true;
+            //TODO anders lösen: in MainView die Funktion login aufrufen und dann breaken;
+//            MainView mainView = new MainView();
+//            mainView.defaultView();
         } else {
-            defaultView();
+            return false;
         }
     }
 
 
-    private void register() {
+    public void register() {
 
         loginService.register();
-        defaultView();
 
     }
 

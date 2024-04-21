@@ -4,30 +4,40 @@ import de.dhbw.ase.dao.PersonDAO;
 import de.dhbw.ase.daoimpl.PersonDAOImpl;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
+import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
+import de.dhbw.ase.restService.PersonRestService;
+import de.dhbw.ase.service.LoginService;
 import de.dhbw.ase.service.PersonService;
 
+import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-public class PersonView {
+public class PersonView implements View {
 
     Scanner scanner = new Scanner(System.in);
 
-    //    PersonRestService personRestService = new PersonRestService();
-    AddressView adressView = new AddressView();
-    PhoneNumberView phoneNumberView = new PhoneNumberView();
-    LoginView loginView = new LoginView();
 
-    PersonDAO personDAO = new PersonDAOImpl();
-    PersonService personService = new PersonService(personDAO);
-    PersonRestHelperService personRestService = new PersonRestHelperService(personService);
+    private final PersonRestHelperService personRestService;
+    private final AddressRestHelperService addressRestService;
+    private final PhoneNumberRestHelperService phoneNumberRestService;
+    private final LoginService loginService;
+
+
+    public PersonView(PersonRestHelperService personRestService, AddressRestHelperService addressRestService, PhoneNumberRestHelperService phoneNumberRestService, LoginService loginService) {
+        this.personRestService = personRestService;
+        this.addressRestService = addressRestService;
+        this.phoneNumberRestService = phoneNumberRestService;
+        this.loginService = loginService;
+    }
 
     public void defaultView() {
 
         int input;
-        MainView mainView = new MainView();
+
 
         boolean done = false;
         while (!done) {
@@ -38,7 +48,7 @@ public class PersonView {
             switch (input) {
                 case 1:
                     getAllPersons();
-                    System.out.println("eingeloggte Person: " + loginView.getLoggedInUser().toString());
+                    System.out.println("eingeloggte Person: " + loginService.getLoggedInUser().toString());
                     break;
                 case 2:
                     System.out.println("Geben Sie die ID der Person ein, die angezeigt werden soll: ");
@@ -79,11 +89,10 @@ public class PersonView {
                     break;
             }
         }
-        scanner.close();
-        mainView.defaultView();
+
+        new MainView(personRestService, addressRestService, phoneNumberRestService, loginService).defaultView();
 
     }
-
 
 
     private static void consoleMenu() {

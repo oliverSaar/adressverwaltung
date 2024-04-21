@@ -1,15 +1,55 @@
 package de.dhbw.ase.view;
 
+import de.dhbw.ase.model.Person;
+import de.dhbw.ase.restHelperService.AddressRestHelperService;
+import de.dhbw.ase.restHelperService.PersonRestHelperService;
+import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
+import de.dhbw.ase.service.LoginService;
+import de.dhbw.ase.service.PersonService;
+
+import javax.inject.Inject;
 import java.util.Scanner;
 
-public class MainView {
+public class MainView implements View {
 
     Scanner scanner = new Scanner(System.in);
 
-    PersonView personView = new PersonView();
-    AddressView addressView = new AddressView();
+    private final PersonRestHelperService personRestHelperService;
+    private final AddressRestHelperService addressRestHelperService;
+    private final PhoneNumberRestHelperService phoneNumberRestHelperService;
+    private final LoginService loginService;
 
-    PhoneNumberView phoneNumberView = new PhoneNumberView();
+    public MainView(PersonRestHelperService personRestHelperService, AddressRestHelperService addressRestHelperService, PhoneNumberRestHelperService phoneNumberRestHelperService, LoginService loginService) {
+        this.personRestHelperService = personRestHelperService;
+        this.addressRestHelperService = addressRestHelperService;
+        this.phoneNumberRestHelperService = phoneNumberRestHelperService;
+        this.loginService = loginService;
+    }
+
+
+    //TODO initiale LoginView hier aufrufen (damit diese instanz)
+
+    public void loginView() {
+
+        int input;
+
+        System.out.println("Haben Sie schon ein Konto?");
+        System.out.println("1. Ja");
+        System.out.println("2. Nein");
+        input = scanner.nextInt();
+        if (input == 1) {
+            if (loginService.login()) {
+                defaultView();
+            } else {
+                System.out.println("Login fehlgeschlagen");
+            }
+        } else {
+            loginService.register();
+            defaultView();
+        }
+
+    }
+
 
     public void defaultView() {
 
@@ -25,13 +65,13 @@ public class MainView {
 
         switch (input) {
             case 1:
-                personView.defaultView();
+                new PersonView(personRestHelperService, addressRestHelperService, phoneNumberRestHelperService, loginService).defaultView();
                 break;
             case 2:
-                addressView.defaultView();
+                new AddressView(addressRestHelperService).defaultView();
                 break;
             case 3:
-                phoneNumberView.defaultView();
+                new PhoneNumberView(phoneNumberRestHelperService).defaultView();
                 break;
             default:
                 break;

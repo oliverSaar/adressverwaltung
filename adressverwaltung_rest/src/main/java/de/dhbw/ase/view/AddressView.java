@@ -1,15 +1,20 @@
 package de.dhbw.ase.view;
 
 import de.dhbw.ase.model.Address;
-import de.dhbw.ase.restService.AddressRestService;
+import de.dhbw.ase.restHelperService.AddressRestHelperService;
 
 import java.util.Scanner;
 
-public class AddressView {
+public class AddressView implements View{
 
     Scanner scanner = new Scanner(System.in);
 
-    AddressRestService addressRestService = new AddressRestService();
+AddressRestHelperService addressRestHelperService;
+
+
+public AddressView(AddressRestHelperService addressRestHelperService) {
+    this.addressRestHelperService = addressRestHelperService;
+}
 
 
     public void defaultView() {
@@ -25,11 +30,11 @@ public class AddressView {
         int input = scanner.nextInt();
         switch (input) {
             case 1:
-                addressRestService.getAllAddresses();
+                addressRestHelperService.getAllAddresses();
                 scanner.close();
             case 2:
                 System.out.print("Bitte geben Sie die ID der Adresse ein: ");
-                addressRestService.getAddress(scanner.nextInt());
+                addressRestHelperService.getAddress(scanner.nextInt());
                 scanner.close();
             case 3:
                 addAddress();
@@ -66,7 +71,7 @@ public class AddressView {
         houseNumber = scanner.next();
 
         Address address = new Address(id, streetName, houseNumber, city, zipCode, country);
-        addressRestService.addAddress(address);
+        addressRestHelperService.addAddress(address);
         return address;
     }
 }

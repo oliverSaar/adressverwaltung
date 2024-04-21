@@ -39,6 +39,8 @@ public class LoginService {
         String username;
         String password;
 
+        System.out.print("Bitte geben Sie ihren Benutzernamen ein: ");
+
         username = scanner.nextLine();
 
         if (userPassword.containsKey(username)) {
