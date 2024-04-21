@@ -14,6 +14,7 @@ public class Person {
     private LocalDate dateOfBirth;
     private List<Address> addresses;
     private List<PhoneNumber> phoneNumbers;
+    private boolean loggedIn = false;
 
     private List<Person> following;
     private LocalDateTime created;
@@ -78,6 +79,15 @@ public class Person {
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     public List<Address> getAddresses() {

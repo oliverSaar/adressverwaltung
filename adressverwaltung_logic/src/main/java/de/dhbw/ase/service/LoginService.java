@@ -32,6 +32,9 @@ public class LoginService {
     }
 
     public boolean login() {
+
+        resetLoginFlags();
+
         userPassword = getUserPassword();
         String username;
         String password;
@@ -54,7 +57,8 @@ public class LoginService {
                         .orElseThrow(() ->
                                 new IllegalArgumentException("Es konnte keine Person mit dem Benutzernamen: " + usernameSplit[0] + " " + usernameSplit[1] + " gefunden werden"));
 
-                System.out.println("User in login: " + user);
+                user.setLoggedIn(true);
+                personService.updatePerson(user);
                 System.out.println("Login erfolgreich");
                 return true;
             } else {
@@ -68,14 +72,23 @@ public class LoginService {
 
     }
 
-    public Person getLoggedInUser() {
-        if (user!= null) {
-            return user;
-        } else {
-            System.out.println("Keine eingeloggte Person gefunden");
-            return null;
-
+    private void resetLoginFlags() {
+        for (Person person : personService.getAllPersons()) {
+            person.setLoggedIn(false);
         }
+    }
+
+    public Person getLoggedInUser() {
+
+        for (Person person : personService.getAllPersons()) {
+            if (person.isLoggedIn()) {
+                return person;
+            }
+        }
+        System.out.println("Keine eingeloggte Person gefunden");
+        return null;
+
+
     }
 
     public void register() {
@@ -96,6 +109,7 @@ public class LoginService {
         userPassword.put(username, password);
         System.out.println("Registrierung erfolgreich");
 
-        scanner.close();
+        login();
+
     }
 }
