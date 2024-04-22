@@ -1,18 +1,11 @@
 package de.dhbw.ase.view;
 
-import de.dhbw.ase.dao.PersonDAO;
-import de.dhbw.ase.daoimpl.PersonDAOImpl;
-import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
-import de.dhbw.ase.restService.PersonRestService;
 import de.dhbw.ase.service.LoginService;
-import de.dhbw.ase.service.PersonService;
 
-import javax.inject.Inject;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -148,7 +141,6 @@ public class PersonView implements View {
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen");
         int phoneNumberID = scanner.nextInt();
         personRestService.addPhoneNumber(personID, phoneNumberID);
-
     }
 
     private void deleteAddress() {
@@ -161,12 +153,8 @@ public class PersonView implements View {
     }
 
     private void addAddress() {
-        System.out.print("Bitte geben Sie die ID der Person an, zu der Sie eine Adresse hinzufügen wollen: ");
-        int personID = scanner.nextInt();
-        System.out.println();
-        System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen");
-        int addressID = scanner.nextInt();
-        personRestService.addAddress(personID, addressID);
+
+        personRestService.addAddress();
     }
 
     private void followPerson() {
@@ -187,63 +175,26 @@ public class PersonView implements View {
         System.out.println("Geben Sie die ID der Person ein, die gelöscht werden soll: ");
         int id = scanner.nextInt();
         personRestService.deletePerson(id);
-
     }
 
     private void changePerson() {
 
         System.out.println("Bitte geben Sie die ID der Person ein, die Sie ändern möchten: ");
         int id = scanner.nextInt();
-        Person person = datenEingabe();
+        Person person = dataInput();
         personRestService.updatePerson(id, person);
     }
 
 
-    private Person datenEingabe() {
-        long id = 0;
-        String firstName;
-        String lastName;
-        int day;
-        int month;
-        int year;
-
-        System.out.print("Vorname: ");
-        firstName = scanner.next();
-        System.out.println();
-        System.out.print("Nachname: ");
-        lastName = scanner.next();
-        System.out.println();
-        System.out.println("Geburtsdatum : ");
-        System.out.print("Tag:");
-        day = scanner.nextInt();
-        System.out.println();
-        System.out.print("Monat (1-12): ");
-        month = scanner.nextInt();
-        System.out.println();
-        System.out.print("Jahr (z.B. 1990): ");
-
-        year = scanner.nextInt();
-
-        while (year < 1900 || year > LocalDate.now().getYear()) {
-            System.out.println("Falsches Jahr! Bitte geben Sie ihr Geburtsjahr erneut ein: ");
-            year = scanner.nextInt();
-        }
-
-        System.out.println("Sie können später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen");
-
-//        scanner.close();
-        return new Person(id, firstName, lastName, day, month, year, null, null);
+    private Person dataInput() {
+        return personRestService.dataInput();
     }
 
 
     private void addPerson() {
 
-
         System.out.println("Bitte geben Sie die folgenden Informationen der Person ein, welche Sie hinzufügen wollen:");
 
-        Person person = datenEingabe();
-
-        personRestService.addPerson(person);
-
+        personRestService.addPerson(dataInput());
     }
 }

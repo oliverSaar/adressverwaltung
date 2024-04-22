@@ -45,7 +45,8 @@ public class PersonRestHelperService {
     public void deleteAddress(int personID, int addressID) {
     }
 
-    public void addAddress(int personID, int addressID) {
+    public void addAddress() {
+        personService.addAddress();
     }
 
 
@@ -67,5 +68,9 @@ public class PersonRestHelperService {
     public void unFollowPerson(int id) {
         personService.unFollowPerson(id);
 
+    }
+
+    public Person dataInput() {
+        return personService.dataInput();
     }
 }

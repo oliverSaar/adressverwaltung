@@ -16,4 +16,5 @@ public interface PersonDAO {
 
     void updatePerson(Person person);
 
+    void addAddress(int personID, int addressID);
 }

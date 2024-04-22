@@ -12,7 +12,7 @@ public class PersonDAOImpl implements PersonDAO {
     List<Person> persons = new ArrayList<>();
 
     public PersonDAOImpl() {
-        Person admin = new Person (0, "admin", "admin", 1, 10, 1990, null, null);
+        Person admin = new Person(0, "admin", "admin", 1, 10, 1990, null, null);
         persons.add(admin);
         Person person = new Person(1, "test", "user", 1, 1, 1999, null, null);
         persons.add(person);
@@ -51,4 +51,14 @@ public class PersonDAOImpl implements PersonDAO {
 
     }
 
+    @Override
+    public void addAddress(int personID, int addressID) {
+
+        //TODO adresse hinzufügen (vllt Adresse nehmen und nicht nur die ID)
+        for (Person p : persons) {
+            if (p.getId() == personID) {
+            }
+
+        }
+    }
 }
