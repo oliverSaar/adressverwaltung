@@ -3,6 +3,7 @@ package de.dhbw.ase.service;
 import de.dhbw.ase.dao.PersonDAO;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.model.PhoneNumber;
 
 import javax.inject.Inject;
 import java.time.LocalDate;
@@ -108,7 +109,6 @@ public class PersonService {
     }
 
 
-
     public void addAddress(long PersonID, Address address) {
 
         try {
@@ -126,5 +126,25 @@ public class PersonService {
         } catch (Exception e) {
             System.out.println("Die Adresse mit der ID: " + address.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden");
         }
+    }
+
+    public void removePhoneNumber(long personID, PhoneNumber phoneNumber) {
+        try {
+            personDAO.removePhoneNumber(personID, phoneNumber);
+            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
+        } catch (Exception e) {
+            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden");
+        }
+    }
+
+    public void addPhoneNumber(long personID, PhoneNumber phoneNumber) {
+        try {
+            personDAO.addPhoneNumber(personID, phoneNumber);
+            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich zu der Person mit der ID: " + personID + " hinzugefügt");
+        } catch (Exception e) {
+            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden");
+        }
+
+
     }
 }

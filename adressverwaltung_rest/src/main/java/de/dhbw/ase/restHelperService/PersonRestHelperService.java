@@ -2,6 +2,7 @@ package de.dhbw.ase.restHelperService;
 
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.model.PhoneNumber;
 import de.dhbw.ase.service.PersonService;
 
 import javax.inject.Inject;
@@ -37,10 +38,13 @@ public class PersonRestHelperService {
 
     }
 
-    public void deletePhoneNumber(long personID, long phoneNumberID) {
+    public void removePhoneNumber(long personID, PhoneNumber phoneNumber) {
+        personService.removePhoneNumber(personID, phoneNumber);
     }
 
-    public void addPhoneNumber(long personID, long phoneNumberID) {
+    public void addPhoneNumber(long personID, PhoneNumber phoneNumber) {
+        personService.addPhoneNumber(personID, phoneNumber);
+
     }
 
     public void removeAddress(long personID, Address address) {
@@ -55,7 +59,8 @@ public class PersonRestHelperService {
     public void deletePerson(long id) {
     }
 
-    public void updatePerson(long id, Person person) {
+    public void updatePerson(Person person) {
+        personService.updatePerson(person);
     }
 
     public void addPerson(Person person) {
@@ -69,9 +74,5 @@ public class PersonRestHelperService {
     public void unFollowPerson(long id) {
         personService.unFollowPerson(id);
 
-    }
-
-    public Person dataInput() {
-        return personService.dataInput();
     }
 }

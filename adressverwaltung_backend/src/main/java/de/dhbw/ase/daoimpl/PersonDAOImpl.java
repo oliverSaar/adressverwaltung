@@ -3,6 +3,7 @@ package de.dhbw.ase.daoimpl;
 import de.dhbw.ase.dao.PersonDAO;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.model.PhoneNumber;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,6 +77,33 @@ public class PersonDAOImpl implements PersonDAO {
             }
         } catch (Exception e) {
             System.out.println("Adresse konnte nicht von der Person mit der ID: " + personID + " entfernt werden");
+        }
+
+    }
+
+    @Override
+    public void addPhoneNumber(long personID, PhoneNumber phoneNumber) {
+        try {
+            for (Person p : persons) {
+                if (p.getId() == personID) {
+                    p.addPhoneNumber(phoneNumber);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Telefonnummer konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden");
+        }
+    }
+
+    @Override
+    public void removePhoneNumber(long personID, PhoneNumber phoneNumber) {
+        try {
+            for (Person p : persons) {
+                if (p.getId() == personID) {
+                    p.removePhoneNumber(phoneNumber);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Telefonnummer konnte nicht von der Person mit der ID: " + personID + " entfernt werden");
         }
 
     }

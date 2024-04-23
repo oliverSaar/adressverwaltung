@@ -93,6 +93,9 @@ public class PersonView implements View {
 
 
     private static void consoleMenu() {
+        System.out.println();
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println();
         System.out.println("Welche Operation wollen Sie ausführen? Tippen Sie dazu die Nummer ein.");
         System.out.println("1. Alle Personen anzeigen");
         System.out.println("2. Eine Person anzeigen (ID benötigt)");
@@ -130,21 +133,20 @@ public class PersonView implements View {
 
     private void deletePhoneNumber() {
         System.out.print(inputPersonID + ", von welcher Sie eine Telefonnummer löschen möchten: ");
-        int personID = scanner.nextInt();
+        long personID = scanner.nextInt();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen: ");
-        int phoneNumberID = scanner.nextInt();
-        personRestService.deletePhoneNumber(personID, phoneNumberID);
+
+        personRestService.removePhoneNumber(personID, phoneNumberRestService.getPhoneNumber(scanner.nextLong()));
 
     }
 
     private void addPhoneNumber() {
         System.out.print(inputPersonID + ", zu der Sie eine Telefonnummer hinzufügen wollen: ");
-        int personID = scanner.nextInt();
+        long personID = scanner.nextInt();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen: ");
-        int phoneNumberID = scanner.nextInt();
-        personRestService.addPhoneNumber(personID, phoneNumberID);
+        personRestService.addPhoneNumber(personID, phoneNumberRestService.getPhoneNumber(scanner.nextLong()));
     }
 
     private void removeAddress() {
@@ -192,14 +194,14 @@ public class PersonView implements View {
     private void changePerson() {
 
         System.out.println(inputPersonID + ", die Sie ändern möchten: ");
-        int id = scanner.nextInt();
+        long id = scanner.nextInt();
         Person person = dataInput();
-        personRestService.updatePerson(id, person);
+        person.setId(id);
+        personRestService.updatePerson(person);
     }
 
 
     private Person dataInput() {
-
 
         long id = 0;
         String firstName;
@@ -232,9 +234,7 @@ public class PersonView implements View {
 
         System.out.println("Sie können später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen");
 
-//        scanner.close();
         return new Person(id, firstName, lastName, day, month, year, null, null);
-
 
     }
 

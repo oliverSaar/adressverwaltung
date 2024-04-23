@@ -122,6 +122,11 @@ public class Person {
         setLastModified(LocalDateTime.now());
     }
 
+    public void removePhoneNumber(PhoneNumber phoneNumber) {
+        this.phoneNumbers.remove(phoneNumber);
+        setLastModified(LocalDateTime.now());
+    }
+
     public List<Person> getFollowing() {
         return following;
     }
@@ -166,4 +171,6 @@ public class Person {
                 ", lastModified=" + lastModified +
                 '}';
     }
+
+
 }

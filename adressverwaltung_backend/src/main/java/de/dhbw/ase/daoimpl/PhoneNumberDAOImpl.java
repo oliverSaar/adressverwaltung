@@ -3,12 +3,18 @@ package de.dhbw.ase.daoimpl;
 import de.dhbw.ase.dao.PhoneNumberDAO;
 import de.dhbw.ase.model.PhoneNumber;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class PhoneNumberDAOImpl implements PhoneNumberDAO {
 
-    private List<PhoneNumber> phoneNumbers;
+    private List<PhoneNumber> phoneNumbers = new ArrayList<>();
+
+    public PhoneNumberDAOImpl() {
+        PhoneNumber phoneNumber = new PhoneNumber(0, false, "0123456789");
+        phoneNumbers.add(phoneNumber);
+    }
 
     @Override
     public Optional<PhoneNumber> getPhoneNumber(long id) {
