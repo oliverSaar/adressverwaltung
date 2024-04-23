@@ -159,17 +159,16 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                ", addresses=" + addresses.get(0) +
-                ", phoneNumbers=" + phoneNumbers +
-                ", following=" + following +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                '}';
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("ID = ").append(id).append("\n")
+                .append("Vorname = ").append(firstName).append('\n')
+                .append("Nachname = ").append(lastName).append('\n')
+                .append("Geburtsdatum = ").append(dateOfBirth).append('\n')
+                .append("Adresse(n) = ").append(addresses).append('\n')
+                .append("Telefonnummer(n) = ").append(phoneNumbers).append('\n')
+                .append("folgt = ").append(following).append('\n');
+        return sb.toString();
     }
 
 

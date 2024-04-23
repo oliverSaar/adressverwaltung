@@ -6,25 +6,20 @@ import de.dhbw.ase.model.Person;
 import de.dhbw.ase.model.PhoneNumber;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class PersonService {
 
     private PersonDAO personDAO;
-    private Scanner scanner = new Scanner(System.in);
-
 
     protected PersonService() {
 
     }
 
-    //TODO kann ich hier public lassen?
     @Inject
     public PersonService(final PersonDAO personDAO) {
         this.personDAO = personDAO;

@@ -21,7 +21,7 @@ public class PersonRestHelperService {
         this.personService = personService;
     }
 
-    public Person getPerson(int id) {
+    public Person getPerson(long id) {
         return personService.getPerson(id);
 
     }

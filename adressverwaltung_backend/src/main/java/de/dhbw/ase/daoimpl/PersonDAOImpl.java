@@ -25,7 +25,20 @@ public class PersonDAOImpl implements PersonDAO {
 
     @Override
     public Optional<Person> getPerson(final long id) {
-        return Optional.ofNullable(persons.get((int) id));
+
+        try {
+
+            for (Person p : persons) {
+                if (p.getId() == id) {
+                    return Optional.of(p);
+                }
+            }
+            return Optional.empty();
+
+        } catch (Exception e) {
+            System.out.println("Person konnte nicht gefunden werden");
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
