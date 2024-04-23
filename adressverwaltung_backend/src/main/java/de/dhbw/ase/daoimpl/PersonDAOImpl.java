@@ -68,7 +68,17 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public void deleteAddress(long personID, Address address) {
+    public void removeAddress(long personID, Address address) {
+        try {
+            for (Person p : persons) {
+                if (p.getId() == personID) {
+                    p.removeAddress(address);
+                    System.out.println("Adresse wurde von der Person mit ID: " + personID + " entfernt");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Adresse konnte nicht von der Person mit der ID: " + personID + " entfernt werden");
+        }
 
     }
 }

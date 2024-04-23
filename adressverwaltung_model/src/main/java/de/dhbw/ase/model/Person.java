@@ -95,12 +95,15 @@ public class Person {
     }
 
     public void addAddress(Address address) {
-        System.out.println("Aufgerufen mit Adresse + " + address.toString());
-        System.out.println("this adresses1 = " + this.addresses);
         this.addresses.add(address);
-        System.out.println("this adresses2 = " + this.addresses);
         setLastModified(LocalDateTime.now());
     }
+
+    public void removeAddress(Address address) {
+        this.addresses.remove(address);
+        setLastModified(LocalDateTime.now());
+    }
+
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
