@@ -14,16 +14,14 @@ public class Address {
     private LocalDateTime lastModified;
 
 
-    public Address(long id, String streetName, String houseNumber, String city, int zipCode, String country) {
+    public Address(long id, String country, int zipCode, String city, String streetName, String houseNumber) {
         this.id = id;
+        this.country = country;
+        this.zipCode = zipCode;
+        this.city = city;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
-        this.city = city;
-        this.zipCode = zipCode;
-        this.country = country;
         this.created = LocalDateTime.now();
-        this.lastModified = null;
-
     }
 
     public long getId() {
@@ -94,5 +92,19 @@ public class Address {
 
     public void setLastModified(LocalDateTime lastModified) {
         this.lastModified = lastModified;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", streetName='" + streetName + '\'' +
+                ", houseNumber='" + houseNumber + '\'' +
+                ", city='" + city + '\'' +
+                ", zipCode=" + zipCode +
+                ", country='" + country + '\'' +
+                ", created=" + created +
+                ", lastModified=" + lastModified +
+                '}';
     }
 }
