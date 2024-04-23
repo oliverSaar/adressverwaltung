@@ -5,6 +5,7 @@ import de.dhbw.ase.service.AddressService;
 
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class AddressRestHelperService {
 
@@ -17,7 +18,8 @@ public class AddressRestHelperService {
         this.addressService = addressService;
     }
 
-    public void getAllAddresses() {
+    public List<Address> getAllAddresses() {
+       return addressService.getAllAddresses();
     }
 
     public Address getAddress(long id) {

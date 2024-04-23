@@ -2,6 +2,7 @@ package de.dhbw.ase.model;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Person {
@@ -12,8 +13,8 @@ public class Person {
     private String lastName;
 
     private LocalDate dateOfBirth;
-    private List<Address> addresses;
-    private List<PhoneNumber> phoneNumbers;
+    private List<Address> addresses = new ArrayList<>();
+    private List<PhoneNumber> phoneNumbers = new ArrayList<>();
     private boolean loggedIn = false;
 
     private List<Person> following;
@@ -33,7 +34,6 @@ public class Person {
                 this.addresses.addAll(addresses);
             }
         }
-
         if (phoneNumbers != null) {
             if (!phoneNumbers.isEmpty()) {
                 this.phoneNumbers.addAll(phoneNumbers);
@@ -95,7 +95,10 @@ public class Person {
     }
 
     public void addAddress(Address address) {
+        System.out.println("Aufgerufen mit Adresse + " + address.toString());
+        System.out.println("this adresses1 = " + this.addresses);
         this.addresses.add(address);
+        System.out.println("this adresses2 = " + this.addresses);
         setLastModified(LocalDateTime.now());
     }
 
@@ -153,7 +156,7 @@ public class Person {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
-                ", addresses=" + addresses +
+                ", addresses=" + addresses.get(0) +
                 ", phoneNumbers=" + phoneNumbers +
                 ", following=" + following +
                 ", created=" + created +

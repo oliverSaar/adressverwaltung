@@ -68,10 +68,10 @@ public class MainView implements View {
                 new PersonView(personRestHelperService, addressRestHelperService, phoneNumberRestHelperService, loginService).defaultView();
                 break;
             case 2:
-                new AddressView(addressRestHelperService).defaultView();
+                new AddressView(addressRestHelperService, personRestHelperService, phoneNumberRestHelperService, loginService).defaultView();
                 break;
             case 3:
-                new PhoneNumberView(phoneNumberRestHelperService).defaultView();
+                new PhoneNumberView(phoneNumberRestHelperService, personRestHelperService, addressRestHelperService, loginService).defaultView();
                 break;
             default:
                 break;

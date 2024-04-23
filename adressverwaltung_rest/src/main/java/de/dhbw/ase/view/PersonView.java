@@ -43,7 +43,8 @@ public class PersonView implements View {
             switch (input) {
                 case 1:
                     getAllPersons();
-                    System.out.println("eingeloggte Person: " + loginService.getLoggedInUser().toString());
+                    //TODO
+//                    System.out.println("eingeloggte Person: " + loginService.getLoggedInUser().toString());
                     break;
                 case 2:
                     System.out.println(inputPersonID + ", die angezeigt werden soll: ");
@@ -130,7 +131,7 @@ public class PersonView implements View {
         System.out.print(inputPersonID + ", von welcher Sie eine Telefonnummer löschen möchten: ");
         int personID = scanner.nextInt();
         System.out.println();
-        System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen");
+        System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen: ");
         int phoneNumberID = scanner.nextInt();
         personRestService.deletePhoneNumber(personID, phoneNumberID);
 
@@ -140,7 +141,7 @@ public class PersonView implements View {
         System.out.print(inputPersonID + ", zu der Sie eine Telefonnummer hinzufügen wollen: ");
         int personID = scanner.nextInt();
         System.out.println();
-        System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen");
+        System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen: ");
         int phoneNumberID = scanner.nextInt();
         personRestService.addPhoneNumber(personID, phoneNumberID);
     }
@@ -149,7 +150,7 @@ public class PersonView implements View {
         System.out.print(inputPersonID + ", von welcher Sie eine Adresse löschen möchten: ");
         long personID = scanner.nextInt();
         System.out.println();
-        System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen");
+        System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen: ");
         Address address = addressRestService.getAddress(scanner.nextLong());
         personRestService.deleteAddress(personID, address);
     }
@@ -160,7 +161,7 @@ public class PersonView implements View {
         long personID = scanner.nextLong();
         System.out.println();
 
-        System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen");
+        System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen: ");
 
         Address address = addressRestService.getAddress(scanner.nextLong());
 

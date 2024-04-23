@@ -4,6 +4,7 @@ import de.dhbw.ase.dao.AddressDAO;
 import de.dhbw.ase.model.Address;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -39,5 +40,9 @@ public class AddressService {
         return optionalAddress
                 .orElseThrow(() -> new IllegalArgumentException("Adresse mit der ID: " + id + " konnte nicht gefunden werden"));
 
+    }
+
+    public List<Address> getAllAddresses() {
+        return addressDAO.getAddresses();
     }
 }
