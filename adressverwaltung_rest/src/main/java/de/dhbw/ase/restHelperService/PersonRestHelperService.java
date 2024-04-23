@@ -43,8 +43,8 @@ public class PersonRestHelperService {
     public void addPhoneNumber(long personID, long phoneNumberID) {
     }
 
-    public void deleteAddress(long personID, Address address) {
-        personService.deleteAddress(personID, address);
+    public void removeAddress(long personID, Address address) {
+        personService.removeAddress(personID, address);
     }
 
     public void addAddress(long personID,Address address) {

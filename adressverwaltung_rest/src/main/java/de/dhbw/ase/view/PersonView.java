@@ -68,7 +68,7 @@ public class PersonView implements View {
                     addAddress();
                     break;
                 case 9:
-                    deleteAddress();
+                    removeAddress();
                     break;
                 case 10:
                     addPhoneNumber();
@@ -146,13 +146,13 @@ public class PersonView implements View {
         personRestService.addPhoneNumber(personID, phoneNumberID);
     }
 
-    private void deleteAddress() {
+    private void removeAddress() {
         System.out.print(inputPersonID + ", von welcher Sie eine Adresse löschen möchten: ");
         long personID = scanner.nextInt();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen: ");
         Address address = addressRestService.getAddress(scanner.nextLong());
-        personRestService.deleteAddress(personID, address);
+        personRestService.removeAddress(personID, address);
     }
 
     private void addAddress() {

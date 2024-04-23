@@ -1,6 +1,5 @@
 package de.dhbw.ase.service;
 
-import de.dhbw.ase.dao.AddressDAO;
 import de.dhbw.ase.dao.PersonDAO;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
@@ -155,9 +154,9 @@ public class PersonService {
         }
     }
 
-    public void deleteAddress(long personID, Address address) {
+    public void removeAddress(long personID, Address address) {
         try {
-            personDAO.deleteAddress(personID, address);
+            personDAO.removeAddress(personID, address);
             System.out.println("Die Adresse mit der ID: " + address.getId() + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
         } catch (Exception e) {
             System.out.println("Die Adresse mit der ID: " + address.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden");

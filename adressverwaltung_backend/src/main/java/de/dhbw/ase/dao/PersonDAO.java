@@ -19,5 +19,5 @@ public interface PersonDAO {
 
     void addAddress(long personID, Address address);
 
-    void deleteAddress(long personID, Address address);
+    void removeAddress(long personID, Address address);
 }
