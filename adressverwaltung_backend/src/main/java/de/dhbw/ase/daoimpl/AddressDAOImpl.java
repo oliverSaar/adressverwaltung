@@ -3,23 +3,27 @@ package de.dhbw.ase.daoimpl;
 import de.dhbw.ase.dao.AddressDAO;
 import de.dhbw.ase.model.Address;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class AddressDAOImpl implements AddressDAO {
 
-    List<Address> addresses;
+    List<Address> addresses = new ArrayList<>();
 
-
-    @Override
-    public Optional<Address> getAddress(long id) {
-        return Optional.ofNullable(addresses.get((int)id));
+    public AddressDAOImpl() {
+        Address address = new Address(0, "country", 12345, "city", "streetName", "7357A");
+        addresses.add(address);
     }
 
     @Override
-    public List<Address> getAddress() {
+    public Optional<Address> getAddress(long id) {
+        return Optional.ofNullable(addresses.get((int) id));
+    }
+
+    @Override
+    public List<Address> getAddresses() {
         return addresses;
     }
 

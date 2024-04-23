@@ -9,9 +9,10 @@ public interface AddressDAO {
 
     Optional<Address> getAddress(final long id);
 
-    List<Address> getAddress();
+    List<Address> getAddresses();
 
     void insertAddress(Address address);
 
     void updateAddress(Address address);
+
 }
