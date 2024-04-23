@@ -59,7 +59,6 @@ public class PersonDAOImpl implements PersonDAO {
             for (Person p : persons) {
                 if (p.getId() == personID) {
                     p.addAddress(address);
-                    System.out.println("Adresse wurde zu der Person mit ID: " + personID + " hinzugefügt");
                 }
             }
         } catch (Exception e) {
@@ -73,7 +72,6 @@ public class PersonDAOImpl implements PersonDAO {
             for (Person p : persons) {
                 if (p.getId() == personID) {
                     p.removeAddress(address);
-                    System.out.println("Adresse wurde von der Person mit ID: " + personID + " entfernt");
                 }
             }
         } catch (Exception e) {

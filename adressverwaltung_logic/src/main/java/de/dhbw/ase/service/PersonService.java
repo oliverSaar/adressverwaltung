@@ -107,42 +107,7 @@ public class PersonService {
     public void unFollowPerson(long id) {
     }
 
-    public Person dataInput() {
 
-        long id = 0;
-        String firstName;
-        String lastName;
-        int day;
-        int month;
-        int year;
-
-        System.out.print("Vorname: ");
-        firstName = scanner.next();
-        System.out.println();
-        System.out.print("Nachname: ");
-        lastName = scanner.next();
-        System.out.println();
-        System.out.println("Geburtsdatum : ");
-        System.out.print("Tag:");
-        day = scanner.nextInt();
-        System.out.println();
-        System.out.print("Monat (1-12): ");
-        month = scanner.nextInt();
-        System.out.println();
-        System.out.print("Jahr (z.B. 1990): ");
-
-        year = scanner.nextInt();
-
-        while (year < 1900 || year > LocalDate.now().getYear()) {
-            System.out.println("Falsches Jahr! Bitte geben Sie ihr Geburtsjahr erneut ein: ");
-            year = scanner.nextInt();
-        }
-
-        System.out.println("Sie können später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen");
-
-//        scanner.close();
-        return new Person(id, firstName, lastName, day, month, year, null, null);
-    }
 
     public void addAddress(long PersonID, Address address) {
 
