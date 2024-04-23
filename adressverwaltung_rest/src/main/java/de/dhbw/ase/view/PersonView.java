@@ -1,5 +1,6 @@
 package de.dhbw.ase.view;
 
+import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
@@ -18,6 +19,7 @@ public class PersonView implements View {
     private final AddressRestHelperService addressRestService;
     private final PhoneNumberRestHelperService phoneNumberRestService;
     private final LoginService loginService;
+    private final String inputPersonID = "Bitte geben Sie die ID der Person ein";
 
 
     public PersonView(PersonRestHelperService personRestService, AddressRestHelperService addressRestService, PhoneNumberRestHelperService phoneNumberRestService, LoginService loginService) {
@@ -44,7 +46,7 @@ public class PersonView implements View {
                     System.out.println("eingeloggte Person: " + loginService.getLoggedInUser().toString());
                     break;
                 case 2:
-                    System.out.println("Geben Sie die ID der Person ein, die angezeigt werden soll: ");
+                    System.out.println(inputPersonID + ", die angezeigt werden soll: ");
                     System.out.println(personRestService.getPerson(scanner.nextInt()).toString());
                     break;
                 case 3:
@@ -125,7 +127,7 @@ public class PersonView implements View {
     }
 
     private void deletePhoneNumber() {
-        System.out.print("Bitte geben Sie die ID der Person an, von welcher Sie eine Telefonnummer löschen möchten: ");
+        System.out.print(inputPersonID + ", von welcher Sie eine Telefonnummer löschen möchten: ");
         int personID = scanner.nextInt();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen");
@@ -135,7 +137,7 @@ public class PersonView implements View {
     }
 
     private void addPhoneNumber() {
-        System.out.print("Bitte geben Sie die ID der Person an, zu der Sie eine Telefonnummer hinzufügen wollen: ");
+        System.out.print(inputPersonID + ", zu der Sie eine Telefonnummer hinzufügen wollen: ");
         int personID = scanner.nextInt();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen");
@@ -144,42 +146,50 @@ public class PersonView implements View {
     }
 
     private void deleteAddress() {
-        System.out.print("Bitte geben Sie die ID der Person an, von welcher Sie eine Adresse löschen möchten: ");
-        int personID = scanner.nextInt();
+        System.out.print(inputPersonID + ", von welcher Sie eine Adresse löschen möchten: ");
+        long personID = scanner.nextInt();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen");
-        int addressID = scanner.nextInt();
-        personRestService.deleteAddress(personID, addressID);
+        Address address = addressRestService.getAddress(scanner.nextLong());
+        personRestService.deleteAddress(personID, address);
     }
 
     private void addAddress() {
 
-        personRestService.addAddress();
+        System.out.print(inputPersonID + ", zu der Sie eine Adresse hinzufügen wollen: ");
+        long personID = scanner.nextLong();
+        System.out.println();
+
+        System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen");
+
+        Address address = addressRestService.getAddress(scanner.nextLong());
+
+        personRestService.addAddress(personID, address);
     }
 
     private void followPerson() {
-        System.out.println("Bitte geben Sie die ID der Person ein, der Sie folgen möchten: ");
+        System.out.println(", der Sie folgen möchten: ");
         int id = scanner.nextInt();
         personRestService.followPerson(id);
     }
 
 
     private void unFollowPerson() {
-        System.out.println("Bitte geben Sie die ID der Person ein, der Sie nicht mehr folgen möchten: ");
+        System.out.println(inputPersonID + ", der Sie nicht mehr folgen möchten: ");
         int id = scanner.nextInt();
         personRestService.unFollowPerson(id);
     }
 
     private void deletePerson() {
 
-        System.out.println("Geben Sie die ID der Person ein, die gelöscht werden soll: ");
+        System.out.println(inputPersonID + ", die gelöscht werden soll: ");
         int id = scanner.nextInt();
         personRestService.deletePerson(id);
     }
 
     private void changePerson() {
 
-        System.out.println("Bitte geben Sie die ID der Person ein, die Sie ändern möchten: ");
+        System.out.println(inputPersonID + ", die Sie ändern möchten: ");
         int id = scanner.nextInt();
         Person person = dataInput();
         personRestService.updatePerson(id, person);

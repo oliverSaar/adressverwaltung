@@ -1,5 +1,6 @@
 package de.dhbw.ase.dao;
 
+import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 
 import java.util.List;
@@ -16,5 +17,7 @@ public interface PersonDAO {
 
     void updatePerson(Person person);
 
-    void addAddress(int personID, int addressID);
+    void addAddress(long personID, Address address);
+
+    void deleteAddress(long personID, Address address);
 }

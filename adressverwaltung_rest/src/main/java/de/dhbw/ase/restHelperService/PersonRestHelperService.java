@@ -1,5 +1,6 @@
 package de.dhbw.ase.restHelperService;
 
+import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.service.PersonService;
 
@@ -30,42 +31,42 @@ public class PersonRestHelperService {
 
     }
 
-    public void createPerson(Person person){
+    public void createPerson(Person person) {
 
         personService.addPerson(person);
 
     }
 
-    public void deletePhoneNumber(int personID, int phoneNumberID) {
+    public void deletePhoneNumber(long personID, long phoneNumberID) {
     }
 
-    public void addPhoneNumber(int personID, int phoneNumberID) {
+    public void addPhoneNumber(long personID, long phoneNumberID) {
     }
 
-    public void deleteAddress(int personID, int addressID) {
+    public void deleteAddress(long personID, Address address) {
+        personService.deleteAddress(personID, address);
     }
 
-    public void addAddress() {
-        personService.addAddress();
+    public void addAddress(long personID,Address address) {
+        personService.addAddress(personID, address);
     }
 
 
-
-    public void deletePerson(int id) {
+    public void deletePerson(long id) {
     }
 
-    public void updatePerson(int id, Person person) {
+    public void updatePerson(long id, Person person) {
     }
 
     public void addPerson(Person person) {
         personService.addPerson(person);
     }
 
-    public void followPerson(int id) {
+    public void followPerson(long id) {
         personService.followPerson(id);
     }
 
-    public void unFollowPerson(int id) {
+    public void unFollowPerson(long id) {
         personService.unFollowPerson(id);
 
     }

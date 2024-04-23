@@ -100,12 +100,12 @@ public class PersonService {
     }
 
 
-    public void followPerson(int followId) {
+    public void followPerson(long followId) {
 //        int userId = loginService.getLoggedInUser().getId();
 //        personDAO.followPerson(userId, followId);
     }
 
-    public void unFollowPerson(int id) {
+    public void unFollowPerson(long id) {
     }
 
     public Person dataInput() {
@@ -145,15 +145,22 @@ public class PersonService {
         return new Person(id, firstName, lastName, day, month, year, null, null);
     }
 
-    public void addAddress() {
-        System.out.print("Bitte geben Sie die ID der Person an, zu der Sie eine Adresse hinzufügen wollen: ");
-        int personID = scanner.nextInt();
-        System.out.println();
-        System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen");
-        int addressID = scanner.nextInt();
+    public void addAddress(long PersonID, Address address) {
 
-        //TODO kann ich hier den addresseService aufrufen oder lieber nicht?
-//        Address address = addressService.getAddress(addressID);
-//        personDAO.addAddress(personID, address);
+        try {
+            personDAO.addAddress(PersonID, address);
+            System.out.println("Die Adresse wurde erfolgreich zu der Person mit der ID: " + PersonID + " hinzugefügt");
+        } catch (Exception e) {
+            System.out.println("Die Adresse konnte nicht zu der Person mit ID:+ " + PersonID + "hinzugefügt werden");
+        }
+    }
+
+    public void deleteAddress(long personID, Address address) {
+        try {
+            personDAO.deleteAddress(personID, address);
+            System.out.println("Die Adresse mit der ID: " + address.getId() + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
+        } catch (Exception e) {
+            System.out.println("Die Adresse mit der ID: " + address.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden");
+        }
     }
 }

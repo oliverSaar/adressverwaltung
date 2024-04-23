@@ -20,7 +20,8 @@ public class AddressRestHelperService {
     public void getAllAddresses() {
     }
 
-    public void getAddress(int i) {
+    public Address getAddress(long id) {
+        return addressService.getAddress(id);
     }
 
     public void addAddress(Address address) {

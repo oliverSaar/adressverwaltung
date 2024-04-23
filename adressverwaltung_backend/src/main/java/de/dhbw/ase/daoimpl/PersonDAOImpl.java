@@ -1,6 +1,7 @@
 package de.dhbw.ase.daoimpl;
 
 import de.dhbw.ase.dao.PersonDAO;
+import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 
 import java.util.ArrayList;
@@ -52,13 +53,22 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public void addAddress(int personID, int addressID) {
+    public void addAddress(long personID, Address address) {
 
-        //TODO adresse hinzufügen (vllt Adresse nehmen und nicht nur die ID)
-        for (Person p : persons) {
-            if (p.getId() == personID) {
+        try {
+            for (Person p : persons) {
+                if (p.getId() == personID) {
+                    p.addAddress(address);
+                }
             }
-
+            System.out.println("Adresse wurde zu der Person mit ID: " + personID + " hinzugefügt");
+        } catch (Exception e) {
+            System.out.println("Adresse konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden");
         }
+    }
+
+    @Override
+    public void deleteAddress(long personID, Address address) {
+
     }
 }
