@@ -122,7 +122,7 @@ public class PersonView implements View {
         System.out.format("+-------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
 
         for (Person p : persons) {
-
+//TODO richtige Darstellung von Adressen und Telefonnummern
             System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers());
         }
         System.out.format("+-------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
@@ -172,16 +172,17 @@ public class PersonView implements View {
     }
 
     private void followPerson() {
-        System.out.println(", der Sie folgen möchten: ");
+        System.out.println(inputPersonID + ", der Sie folgen möchten: ");
         int id = scanner.nextInt();
-        personRestService.followPerson(id);
+
+        personRestService.followPerson(loginService.getLoggedInUser().getId(), id);
     }
 
 
     private void unFollowPerson() {
         System.out.println(inputPersonID + ", der Sie nicht mehr folgen möchten: ");
         int id = scanner.nextInt();
-        personRestService.unFollowPerson(id);
+        personRestService.unFollowPerson(loginService.getLoggedInUser().getId(), id);
     }
 
     private void deletePerson() {

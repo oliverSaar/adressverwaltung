@@ -95,12 +95,12 @@ public class PersonService {
     }
 
 
-    public void followPerson(long followId) {
-//        int userId = loginService.getLoggedInUser().getId();
-//        personDAO.followPerson(userId, followId);
+    public void followPerson(long follower, long personToFollow) {
+        personDAO.followPerson(follower, personToFollow);
     }
 
-    public void unFollowPerson(long id) {
+    public void unfollowPerson(long follower, long personToUnfollow) {
+        personDAO.unfollowPerson(follower, personToUnfollow);
     }
 
 

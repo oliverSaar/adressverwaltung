@@ -17,7 +17,7 @@ public class Person {
     private List<PhoneNumber> phoneNumbers = new ArrayList<>();
     private boolean loggedIn = false;
 
-    private List<Person> following;
+    private List<Person> following = new ArrayList<>();
     private LocalDateTime created;
     private LocalDateTime lastModified;
 
@@ -170,6 +170,5 @@ public class Person {
                 .append("folgt = ").append(following).append('\n');
         return sb.toString();
     }
-
 
 }

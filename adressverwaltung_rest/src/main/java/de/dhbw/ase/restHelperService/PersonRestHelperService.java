@@ -67,12 +67,12 @@ public class PersonRestHelperService {
         personService.addPerson(person);
     }
 
-    public void followPerson(long id) {
-        personService.followPerson(id);
+    public void followPerson(long follower, long personToFollow) {
+        personService.followPerson(follower, personToFollow);
     }
 
-    public void unFollowPerson(long id) {
-        personService.unFollowPerson(id);
+    public void unFollowPerson(long follower, long personToUnfollow) {
+        personService.unfollowPerson(follower, personToUnfollow);
 
     }
 }

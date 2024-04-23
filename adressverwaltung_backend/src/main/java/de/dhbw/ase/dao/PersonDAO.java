@@ -26,4 +26,8 @@ public interface PersonDAO {
 
 
     void removePhoneNumber(long personID, PhoneNumber phoneNumber);
+
+    void followPerson(long follower, long personToFollow);
+
+    void unfollowPerson(long follower, long personToFollow);
 }
