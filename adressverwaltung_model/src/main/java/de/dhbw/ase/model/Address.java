@@ -96,15 +96,9 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "id=" + id +
-                ", streetName='" + streetName + '\'' +
-                ", houseNumber='" + houseNumber + '\'' +
-                ", city='" + city + '\'' +
-                ", zipCode=" + zipCode +
-                ", country='" + country + '\'' +
-                ", created=" + created +
-                ", lastModified=" + lastModified +
-                '}';
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("ID = ").append(id).append(" Postleitzahl = ").append(zipCode).append(" Straße = ").append(streetName).append(" Hausnummer = ").append(houseNumber);
+        return sb.toString();
     }
 }
