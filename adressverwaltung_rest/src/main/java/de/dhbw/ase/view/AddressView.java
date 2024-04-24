@@ -77,7 +77,7 @@ public class AddressView implements View {
 
     }
 
-    public Address addAddress() {
+    public void addAddress() {
 
         long id = 0;
         String country;
@@ -103,7 +103,6 @@ public class AddressView implements View {
 
         Address address = new Address(id, country, zipCode, city, streetName, houseNumber);
         addressRestHelperService.addAddress(address);
-        return address;
     }
 
 

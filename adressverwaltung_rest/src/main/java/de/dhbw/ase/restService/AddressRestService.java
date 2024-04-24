@@ -18,9 +18,8 @@ public class AddressRestService {
     public void getAddress(int id) {
     }
 
-    public Address addAddress(Address address) {
+    public void addAddress(Address address) {
 
-        return addressService.addAddress(address);
 
     }
 }

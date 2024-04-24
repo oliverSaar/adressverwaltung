@@ -27,5 +27,6 @@ public class AddressRestHelperService {
     }
 
     public void addAddress(Address address) {
+        addressService.addAddress(address);
     }
 }

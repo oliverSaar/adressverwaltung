@@ -27,10 +27,9 @@ public class AddressService {
         return ID_COUNTER.incrementAndGet();
     }
 
-    public Address addAddress(Address address) {
+    public void addAddress(Address address) {
         address.setId(getNextId());
         addressDAO.insertAddress(address);
-        return address;
     }
 
     public Address getAddress(long id) {
