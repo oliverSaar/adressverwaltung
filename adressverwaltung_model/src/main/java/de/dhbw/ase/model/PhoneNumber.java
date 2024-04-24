@@ -12,7 +12,7 @@ public class PhoneNumber {
     private LocalDateTime lastModified;
 
 
-    public PhoneNumber(long id, boolean mobile, String number) {
+    public PhoneNumber(long id, String number, boolean mobile) {
         this.id = id;
         this.mobile = mobile;
         this.number = number;

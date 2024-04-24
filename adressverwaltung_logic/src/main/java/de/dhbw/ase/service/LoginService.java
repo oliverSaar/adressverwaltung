@@ -4,6 +4,7 @@ import de.dhbw.ase.dao.UserPasswordDAO;
 import de.dhbw.ase.model.Person;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -21,7 +22,7 @@ public class LoginService {
     }
 
     @Inject
-    public LoginService(final UserPasswordDAO userPasswordDAO, final PersonService personService) {
+    public LoginService(final UserPasswordDAO userPasswordDAO, PersonService personService) {
         this.userPasswordDAO = userPasswordDAO;
         this.personService = personService;
     }
@@ -40,17 +41,14 @@ public class LoginService {
         String password;
 
         System.out.print("Bitte geben Sie ihren Benutzernamen ein: ");
-
         username = scanner.nextLine();
 
         if (userPassword.containsKey(username)) {
 
             String[] usernameSplit = username.split(" ");
-            System.out.println("0 " + usernameSplit[0]);
-            System.out.println("1 " + usernameSplit[1]);
 
             System.out.print("Bitte geben Sie Ihr Passwort ein: ");
-            password = scanner.next();
+            password = scanner.nextLine();
             if (userPassword.get(username).equals(password)) {
                 user = personService.getAllPersons()
                         .stream()
@@ -64,11 +62,11 @@ public class LoginService {
                 System.out.println("Login erfolgreich");
                 return true;
             } else {
-                System.out.println("Login fehlgeschlagen");
+                System.out.println("Login fehlgeschlagen 1");
                 return false;
             }
         } else {
-            System.out.println("Login fehlgeschlagen");
+            System.out.println("Login fehlgeschlagen 2");
             return false;
         }
 
@@ -97,18 +95,44 @@ public class LoginService {
 
         userPassword = getUserPassword();
 
-
         System.out.print("Bitte geben Sie Ihren Benutzernamen ein: ");
-        String username = scanner.next();
+        String username = scanner.nextLine();
+        String[] usernameSplit = username.split(" ");
         if (userPassword.containsKey(username)) {
             System.out.println("Benutzername ist bereits vergeben");
             System.out.println("------------------------------------------");
             register();
         }
         System.out.print("Bitte geben Sie Ihr Passwort ein: ");
-        String password = scanner.next();
+        String password = scanner.nextLine();
 
+        System.out.println("Bitte geben Sie Ihr Geburtsdatum ein, um die Registrierung abzuschließen: ");
+
+
+        System.out.print("Tag:");
+        int day = scanner.nextInt();
+        System.out.println();
+        System.out.print("Monat (1-12): ");
+        int month = scanner.nextInt();
+        System.out.println();
+        System.out.print("Jahr (z.B. 1990): ");
+
+        int year = scanner.nextInt();
+
+        while (year < 1900 || year > LocalDate.now().getYear()) {
+            System.out.println("Falsches Jahr! Bitte geben Sie ihr Geburtsjahr erneut ein: ");
+            year = scanner.nextInt();
+            //consume unneccesary nextLine
+            scanner.nextLine();
+        }
+
+
+        personService.addPerson(new Person(1, usernameSplit[0], usernameSplit[1], day, month, year, null, null));
         userPassword.put(username, password);
+
+        //consume unneccesary nextLine
+        scanner.nextLine();
+
         System.out.println("Registrierung erfolgreich");
 
         login();
