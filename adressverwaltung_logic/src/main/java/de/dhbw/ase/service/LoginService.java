@@ -6,6 +6,7 @@ import de.dhbw.ase.model.Person;
 import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class LoginService {
@@ -59,14 +60,14 @@ public class LoginService {
 
                 user.setLoggedIn(true);
                 personService.updatePerson(user);
-                System.out.println("Login erfolgreich");
+                System.out.println("Login erfolgreich\n\n");
                 return true;
             } else {
-                System.out.println("Login fehlgeschlagen 1");
+                System.out.println("Login fehlgeschlagen\n");
                 return false;
             }
         } else {
-            System.out.println("Login fehlgeschlagen 2");
+            System.out.println("Login fehlgeschlagen\n");
             return false;
         }
 
@@ -137,5 +138,14 @@ public class LoginService {
 
         login();
 
+    }
+
+    public void getBirthdayView() {
+        List<Person> following = getLoggedInUser().getFollowing();
+        for (Person person : following) {
+            if (person.getDateOfBirth().getDayOfMonth() == LocalDate.now().getDayOfMonth() && person.getDateOfBirth().getMonthValue() == LocalDate.now().getMonthValue()) {
+                System.out.println(person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG!\n");
+            }
+        }
     }
 }

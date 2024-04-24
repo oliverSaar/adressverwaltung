@@ -1,13 +1,10 @@
 package de.dhbw.ase.view;
 
-import de.dhbw.ase.model.Person;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
 import de.dhbw.ase.service.LoginService;
-import de.dhbw.ase.service.PersonService;
 
-import javax.inject.Inject;
 import java.util.Scanner;
 
 public class MainView implements View {
@@ -52,6 +49,8 @@ public class MainView implements View {
 
 
     public void defaultView() {
+
+        loginService.getBirthdayView();
 
         int input;
 

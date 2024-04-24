@@ -33,8 +33,6 @@ public class PersonView implements View {
     public void defaultView() {
 
         int input;
-
-
         boolean done = false;
         while (!done) {
 

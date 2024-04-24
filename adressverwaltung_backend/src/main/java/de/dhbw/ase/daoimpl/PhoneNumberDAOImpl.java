@@ -12,7 +12,7 @@ public class PhoneNumberDAOImpl implements PhoneNumberDAO {
     private List<PhoneNumber> phoneNumbers = new ArrayList<>();
 
     public PhoneNumberDAOImpl() {
-        PhoneNumber phoneNumber = new PhoneNumber(0, false, "0123456789");
+        PhoneNumber phoneNumber = new PhoneNumber(0, "0123456789", false);
         phoneNumbers.add(phoneNumber);
     }
 
