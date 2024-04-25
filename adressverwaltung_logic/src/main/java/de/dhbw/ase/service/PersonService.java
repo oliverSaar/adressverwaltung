@@ -53,20 +53,24 @@ public class PersonService {
         }
     }
 
-    public void updatePerson(final Person person) {
+    public void updatePerson(final Person person, final long loggedInUserID) {
 
-        //TODO hier prüfen, ob die ID der zu ändernden Person auch zum angemeldeten Nutzer passt (außer Admin, der darf alles)
+        if (person.getId() == loggedInUserID || loggedInUserID == 0) {
+            Person databasePerson = personDAO
+                    .getPersons()
+                    .stream()
+                    .filter(entry -> entry.getId() == person.getId())
+                    .findFirst()
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Es konnte keine Person mit der ID: " + person.getId() + " gefunden werden"));
 
-        Person databasePerson = personDAO
-                .getPersons()
-                .stream()
-                .filter(entry -> entry.getId() == person.getId())
-                .findFirst()
-                .orElseThrow(() ->
-                        new IllegalArgumentException("Es konnte keine Person mit der ID: " + person.getId() + " gefunden werden"));
+            Person updatedPerson = changeValues(databasePerson, person);
+            personDAO.updatePerson(updatedPerson);
+        } else {
+            System.out.println("Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine anderen Benutzer ändern!");
+        }
 
-        Person updatedPerson = changeValues(databasePerson, person);
-        personDAO.updatePerson(updatedPerson);
+
     }
 
     private Person changeValues(Person databasePerson, Person person) {

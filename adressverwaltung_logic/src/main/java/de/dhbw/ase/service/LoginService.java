@@ -59,7 +59,7 @@ public class LoginService {
                                 new IllegalArgumentException("Es konnte keine Person mit dem Benutzernamen: " + usernameSplit[0] + " " + usernameSplit[1] + " gefunden werden"));
 
                 user.setLoggedIn(true);
-                personService.updatePerson(user);
+                personService.updatePerson(user, getLoggedInUser().getId());
                 System.out.println("Login erfolgreich\n\n");
                 return true;
             } else {

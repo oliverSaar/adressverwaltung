@@ -120,7 +120,6 @@ public class PersonView implements View {
         System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------+%n");
 
         for (Person p : persons) {
-//TODO richtige Darstellung von Adressen und Telefonnummern
             System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers());
         }
         System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------+%n");
@@ -196,7 +195,9 @@ public class PersonView implements View {
         long id = scanner.nextInt();
         Person person = dataInput();
         person.setId(id);
-        personRestService.updatePerson(person);
+
+        //TODO vllt hier Logik einbauen, damit die ID direkt geprüft wird (Logik und Anzeige mischen?)
+        personRestService.updatePerson(person, loginService.getLoggedInUser().getId());
     }
 
 

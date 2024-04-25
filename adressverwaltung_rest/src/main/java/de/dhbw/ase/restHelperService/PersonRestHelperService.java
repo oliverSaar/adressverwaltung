@@ -59,8 +59,8 @@ public class PersonRestHelperService {
     public void deletePerson(long id) {
     }
 
-    public void updatePerson(Person person) {
-        personService.updatePerson(person);
+    public void updatePerson(Person person, long loggedInUserID) {
+        personService.updatePerson(person, loggedInUserID);
     }
 
     public void addPerson(Person person) {
