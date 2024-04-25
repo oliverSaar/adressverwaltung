@@ -25,8 +25,6 @@ public class MainView implements View {
     }
 
 
-    //TODO initiale LoginView hier aufrufen (damit diese instanz)
-
     public void loginView() {
 
         int input;
