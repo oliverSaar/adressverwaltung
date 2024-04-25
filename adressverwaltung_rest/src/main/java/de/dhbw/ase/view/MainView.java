@@ -1,6 +1,7 @@
 package de.dhbw.ase.view;
 
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
+import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
 import de.dhbw.ase.service.LoginService;
@@ -14,9 +15,9 @@ public class MainView implements View {
     private final PersonRestHelperService personRestHelperService;
     private final AddressRestHelperService addressRestHelperService;
     private final PhoneNumberRestHelperService phoneNumberRestHelperService;
-    private final LoginService loginService;
+    private final LoginRestHelperService loginService;
 
-    public MainView(PersonRestHelperService personRestHelperService, AddressRestHelperService addressRestHelperService, PhoneNumberRestHelperService phoneNumberRestHelperService, LoginService loginService) {
+    public MainView(PersonRestHelperService personRestHelperService, AddressRestHelperService addressRestHelperService, PhoneNumberRestHelperService phoneNumberRestHelperService, LoginRestHelperService loginService) {
         this.personRestHelperService = personRestHelperService;
         this.addressRestHelperService = addressRestHelperService;
         this.phoneNumberRestHelperService = phoneNumberRestHelperService;

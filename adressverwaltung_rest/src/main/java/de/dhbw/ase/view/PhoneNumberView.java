@@ -1,11 +1,10 @@
 package de.dhbw.ase.view;
 
-import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.PhoneNumber;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
+import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
-import de.dhbw.ase.service.LoginService;
 
 import java.util.List;
 import java.util.Scanner;
@@ -15,10 +14,10 @@ public class PhoneNumberView implements View {
     private final PhoneNumberRestHelperService phoneNumberRestHelperService;
     private final PersonRestHelperService personRestHelperService;
     private final AddressRestHelperService addressRestHelperService;
-    private final LoginService loginService;
+    private final LoginRestHelperService loginService;
     private Scanner scanner = new Scanner(System.in);
 
-    public PhoneNumberView(PhoneNumberRestHelperService phoneNumberRestHelperService, PersonRestHelperService personRestHelperService, AddressRestHelperService addressRestHelperService, LoginService loginService) {
+    public PhoneNumberView(PhoneNumberRestHelperService phoneNumberRestHelperService, PersonRestHelperService personRestHelperService, AddressRestHelperService addressRestHelperService, LoginRestHelperService loginService) {
         this.phoneNumberRestHelperService = phoneNumberRestHelperService;
         this.personRestHelperService = personRestHelperService;
         this.addressRestHelperService = addressRestHelperService;

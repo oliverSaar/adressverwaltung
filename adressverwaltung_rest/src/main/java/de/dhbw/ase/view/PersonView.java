@@ -3,9 +3,9 @@ package de.dhbw.ase.view;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
+import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
-import de.dhbw.ase.service.LoginService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,11 +19,11 @@ public class PersonView implements View {
     private final PersonRestHelperService personRestService;
     private final AddressRestHelperService addressRestService;
     private final PhoneNumberRestHelperService phoneNumberRestService;
-    private final LoginService loginService;
+    private final LoginRestHelperService loginService;
     private final String inputPersonID = "Bitte geben Sie die ID der Person ein";
 
 
-    public PersonView(PersonRestHelperService personRestService, AddressRestHelperService addressRestService, PhoneNumberRestHelperService phoneNumberRestService, LoginService loginService) {
+    public PersonView(PersonRestHelperService personRestService, AddressRestHelperService addressRestService, PhoneNumberRestHelperService phoneNumberRestService, LoginRestHelperService loginService) {
         this.personRestService = personRestService;
         this.addressRestService = addressRestService;
         this.phoneNumberRestService = phoneNumberRestService;

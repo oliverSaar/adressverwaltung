@@ -3,6 +3,7 @@ package de.dhbw.ase.view;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
+import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
 import de.dhbw.ase.service.LoginService;
@@ -18,10 +19,10 @@ public class AddressView implements View {
     private final AddressRestHelperService addressRestHelperService;
     private final PersonRestHelperService personRestHelperService;
     private final PhoneNumberRestHelperService phoneNumberRestHelperService;
-    private final LoginService loginService;
+    private final LoginRestHelperService loginService;
 
 
-    public AddressView(AddressRestHelperService addressRestHelperService, PersonRestHelperService personRestHelperService, PhoneNumberRestHelperService phoneNumberRestHelperService, LoginService loginService) {
+    public AddressView(AddressRestHelperService addressRestHelperService, PersonRestHelperService personRestHelperService, PhoneNumberRestHelperService phoneNumberRestHelperService, LoginRestHelperService loginService) {
         this.addressRestHelperService = addressRestHelperService;
         this.personRestHelperService = personRestHelperService;
         this.phoneNumberRestHelperService = phoneNumberRestHelperService;
