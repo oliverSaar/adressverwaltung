@@ -15,6 +15,8 @@ public class AddressDAOImpl implements AddressDAO {
     public AddressDAOImpl() {
         Address address = new Address(0, "country", 12345, "city", "streetName", "7357A");
         addresses.add(address);
+        Address address2 = new Address(1, "land", 98765, "stadt", "hauptstraße", "13b");
+        addresses.add(address2);
     }
 
     @Override

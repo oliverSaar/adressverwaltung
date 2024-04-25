@@ -55,6 +55,8 @@ public class PersonService {
 
     public void updatePerson(final Person person) {
 
+        //TODO hier prüfen, ob die ID der zu ändernden Person auch zum angemeldeten Nutzer passt (außer Admin, der darf alles)
+
         Person databasePerson = personDAO
                 .getPersons()
                 .stream()

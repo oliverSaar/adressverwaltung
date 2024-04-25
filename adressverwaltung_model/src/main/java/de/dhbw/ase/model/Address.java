@@ -98,7 +98,7 @@ public class Address {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("ID = ").append(id).append(" Postleitzahl = ").append(zipCode).append(" Straße = ").append(streetName).append(" Hausnummer = ").append(houseNumber);
+        sb.append("{ID = ").append(id).append(", ").append(zipCode).append(", ").append(city).append(", ").append(streetName).append(", ").append(houseNumber).append("}");
         return sb.toString();
     }
 }

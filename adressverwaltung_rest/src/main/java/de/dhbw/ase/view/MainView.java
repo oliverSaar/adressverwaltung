@@ -31,7 +31,7 @@ public class MainView implements View {
 
         int input;
 
-        System.out.println("Haben Sie schon ein Konto?");
+        System.out.println("Haben Sie schon ein Konto? Bitte geben Sie die Nummer ein und bestätigen mit Enter");
         System.out.println("1. Ja");
         System.out.println("2. Nein");
         input = scanner.nextInt();
@@ -56,7 +56,7 @@ public class MainView implements View {
         int input;
 
         System.out.println("Wilkommen zur Adressverwaltung");
-        System.out.println("Drücken Sie die entsprechenden Zahlen, um zu den Funktionen zu navigieren");
+        System.out.println("Drücken Sie die entsprechenden Nummern und bestätigen mit Enter, um zu den Funktionen zu navigieren");
         System.out.println("1. Personen");
         System.out.println("2. Adressen");
         System.out.println("3. Telefonnummern");

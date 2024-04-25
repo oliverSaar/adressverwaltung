@@ -59,5 +59,11 @@ public class PhoneNumber {
         this.lastModified = lastModified;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{ID = ").append(id).append(", ").append(number).append(", mobil: ").append(mobile).append("}");
+        return sb.toString();
+    }
 
 }
