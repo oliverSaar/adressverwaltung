@@ -1,13 +1,10 @@
 package de.dhbw.ase.view;
 
 import de.dhbw.ase.model.Address;
-import de.dhbw.ase.model.Person;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
-import de.dhbw.ase.service.LoginService;
-import de.dhbw.ase.service.PhoneNumberService;
 
 import java.util.List;
 import java.util.Scanner;

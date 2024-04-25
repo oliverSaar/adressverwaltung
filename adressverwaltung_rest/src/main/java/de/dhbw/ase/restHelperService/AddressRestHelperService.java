@@ -3,7 +3,6 @@ package de.dhbw.ase.restHelperService;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.service.AddressService;
 
-
 import javax.inject.Inject;
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class AddressRestHelperService {
     }
 
     public List<Address> getAllAddresses() {
-       return addressService.getAllAddresses();
+        return addressService.getAllAddresses();
     }
 
     public Address getAddress(long id) {

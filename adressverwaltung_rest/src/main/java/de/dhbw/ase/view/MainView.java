@@ -4,7 +4,6 @@ import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
-import de.dhbw.ase.service.LoginService;
 
 import java.util.Scanner;
 

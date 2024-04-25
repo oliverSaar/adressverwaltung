@@ -51,7 +51,7 @@ public class PersonRestHelperService {
         personService.removeAddress(personID, address);
     }
 
-    public void addAddress(long personID,Address address) {
+    public void addAddress(long personID, Address address) {
         personService.addAddress(personID, address);
     }
 

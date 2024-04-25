@@ -14,6 +14,7 @@ public class UserPasswordDAOImpl implements UserPasswordDAO {
         userPassword.put("admin user", "admin");
         userPassword.put("Max Mustermann", "123456");
     }
+
     @Override
     public HashMap<String, String> getUserPassword() {
         return userPassword;

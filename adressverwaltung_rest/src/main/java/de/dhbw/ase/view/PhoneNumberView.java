@@ -15,7 +15,7 @@ public class PhoneNumberView implements View {
     private final PersonRestHelperService personRestHelperService;
     private final AddressRestHelperService addressRestHelperService;
     private final LoginRestHelperService loginService;
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public PhoneNumberView(PhoneNumberRestHelperService phoneNumberRestHelperService, PersonRestHelperService personRestHelperService, AddressRestHelperService addressRestHelperService, LoginRestHelperService loginService) {
         this.phoneNumberRestHelperService = phoneNumberRestHelperService;
