@@ -127,9 +127,9 @@ public class LoginService {
             scanner.nextLine();
         }
 
-
         personService.addPerson(new Person(1, usernameSplit[0], usernameSplit[1], day, month, year, null, null));
         userPassword.put(username, password);
+        userPasswordDAO.insertUserPassword(username, password);
 
         //consume unneccesary nextLine
         scanner.nextLine();
@@ -137,7 +137,6 @@ public class LoginService {
         System.out.println("Registrierung erfolgreich");
 
         login();
-
     }
 
     public void getBirthdayView() {
