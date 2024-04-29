@@ -140,10 +140,14 @@ public class LoginService {
     }
 
     public void getBirthdayView() {
+
+        final String ANSI_RESET = "\u001B[0m";
+        final String ANSI_CYAN = "\u001B[36m";
+
         List<Person> following = getLoggedInUser().getFollowing();
         for (Person person : following) {
             if (person.getDateOfBirth().getDayOfMonth() == LocalDate.now().getDayOfMonth() && person.getDateOfBirth().getMonthValue() == LocalDate.now().getMonthValue()) {
-                System.out.println(person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG!\n");
+                System.out.println(ANSI_CYAN + person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG!\n" + ANSI_RESET);
             }
         }
     }
