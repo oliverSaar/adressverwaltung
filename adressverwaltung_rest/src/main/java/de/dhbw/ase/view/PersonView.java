@@ -19,7 +19,7 @@ public class PersonView implements View {
     private final PersonRestHelperService personRestService;
     private final AddressRestHelperService addressRestService;
     private final PhoneNumberRestHelperService phoneNumberRestService;
-    private final LoginRestHelperService loginService;
+    private final LoginRestHelperService loginRestHelperService;
     private final String inputPersonID = "Bitte geben Sie die ID der Person ein";
 
 
@@ -27,7 +27,7 @@ public class PersonView implements View {
         this.personRestService = personRestService;
         this.addressRestService = addressRestService;
         this.phoneNumberRestService = phoneNumberRestService;
-        this.loginService = loginService;
+        this.loginRestHelperService = loginService;
     }
 
     public void defaultView() {
@@ -85,12 +85,12 @@ public class PersonView implements View {
             }
         }
 
-        new MainView(personRestService, addressRestService, phoneNumberRestService, loginService).defaultView();
+        new MainView(personRestService, addressRestService, phoneNumberRestService, loginRestHelperService).defaultView();
 
     }
 
 
-    private static void consoleMenu() {
+    public void consoleMenu() {
         System.out.println();
         System.out.println("---------------------------------------------------------------------");
         System.out.println();
@@ -172,14 +172,14 @@ public class PersonView implements View {
         System.out.println(inputPersonID + ", der Sie folgen möchten: ");
         int id = scanner.nextInt();
 
-        personRestService.followPerson(loginService.getLoggedInUser().getId(), id);
+        personRestService.followPerson(loginRestHelperService.getLoggedInUser().getId(), id);
     }
 
 
     private void unFollowPerson() {
         System.out.println(inputPersonID + ", der Sie nicht mehr folgen möchten: ");
         int id = scanner.nextInt();
-        personRestService.unFollowPerson(loginService.getLoggedInUser().getId(), id);
+        personRestService.unFollowPerson(loginRestHelperService.getLoggedInUser().getId(), id);
     }
 
     private void deletePerson() {
@@ -197,7 +197,7 @@ public class PersonView implements View {
         person.setId(id);
 
         //TODO vllt hier Logik einbauen, damit die ID direkt geprüft wird (Logik und Anzeige mischen?)
-        personRestService.updatePerson(person, loginService.getLoggedInUser().getId());
+        personRestService.updatePerson(person, loginRestHelperService.getLoggedInUser().getId());
     }
 
 

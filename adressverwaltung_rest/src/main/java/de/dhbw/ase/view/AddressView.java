@@ -104,7 +104,7 @@ public class AddressView implements View {
     }
 
 
-    private void consoleMenu() {
+    public void consoleMenu() {
         System.out.println("Bitte geben Sie die Zahl der Aktion ein: ");
 
         System.out.println("1. Alle Adressen anzeigen");
