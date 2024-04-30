@@ -123,12 +123,12 @@ public class PersonView implements View {
         for (Person p : persons) {
             List<Person> following = p.getFollowing();
 
-            List<String> followingIds = new ArrayList<String>();
+            List<String> followingIds = new ArrayList<>();
             for (Person person : following) {
                 System.out.println("Person zum hinzufügen: " + person.getFirstName());
                 followingIds.add(person.getId() + "");
             }
-            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers(),followingIds);
+            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers(), followingIds);
         }
         System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------+------------------------+%n");
 
