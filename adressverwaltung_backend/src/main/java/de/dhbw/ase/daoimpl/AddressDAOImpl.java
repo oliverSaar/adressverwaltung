@@ -5,7 +5,6 @@ import de.dhbw.ase.model.Address;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class AddressDAOImpl implements AddressDAO {
@@ -20,32 +19,18 @@ public class AddressDAOImpl implements AddressDAO {
     }
 
     @Override
-    public Optional<Address> getAddress(long id) {
+    public Optional<Address> getAddress(long id) throws Exception {
         return Optional.ofNullable(addresses.get((int) id));
     }
 
     @Override
-    public List<Address> getAddresses() {
+    public List<Address> getAddresses() throws Exception {
         return addresses;
     }
 
     @Override
-    public void insertAddress(Address address) {
+    public void insertAddress(Address address) throws Exception {
         addresses.add(address);
-
-    }
-
-    @Override
-    public void updateAddress(Address address) {
-        for (Address a : addresses) {
-            if (Objects.equals(a.getId(), address.getId())) {
-                a.setStreetName(address.getStreetName());
-                a.setHouseNumber(address.getHouseNumber());
-                a.setCity(address.getCity());
-                a.setZipCode(address.getZipCode());
-                a.setCountry(address.getCountry());
-            }
-        }
 
     }
 }

@@ -17,14 +17,28 @@ public class PhoneNumberRestHelperService {
     }
 
     public PhoneNumber getPhoneNumber(long id) {
-        return phoneNumberService.getPhoneNumber(id);
+        try {
+            return phoneNumberService.getPhoneNumber(id);
+        } catch (Exception e) {
+            System.out.println("Die Telefonnummer mit der ID: " + id + " konnte nicht gefunden werden!");
+            return null;
+        }
     }
 
     public List<PhoneNumber> getAllPhoneNumbers() {
-        return phoneNumberService.getAllPhoneNumbers();
+        try {
+            return phoneNumberService.getAllPhoneNumbers();
+        } catch (Exception e) {
+            System.out.println("Es konnten keine Telefonnummern gefunden werden!");
+            return null;
+        }
     }
 
     public void addPhoneNumber(PhoneNumber phoneNumber) {
-        phoneNumberService.addPhoneNumber(phoneNumber);
+        try {
+            phoneNumberService.addPhoneNumber(phoneNumber);
+        } catch (Exception e) {
+            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht hinzugefügt werden!");
+        }
     }
 }

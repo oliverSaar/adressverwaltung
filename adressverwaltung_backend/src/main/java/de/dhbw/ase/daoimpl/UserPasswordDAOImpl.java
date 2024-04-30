@@ -16,12 +16,12 @@ public class UserPasswordDAOImpl implements UserPasswordDAO {
     }
 
     @Override
-    public HashMap<String, String> getUserPassword() {
+    public HashMap<String, String> getUserPassword() throws Exception {
         return userPassword;
     }
 
     @Override
-    public void insertUserPassword(String userName, String password) {
+    public void insertUserPassword(String userName, String password) throws Exception {
         userPassword.put(userName, password);
 
     }

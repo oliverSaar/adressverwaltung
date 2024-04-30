@@ -24,12 +24,12 @@ public class AddressService {
         return ID_COUNTER.incrementAndGet();
     }
 
-    public void addAddress(Address address) {
+    public void addAddress(Address address) throws Exception {
         address.setId(getNextId());
         addressDAO.insertAddress(address);
     }
 
-    public Address getAddress(long id) {
+    public Address getAddress(long id) throws Exception {
 
         Optional<Address> optionalAddress = addressDAO.getAddress(id);
 
@@ -38,7 +38,7 @@ public class AddressService {
 
     }
 
-    public List<Address> getAllAddresses() {
+    public List<Address> getAllAddresses() throws Exception {
         return addressDAO.getAddresses();
     }
 }

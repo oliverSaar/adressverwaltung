@@ -18,14 +18,28 @@ public class AddressRestHelperService {
     }
 
     public List<Address> getAllAddresses() {
-        return addressService.getAllAddresses();
+        try {
+            return addressService.getAllAddresses();
+        } catch (Exception e) {
+            System.out.println("Es konnten keine Adressen gefunden werden! Bitte versuchen Sie es erneut!");
+            return null;
+        }
     }
 
     public Address getAddress(long id) {
-        return addressService.getAddress(id);
+        try {
+            return addressService.getAddress(id);
+        } catch (Exception e) {
+            System.out.println("Es konnte keine Adresse mit der ID: " + id + " gefunden werden! Bitte versuchen Sie es erneut!");
+            return null;
+        }
     }
 
     public void addAddress(Address address) {
-        addressService.addAddress(address);
+        try {
+            addressService.addAddress(address);
+        } catch (Exception e) {
+            System.out.println("Die Adresse konnte nicht hinzugefügt werden! Bitte versuchen Sie es erneut!");
+        }
     }
 }

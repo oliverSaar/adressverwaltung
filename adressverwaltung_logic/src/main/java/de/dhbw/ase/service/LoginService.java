@@ -26,7 +26,7 @@ public class LoginService {
     }
 
 
-    public HashMap<String, String> getUserPassword() {
+    public HashMap<String, String> getUserPassword() throws Exception {
         return userPasswordDAO.getUserPassword();
     }
 

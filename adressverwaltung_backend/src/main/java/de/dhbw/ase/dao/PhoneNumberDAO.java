@@ -7,11 +7,10 @@ import java.util.Optional;
 
 public interface PhoneNumberDAO {
 
-    Optional<PhoneNumber> getPhoneNumber(long id);
+    Optional<PhoneNumber> getPhoneNumber(long id) throws Exception;
 
-    List<PhoneNumber> getPhoneNumbers();
+    List<PhoneNumber> getPhoneNumbers() throws Exception;
 
-    void insertPhoneNumber(PhoneNumber phoneNumber);
+    void insertPhoneNumber(PhoneNumber phoneNumber) throws Exception;
 
-    void updatePhoneNumber(PhoneNumber phoneNumber);
 }

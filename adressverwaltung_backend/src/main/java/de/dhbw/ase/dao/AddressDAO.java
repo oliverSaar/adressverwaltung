@@ -7,12 +7,10 @@ import java.util.Optional;
 
 public interface AddressDAO {
 
-    Optional<Address> getAddress(final long id);
+    Optional<Address> getAddress(final long id) throws Exception;
 
-    List<Address> getAddresses();
+    List<Address> getAddresses() throws Exception;
 
-    void insertAddress(Address address);
-
-    void updateAddress(Address address);
+    void insertAddress(Address address) throws Exception;
 
 }

@@ -24,7 +24,7 @@ public class PhoneNumberService {
         return ID_COUNTER.incrementAndGet();
     }
 
-    public PhoneNumber getPhoneNumber(long id) {
+    public PhoneNumber getPhoneNumber(long id) throws Exception {
 
         Optional<PhoneNumber> optionalPhoneNumber = phoneNumberDAO.getPhoneNumber(id);
 
@@ -32,12 +32,12 @@ public class PhoneNumberService {
                 .orElseThrow(() -> new IllegalArgumentException("Telefonnummer mit der ID: " + id + " konnte nicht gefunden werden"));
     }
 
-    public List<PhoneNumber> getAllPhoneNumbers() {
+    public List<PhoneNumber> getAllPhoneNumbers() throws Exception {
 
         return phoneNumberDAO.getPhoneNumbers();
     }
 
-    public void addPhoneNumber(PhoneNumber phoneNumber) {
+    public void addPhoneNumber(PhoneNumber phoneNumber) throws Exception {
         phoneNumber.setId(getNextId());
         phoneNumberDAO.insertPhoneNumber(phoneNumber);
     }

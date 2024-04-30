@@ -28,6 +28,7 @@ public class LoginRestHelperService {
     public void register() {
         try {
             loginService.register();
+            System.out.println("Die Registrierung war erfolgreich!");
         } catch (Exception e) {
             System.out.println("Die Registrierung konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut.");
         }
@@ -44,10 +45,8 @@ public class LoginRestHelperService {
 
     public void getBirthdayView() {
         try {
-
             loginService.getBirthdayView();
         } catch (Exception e) {
-
             System.out.println("Die Geburtstagsanzeige konnte nicht geladen werden! Bitte versuchen Sie es erneut.");
         }
     }

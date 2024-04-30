@@ -17,31 +17,19 @@ public class PhoneNumberDAOImpl implements PhoneNumberDAO {
     }
 
     @Override
-    public Optional<PhoneNumber> getPhoneNumber(long id) {
+    public Optional<PhoneNumber> getPhoneNumber(long id) throws Exception {
         return Optional.ofNullable(phoneNumbers.get((int) id));
     }
 
     @Override
-    public List<PhoneNumber> getPhoneNumbers() {
+    public List<PhoneNumber> getPhoneNumbers() throws Exception {
         return phoneNumbers;
     }
 
     @Override
-    public void insertPhoneNumber(PhoneNumber phoneNumber) {
+    public void insertPhoneNumber(PhoneNumber phoneNumber) throws Exception {
 
         phoneNumbers.add(phoneNumber);
     }
 
-    @Override
-    public void updatePhoneNumber(PhoneNumber phoneNumber) {
-
-        for (PhoneNumber p : phoneNumbers) {
-            if (p.getId() == phoneNumber.getId()) {
-                p.setNumber(phoneNumber.getNumber());
-                p.setMobile(phoneNumber.isMobile());
-            }
-        }
-
-
-    }
 }
