@@ -12,8 +12,6 @@ import java.util.Optional;
 public class PersonDAOMock extends PersonDAOImpl {
 
 
-
-
     private Person person = new Person(0, "vorname", "nachname", 29, 4, 1990, null, null);
 
     private Person person2 = new Person(1, "vorname2", "nachname2", 29, 4, 1990, null, null);

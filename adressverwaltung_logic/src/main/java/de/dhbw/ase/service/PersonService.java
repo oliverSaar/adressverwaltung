@@ -17,7 +17,6 @@ public class PersonService {
     private PersonDAO personDAO;
 
     protected PersonService() {
-
     }
 
     @Inject

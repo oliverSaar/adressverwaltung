@@ -71,9 +71,7 @@ class PersonServiceTest {
     @Test
     void followPerson() {
         assertEquals(0, personService.getPerson(0).getFollowing().size());
-        Person p = personService.getPerson(0);
-        p.addFollowing(personService.getPerson(1));
-        personService.updatePerson(p, p.getId());
+        personService.followPerson(0, 1);
         assertEquals(1, personService.getPerson(0).getFollowing().size());
     }
 
@@ -81,11 +79,8 @@ class PersonServiceTest {
     void unfollowPerson() {
 
         assertEquals(1, personService.getPerson(1).getFollowing().size());
-        Person p = personService.getPerson(1);
-        p.removeFollowing(personService.getPerson(0));
-        personService.updatePerson(p, p.getId());
+        personService.unfollowPerson(1, 0);
         assertEquals(0, personService.getPerson(1).getFollowing().size());
-
     }
 
     @Test
@@ -94,7 +89,6 @@ class PersonServiceTest {
         assertEquals(0, personService.getPerson(0).getAddresses().size());
         personService.addAddress(0, new Address(0, "test", 12345, "test", "test", "test"));
         assertEquals(1, personService.getPerson(0).getAddresses().size());
-
     }
 
     @Test
