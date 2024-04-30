@@ -129,15 +129,13 @@ public class PersonDAOImpl implements PersonDAO {
         try {
             Optional<Person> toFollow = getPerson(personToFollow);
 
-            System.out.println("außen");
             if (toFollow.isPresent()) {
 
-                System.out.println("drinne");
                 for (Person p : persons) {
                     if (p.getId() == follower) {
-
-                        System.out.println("if schleife");
-                        System.out.println(toFollow.get().getFirstName());
+                        if(p.getFollowing().contains(toFollow.get())){
+                            System.out.println("Dieser Person wird bereits gefolgt!");
+                        }
                         p.addFollowing(toFollow.get());
                     }
                 }

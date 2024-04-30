@@ -8,6 +8,7 @@ import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -113,16 +114,23 @@ public class PersonView implements View {
 
         List<Person> persons = personRestService.getAllPersons();
 
-        String leftAlignFormat = "| %-5d | %-15s | %-15s | %-15s | %-90s | %-65s |%n";
-        System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------+%n");
+        String leftAlignFormat = "| %-5d | %-15s | %-15s | %-15s | %-90s | %-43s | %-22s |%n";
+        System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------+------------------------+%n");
 
-        System.out.format("| ID    | Vorname         | Nachname        | Geburtsdatum    | Adresse(n)                                                                                 | Telefonnummer(n)                                                  |%n");
-        System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------+%n");
+        System.out.format("| ID    | Vorname         | Nachname        | Geburtsdatum    | Adresse(n)                                                                                 | Telefonnummer(n)                          | Gefolgt                |%n");
+        System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------+------------------------+%n");
 
         for (Person p : persons) {
-            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers());
+            List<Person> following = p.getFollowing();
+
+            List<String> followingIds = new ArrayList<String>();
+            for (Person person : following) {
+                System.out.println("Person zum hinzufügen: " + person.getFirstName());
+                followingIds.add(person.getId() + "");
+            }
+            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers(),followingIds);
         }
-        System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------------------------------+%n");
+        System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------+------------------------+%n");
 
 
 //                personRestService.getAllPersons();
