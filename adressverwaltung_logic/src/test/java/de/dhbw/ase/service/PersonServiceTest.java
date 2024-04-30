@@ -31,14 +31,14 @@ class PersonServiceTest {
     }
 
     @Test
-    void getAllPersons() {
+    void getAllPersons() throws Exception {
 
         assertEquals(3, personService.getAllPersons().size());
 
     }
 
     @Test
-    void getPerson() {
+    void getPerson() throws Exception {
 
         Person person = personService.getPerson(0);
 
@@ -48,7 +48,7 @@ class PersonServiceTest {
     }
 
     @Test
-    void addPerson() {
+    void addPerson() throws Exception {
 
         assertEquals(3, personService.getAllPersons().size());
 
@@ -60,7 +60,7 @@ class PersonServiceTest {
     }
 
     @Test
-    void updatePerson() {
+    void updatePerson() throws Exception {
         assertEquals("vorname", personService.getPerson(0).getFirstName());
         personService.updatePerson(toAdd, toAdd.getId());
         assertEquals("testV", personService.getPerson(0).getFirstName());
@@ -69,14 +69,14 @@ class PersonServiceTest {
     }
 
     @Test
-    void followPerson() {
+    void followPerson() throws Exception {
         assertEquals(0, personService.getPerson(0).getFollowing().size());
         personService.followPerson(0, 1);
         assertEquals(1, personService.getPerson(0).getFollowing().size());
     }
 
     @Test
-    void unfollowPerson() {
+    void unfollowPerson() throws Exception {
 
         assertEquals(1, personService.getPerson(1).getFollowing().size());
         personService.unfollowPerson(1, 0);
@@ -84,7 +84,7 @@ class PersonServiceTest {
     }
 
     @Test
-    void addAddress() {
+    void addAddress() throws Exception {
 
         assertEquals(0, personService.getPerson(0).getAddresses().size());
         personService.addAddress(0, new Address(0, "test", 12345, "test", "test", "test"));
@@ -92,7 +92,7 @@ class PersonServiceTest {
     }
 
     @Test
-    void removeAddress() {
+    void removeAddress() throws Exception {
 
         assertEquals(1, personService.getPerson(1).getAddresses().size());
         personService.removeAddress(1, personService.getPerson(1).getAddresses().get(0));
@@ -100,7 +100,7 @@ class PersonServiceTest {
     }
 
     @Test
-    void removePhoneNumber() {
+    void removePhoneNumber() throws Exception {
         assertEquals(1, personService.getPerson(1).getPhoneNumbers().size());
         personService.removePhoneNumber(1, personService.getPerson(1).getPhoneNumbers().get(0));
         assertEquals(0, personService.getPerson(1).getPhoneNumbers().size());
@@ -108,7 +108,7 @@ class PersonServiceTest {
     }
 
     @Test
-    void addPhoneNumber() {
+    void addPhoneNumber() throws Exception {
 
         assertEquals(0, personService.getPerson(0).getPhoneNumbers().size());
         personService.addPhoneNumber(0, new PhoneNumber(0, "0123456789", false));

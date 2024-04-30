@@ -33,7 +33,7 @@ public class LoginService {
         return userPasswordDAO.getUserPassword();
     }
 
-    public boolean login() {
+    public boolean login() throws Exception {
 
         resetLoginFlags();
 
@@ -73,13 +73,13 @@ public class LoginService {
 
     }
 
-    private void resetLoginFlags() {
+    private void resetLoginFlags() throws Exception {
         for (Person person : personService.getAllPersons()) {
             person.setLoggedIn(false);
         }
     }
 
-    public Person getLoggedInUser() {
+    public Person getLoggedInUser() throws Exception {
 
         for (Person person : personService.getAllPersons()) {
             if (person.isLoggedIn()) {
@@ -92,7 +92,7 @@ public class LoginService {
 
     }
 
-    public void register() {
+    public void register() throws Exception {
 
         userPassword = getUserPassword();
 
@@ -139,7 +139,7 @@ public class LoginService {
         login();
     }
 
-    public void getBirthdayView() {
+    public void getBirthdayView() throws Exception {
 
         final String ANSI_RESET = "\u001B[0m";
         final String ANSI_CYAN = "\u001B[36m";

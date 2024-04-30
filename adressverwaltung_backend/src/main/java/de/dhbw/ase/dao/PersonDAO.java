@@ -9,25 +9,25 @@ import java.util.Optional;
 
 public interface PersonDAO {
 
-    Optional<Person> getPerson(final long id);
+    Optional<Person> getPerson(final long id) throws Exception;
 
-    List<Person> getPersons();
-
-
-    void insertPerson(Person person);
-
-    void updatePerson(Person person);
-
-    void addAddress(long personID, Address address);
-
-    void removeAddress(long personID, Address address);
-
-    void addPhoneNumber(long personID, PhoneNumber phoneNumber);
+    List<Person> getPersons() throws Exception;
 
 
-    void removePhoneNumber(long personID, PhoneNumber phoneNumber);
+    void insertPerson(Person person) throws Exception;
 
-    void followPerson(long follower, long personToFollow);
+    void updatePerson(Person person) throws Exception;
 
-    void unfollowPerson(long follower, long personToFollow);
+    void addAddress(long personID, Address address) throws Exception;
+
+    void removeAddress(long personID, Address address) throws Exception;
+
+    void addPhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception;
+
+
+    void removePhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception;
+
+    void followPerson(long follower, long personToFollow) throws Exception;
+
+    void unfollowPerson(long follower, long personToFollow) throws Exception;
 }

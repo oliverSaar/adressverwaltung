@@ -25,36 +25,30 @@ public class PersonDAOImpl implements PersonDAO {
 
 
     @Override
-    public Optional<Person> getPerson(final long id) {
+    public Optional<Person> getPerson(final long id) throws Exception {
 
-        try {
-
-            for (Person p : persons) {
-                if (p.getId() == id) {
-                    return Optional.of(p);
-                }
+        for (Person p : persons) {
+            if (p.getId() == id) {
+                return Optional.of(p);
             }
-            return Optional.empty();
-
-        } catch (Exception e) {
-            System.out.println("Person konnte nicht gefunden werden");
-            throw new RuntimeException(e);
         }
+        return Optional.empty();
+
     }
 
     @Override
-    public List<Person> getPersons() {
+    public List<Person> getPersons() throws Exception {
         return persons;
     }
 
     @Override
-    public void insertPerson(Person person) {
+    public void insertPerson(Person person) throws Exception {
         persons.add(person);
 
     }
 
     @Override
-    public void updatePerson(Person person) {
+    public void updatePerson(Person person) throws Exception {
         for (Person p : persons) {
             if (p.getId() == person.getId()) {
                 p.setAddresses(person.getAddresses());
@@ -68,107 +62,82 @@ public class PersonDAOImpl implements PersonDAO {
     }
 
     @Override
-    public void addAddress(long personID, Address address) {
+    public void addAddress(long personID, Address address) throws Exception {
 
-        try {
-            for (Person p : persons) {
-                if (p.getId() == personID) {
-                    p.addAddress(address);
-                }
+        for (Person p : persons) {
+            if (p.getId() == personID) {
+                p.addAddress(address);
             }
-        } catch (Exception e) {
-            System.out.println("Adresse konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden");
         }
     }
 
     @Override
-    public void removeAddress(long personID, Address address) {
-        try {
-            for (Person p : persons) {
-                if (p.getId() == personID) {
-                    p.removeAddress(address);
-                }
+    public void removeAddress(long personID, Address address) throws Exception {
+        for (Person p : persons) {
+            if (p.getId() == personID) {
+                p.removeAddress(address);
             }
-        } catch (Exception e) {
-            System.out.println("Adresse konnte nicht von der Person mit der ID: " + personID + " entfernt werden");
-        }
-
-    }
-
-    @Override
-    public void addPhoneNumber(long personID, PhoneNumber phoneNumber) {
-        try {
-            for (Person p : persons) {
-                if (p.getId() == personID) {
-                    p.addPhoneNumber(phoneNumber);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Telefonnummer konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden");
         }
     }
 
     @Override
-    public void removePhoneNumber(long personID, PhoneNumber phoneNumber) {
-        try {
-            for (Person p : persons) {
-                if (p.getId() == personID) {
-                    p.removePhoneNumber(phoneNumber);
-                }
+    public void addPhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
+
+        for (Person p : persons) {
+            if (p.getId() == personID) {
+                p.addPhoneNumber(phoneNumber);
             }
-        } catch (Exception e) {
-            System.out.println("Telefonnummer konnte nicht von der Person mit der ID: " + personID + " entfernt werden");
+        }
+    }
+
+    @Override
+    public void removePhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
+        for (Person p : persons) {
+            if (p.getId() == personID) {
+                p.removePhoneNumber(phoneNumber);
+            }
         }
 
     }
 
     @Override
-    public void followPerson(long follower, long personToFollow) {
+    public void followPerson(long follower, long personToFollow) throws Exception {
 
 
-        try {
-            Optional<Person> toFollow = getPerson(personToFollow);
+        Optional<Person> toFollow = getPerson(personToFollow);
 
-            if (toFollow.isPresent()) {
+        if (toFollow.isPresent()) {
 
-                for (Person p : persons) {
-                    if (p.getId() == follower) {
-                        if(p.getFollowing().contains(toFollow.get())){
-                            System.out.println("Dieser Person wird bereits gefolgt!");
-                        }
-                        p.addFollowing(toFollow.get());
+            for (Person p : persons) {
+                if (p.getId() == follower) {
+                    if (p.getFollowing().contains(toFollow.get())) {
+                        throw new RuntimeException("Dieser Person wird bereits gefolgt!");
                     }
+                    p.addFollowing(toFollow.get());
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Der Person mit der ID: " + personToFollow + " konnte nicht gefolgt werden");
-
         }
+
     }
 
     @Override
-    public void unfollowPerson(long follower, long personToUnfollow) {
+    public void unfollowPerson(long follower, long personToUnfollow) throws Exception {
 
 
-        try {
-            Optional<Person> toUnfollow = getPerson(personToUnfollow);
+        Optional<Person> toUnfollow = getPerson(personToUnfollow);
 
-            System.out.println("außen");
-            if (toUnfollow.isPresent()) {
+        if (toUnfollow.isPresent()) {
 
-                System.out.println("drinne");
-                for (Person p : persons) {
-                    if (p.getId() == follower) {
-
-                        System.out.println("if schleife");
-                        System.out.println(toUnfollow.get().getFirstName());
+            for (Person p : persons) {
+                if (p.getId() == follower) {
+                    if (p.getFollowing().contains(getPerson(personToUnfollow).get())) {
                         p.removeFollowing(toUnfollow.get());
                     }
+                    else{
+                        throw new Exception("Der Person mit der ID: " + personToUnfollow + " wird nicht gefolgt!");
+                    }
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Der Person mit der ID: " + personToUnfollow + " konnte nicht gefolgt werden");
-
         }
     }
 }

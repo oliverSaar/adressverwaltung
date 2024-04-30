@@ -32,27 +32,25 @@ public class PersonService {
         return ID_COUNTER.incrementAndGet();
     }
 
-    public List<Person> getAllPersons() {
+    public List<Person> getAllPersons() throws Exception {
+
         return personDAO.getPersons();
     }
 
-    public Person getPerson(long id) {
+    public Person getPerson(long id) throws Exception {
         Optional<Person> optionalPerson = personDAO.getPerson(id);
 
         return optionalPerson
                 .orElseThrow(() -> new IllegalArgumentException("Person mit der ID: " + id + " konnte nicht gefunden werden"));
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(Person person) throws Exception {
         person.setId(getNextId());
-        try {
-            personDAO.insertPerson(person);
-        } catch (Exception e) {
-            System.out.println("Person konnte nicht hinzugefügt werden");
-        }
+        personDAO.insertPerson(person);
+
     }
 
-    public void updatePerson(final Person person, final long loggedInUserID) {
+    public void updatePerson(final Person person, final long loggedInUserID) throws Exception {
 
         if (person.getId() == loggedInUserID || loggedInUserID == 0) {
             Person databasePerson = personDAO
@@ -100,51 +98,36 @@ public class PersonService {
     }
 
 
-    public void followPerson(long follower, long personToFollow) {
+    public void followPerson(long follower, long personToFollow) throws Exception {
+
         personDAO.followPerson(follower, personToFollow);
     }
 
-    public void unfollowPerson(long follower, long personToUnfollow) {
+    public void unfollowPerson(long follower, long personToUnfollow) throws Exception {
         personDAO.unfollowPerson(follower, personToUnfollow);
     }
 
 
-    public void addAddress(long PersonID, Address address) {
+    public void addAddress(long PersonID, Address address) throws Exception {
 
-        try {
-            personDAO.addAddress(PersonID, address);
-            System.out.println("Die Adresse wurde erfolgreich zu der Person mit der ID: " + PersonID + " hinzugefügt");
-        } catch (Exception e) {
-            System.out.println("Die Adresse konnte nicht zu der Person mit ID:+ " + PersonID + "hinzugefügt werden");
-        }
+        personDAO.addAddress(PersonID, address);
+
     }
 
-    public void removeAddress(long personID, Address address) {
-        try {
-            personDAO.removeAddress(personID, address);
-            System.out.println("Die Adresse mit der ID: " + address.getId() + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
-        } catch (Exception e) {
-            System.out.println("Die Adresse mit der ID: " + address.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden");
-        }
+    public void removeAddress(long personID, Address address) throws Exception {
+
+        personDAO.removeAddress(personID, address);
+
     }
 
-    public void removePhoneNumber(long personID, PhoneNumber phoneNumber) {
-        try {
-            personDAO.removePhoneNumber(personID, phoneNumber);
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
-        } catch (Exception e) {
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden");
-        }
+    public void removePhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
+
+        personDAO.removePhoneNumber(personID, phoneNumber);
+
     }
 
-    public void addPhoneNumber(long personID, PhoneNumber phoneNumber) {
-        try {
-            personDAO.addPhoneNumber(personID, phoneNumber);
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich zu der Person mit der ID: " + personID + " hinzugefügt");
-        } catch (Exception e) {
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden");
-        }
-
+    public void addPhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
+        personDAO.addPhoneNumber(personID, phoneNumber);
 
     }
 }

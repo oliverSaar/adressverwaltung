@@ -17,18 +17,38 @@ public class LoginRestHelperService {
 
 
     public boolean login() {
-        return loginService.login();
+        try {
+            return loginService.login();
+        } catch (Exception e) {
+            System.out.println("Der Login konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut.");
+            return false;
+        }
     }
 
     public void register() {
-        loginService.register();
+        try {
+            loginService.register();
+        } catch (Exception e) {
+            System.out.println("Die Registrierung konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut.");
+        }
     }
 
     public Person getLoggedInUser() {
-        return loginService.getLoggedInUser();
+        try {
+            return loginService.getLoggedInUser();
+        } catch (Exception e) {
+            System.out.println("Keine eingeloggte Person gefunden!");
+            return null;
+        }
     }
 
     public void getBirthdayView() {
-        loginService.getBirthdayView();
+        try {
+
+            loginService.getBirthdayView();
+        } catch (Exception e) {
+
+            System.out.println("Die Geburtstagsanzeige konnte nicht geladen werden! Bitte versuchen Sie es erneut.");
+        }
     }
 }
