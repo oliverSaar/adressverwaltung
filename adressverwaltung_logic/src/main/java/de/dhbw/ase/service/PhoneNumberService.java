@@ -12,8 +12,6 @@ public class PhoneNumberService {
 
     private PhoneNumberDAO phoneNumberDAO;
 
-    protected PhoneNumberService() {
-    }
 
     @Inject
     public PhoneNumberService(final PhoneNumberDAO phoneNumberDAO) {

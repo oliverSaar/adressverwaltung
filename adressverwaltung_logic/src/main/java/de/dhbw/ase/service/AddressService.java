@@ -12,9 +12,6 @@ public class AddressService {
 
     private AddressDAO addressDAO;
 
-    protected AddressService() {
-
-    }
 
     @Inject
     public AddressService(final AddressDAO addressDAO) {

@@ -16,8 +16,6 @@ public class PersonService {
 
     private PersonDAO personDAO;
 
-    protected PersonService() {
-    }
 
     @Inject
     public PersonService(final PersonDAO personDAO) {

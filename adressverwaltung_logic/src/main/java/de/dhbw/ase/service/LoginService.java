@@ -19,9 +19,6 @@ public class LoginService {
     Scanner scanner = new Scanner(System.in);
 
 
-    protected LoginService() {
-    }
-
     @Inject
     public LoginService(final UserPasswordDAO userPasswordDAO, PersonService personService) {
         this.userPasswordDAO = userPasswordDAO;
