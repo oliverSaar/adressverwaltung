@@ -126,7 +126,6 @@ public class PersonView implements View {
 
             List<String> followingIds = new ArrayList<>();
             for (Person person : following) {
-                System.out.println("Person zum hinzufügen: " + person.getFirstName());
                 followingIds.add(person.getId() + "");
             }
             System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers(), followingIds);

@@ -97,6 +97,7 @@ public class PersonService {
 
 
     public void followPerson(long follower, long personToFollow) throws Exception {
+        //TODO checken ob nicht selbst + checken ob Personen vorhanden
 
         personDAO.followPerson(follower, personToFollow);
     }
