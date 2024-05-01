@@ -38,6 +38,16 @@ angesprochen.
 Views werden für jede Modellklasse eine benötigt, also Personen-, Adressen- und Telefonnummernview.
 Zusätzlich gibt es eine Mainview, welche den Startpunkt und das Hauptmenü darstellt.
 
+# Ubiquitous Language
+DAO - Data Object
+DAO -> DAOImpl -> Service -> RestHelperService -> (RestService) -> View (Frontend)
+
+Attribute von Person:
+boolean loggedIn -> wenn dieser User eingeloggt ist, geht der boolean auf true
+List<Person> following -> Die Personen, welchen der Nutzer folgt
+
+
+
 # How to RUN
 
 adressverwaltung_rest -> src -> main -> java -> de.dhbw.ase -> Program.java
