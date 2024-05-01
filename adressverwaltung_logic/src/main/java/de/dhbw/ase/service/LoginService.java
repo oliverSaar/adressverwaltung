@@ -140,6 +140,8 @@ public class LoginService {
         for (Person person : following) {
             if (person.getDateOfBirth().getDayOfMonth() == LocalDate.now().getDayOfMonth() && person.getDateOfBirth().getMonthValue() == LocalDate.now().getMonthValue()) {
                 System.out.println(ANSI_CYAN + person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG!\n" + ANSI_RESET);
+            } else {
+                System.out.println("Heute hat niemand der Personen, denen Sie folgen Geburtstag!\n");
             }
         }
     }

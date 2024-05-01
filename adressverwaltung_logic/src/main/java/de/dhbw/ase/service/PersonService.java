@@ -30,6 +30,9 @@ public class PersonService {
 
     public List<Person> getAllPersons() throws Exception {
 
+        if(personDAO.getPersons().isEmpty()){
+            throw new Exception("Keine Personen gefunden!");
+        }
         return personDAO.getPersons();
     }
 

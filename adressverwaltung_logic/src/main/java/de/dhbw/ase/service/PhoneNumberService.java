@@ -32,10 +32,14 @@ public class PhoneNumberService {
 
     public List<PhoneNumber> getAllPhoneNumbers() throws Exception {
 
+        if (phoneNumberDAO.getPhoneNumbers().isEmpty()) {
+            throw new Exception("Keine Telefonnummern gefunden!");
+        }
         return phoneNumberDAO.getPhoneNumbers();
     }
 
     public void addPhoneNumber(PhoneNumber phoneNumber) throws Exception {
+
         phoneNumber.setId(getNextId());
         phoneNumberDAO.insertPhoneNumber(phoneNumber);
     }
