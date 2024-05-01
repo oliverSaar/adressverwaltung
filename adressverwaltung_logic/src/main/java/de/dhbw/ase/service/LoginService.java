@@ -3,7 +3,6 @@ package de.dhbw.ase.service;
 import de.dhbw.ase.dao.UserPasswordDAO;
 import de.dhbw.ase.model.Person;
 
-import javax.inject.Inject;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;

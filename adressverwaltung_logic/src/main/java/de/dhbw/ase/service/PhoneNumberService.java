@@ -3,7 +3,6 @@ package de.dhbw.ase.service;
 import de.dhbw.ase.dao.PhoneNumberDAO;
 import de.dhbw.ase.model.PhoneNumber;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
