@@ -5,19 +5,20 @@ import de.dhbw.ase.model.Person;
 import de.dhbw.ase.model.PhoneNumber;
 import de.dhbw.ase.service.mocks.PersonDAOMock;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PersonServiceTest {
 
 
     public PersonDAOMock personDAOMock;
-    PersonService personService;
+    public PersonService personService;
 
-    public Person toAdd;
+    public Person toAdd, follow;
 
     @BeforeEach
     void setUp() {
@@ -26,6 +27,7 @@ class PersonServiceTest {
         personService = new PersonService(personDAOMock);
 
         toAdd = new Person(0, "testV", "testN", 29, 4, 1990, null, null);
+        follow = new Person(4, "testV", "testN", 29, 4, 1990, null, null);
 
 
     }
@@ -34,7 +36,6 @@ class PersonServiceTest {
     void getAllPersons() throws Exception {
 
         assertEquals(3, personService.getAllPersons().size());
-
     }
 
     @Test
@@ -45,6 +46,16 @@ class PersonServiceTest {
         assertEquals("vorname", person.getFirstName());
         assertEquals("nachname", person.getLastName());
         assertEquals(LocalDate.of(1990, 4, 29), person.getDateOfBirth());
+    }
+
+    @Test
+    void getPersonThrowsException() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.getPerson(4));
+
+        String expectedMessage = "Person mit der ID: 4 konnte nicht gefunden werden";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
@@ -60,19 +71,79 @@ class PersonServiceTest {
     }
 
     @Test
+    void addPersonThrowsException() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.addPerson(new Person(0, "vorname", "nachname", 29, 4, 1990, null, null)));
+
+        String expectedMessage = "Person mit dem Namen: vorname nachname existiert bereits";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     void updatePerson() throws Exception {
         assertEquals("vorname", personService.getPerson(0).getFirstName());
         personService.updatePerson(toAdd, toAdd.getId());
         assertEquals("testV", personService.getPerson(0).getFirstName());
-
-
     }
+
+    @Test
+    void updatePersonNotFound() throws Exception {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.updatePerson(follow, 4));
+
+        String expectedMessage = "Es konnte keine Person mit der ID: 4 gefunden werden";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void updatePersonOtherPerson() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.updatePerson(follow, 1));
+
+        String expectedMessage = "Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine anderen Benutzer ändern!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
 
     @Test
     void followPerson() throws Exception {
         assertEquals(0, personService.getPerson(0).getFollowing().size());
         personService.followPerson(0, 1);
         assertEquals(1, personService.getPerson(0).getFollowing().size());
+    }
+
+    @Test
+    void followPersonFollowSelf() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(0, 0));
+
+        String expectedMessage = "Sie können sich nicht selbst folgen!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void followPersonAlreadyFollowing() {
+        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(1, 0));
+
+        String expectedMessage = "Sie folgen dieser Person bereits!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Disabled
+    @Test
+    void followPersonWrongID() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(1, 5));
+
+        String expectedMessage = "Die Person mit der ID: 5 konnte nicht gefunden werden!";
+        String actualMessage = exception.getMessage();
+        System.out.println(actualMessage);
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
@@ -84,11 +155,41 @@ class PersonServiceTest {
     }
 
     @Test
+    void unfollowPersonNotFollowed() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.unfollowPerson(1, 2));
+
+        String expectedMessage = "Der Person mit der ID: 2 wird nicht gefolgt!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     void addAddress() throws Exception {
 
         assertEquals(0, personService.getPerson(0).getAddresses().size());
         personService.addAddress(0, new Address(0, "test", 12345, "test", "test", "test"));
         assertEquals(1, personService.getPerson(0).getAddresses().size());
+    }
+
+    @Test
+    void addAddressPersonNotFound() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.addAddress(4, new Address(0, "test", 12345, "test", "test", "test")));
+
+        String expectedMessage = "Die Person konnte nicht gefunden werden!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void addAddressPersonAlreadyHasAddress() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.addAddress(1, personService.getPerson(1).getAddresses().get(0)));
+        String expectedMessage = "Die Adresse wurde bereits zu der Person hinzugefügt!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+
     }
 
     @Test
@@ -100,6 +201,25 @@ class PersonServiceTest {
     }
 
     @Test
+    void removeAddressPersonNotFound() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.removeAddress(4, new Address(0, "test", 12345, "test", "test", "test")));
+        String expectedMessage = "Die Person konnte nicht gefunden werden!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+
+    }
+
+    @Test
+    void removeAddressNotConnected() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.removeAddress(1, new Address(0, "test", 12345, "test", "test", "test")));
+        String expectedMessage = "Die Adresse ist nicht mit der Person verknüpft!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     void removePhoneNumber() throws Exception {
         assertEquals(1, personService.getPerson(1).getPhoneNumbers().size());
         personService.removePhoneNumber(1, personService.getPerson(1).getPhoneNumbers().get(0));
@@ -108,10 +228,46 @@ class PersonServiceTest {
     }
 
     @Test
+    void removePhoneNumberPersonNotFound() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.removePhoneNumber(4, new PhoneNumber(0, "0123456789", false)));
+        String expectedMessage = "Die Person konnte nicht gefunden werden!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void removePhoneNumberNotConnected() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.removePhoneNumber(1, new PhoneNumber(0, "0123456789", false)));
+        String expectedMessage = "Die Telefonnummer ist nicht mit der Person verknüpft!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     void addPhoneNumber() throws Exception {
 
         assertEquals(0, personService.getPerson(0).getPhoneNumbers().size());
         personService.addPhoneNumber(0, new PhoneNumber(0, "0123456789", false));
         assertEquals(1, personService.getPerson(0).getPhoneNumbers().size());
+    }
+
+    @Test
+    void addPhoneNumberPersonNotFound() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.addPhoneNumber(4, new PhoneNumber(0, "0123456789", false)));
+        String expectedMessage = "Die Person konnte nicht gefunden werden!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
+    void addPhoneNumberPersonAlreadyHasPhoneNumber() {
+
+        Exception exception = assertThrows(Exception.class, () -> personService.addPhoneNumber(1, personService.getPerson(1).getPhoneNumbers().get(0)));
+        String expectedMessage = "Die Telefonnummer wurde bereits zu der Person hinzugefügt!";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }

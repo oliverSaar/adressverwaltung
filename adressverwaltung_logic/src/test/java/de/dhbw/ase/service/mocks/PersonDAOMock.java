@@ -138,25 +138,18 @@ public class PersonDAOMock extends PersonDAOImpl {
     public void followPerson(long follower, long personToFollow) {
 
 
-        try {
-            Optional<Person> toFollow = getPerson(personToFollow);
+        Optional<Person> toFollow = getPerson(personToFollow);
 
-            System.out.println("außen");
-            if (toFollow.isPresent()) {
+        if (toFollow.isPresent()) {
 
-                System.out.println("drinne");
-                for (Person p : persons) {
-                    if (p.getId() == follower) {
-
-                        System.out.println("if schleife");
-                        System.out.println(toFollow.get().getFirstName());
-                        p.addFollowing(toFollow.get());
+            for (Person p : persons) {
+                if (p.getId() == follower) {
+                    if (p.getFollowing().contains(toFollow.get())) {
+                        throw new RuntimeException("Dieser Person wird bereits gefolgt!");
                     }
+                    p.addFollowing(toFollow.get());
                 }
             }
-        } catch (Exception e) {
-            System.out.println("Der Person mit der ID: " + personToFollow + " konnte nicht gefolgt werden");
-
         }
     }
 

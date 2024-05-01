@@ -30,7 +30,7 @@ public class PersonService {
 
     public List<Person> getAllPersons() throws Exception {
 
-        if(personDAO.getPersons().isEmpty()){
+        if (personDAO.getPersons().isEmpty()) {
             throw new Exception("Keine Personen gefunden!");
         }
         return personDAO.getPersons();
@@ -70,7 +70,7 @@ public class PersonService {
             Person updatedPerson = changeValues(databasePerson, person);
             personDAO.updatePerson(updatedPerson);
         } else {
-            System.out.println("Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine anderen Benutzer ändern!");
+            throw new Exception("Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine anderen Benutzer ändern!");
         }
 
 
@@ -107,12 +107,13 @@ public class PersonService {
     public void followPerson(long follower, long personToFollow) throws Exception {
         if (follower == personToFollow) {
             throw new RuntimeException("Sie können sich nicht selbst folgen!");
+        } else if (personDAO.getPerson(follower).get().getFollowing().contains(personDAO.getPerson(personToFollow).get())) {
+            throw new RuntimeException("Sie folgen dieser Person bereits!");
         } else if (personDAO.getPerson(personToFollow).isPresent()) {
             personDAO.followPerson(follower, personToFollow);
         } else {
-            throw new RuntimeException("Der Person mit der ID: " + personToFollow + " konnte nicht gefunden werden!");
+            throw new RuntimeException("Die Person mit der ID: " + personToFollow + " konnte nicht gefunden werden!");
         }
-
     }
 
     public void unfollowPerson(long follower, long personToUnfollow) throws Exception {
@@ -162,7 +163,14 @@ public class PersonService {
     }
 
     public void addPhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
-        personDAO.addPhoneNumber(personID, phoneNumber);
+
+        if (personDAO.getPerson(personID).isEmpty()) {
+            throw new RuntimeException("Die Person konnte nicht gefunden werden!");
+        } else if (personDAO.getPerson(personID).get().getPhoneNumbers().contains(phoneNumber)) {
+            throw new RuntimeException("Die Telefonnummer wurde bereits zu der Person hinzugefügt!");
+        } else {
+            personDAO.addPhoneNumber(personID, phoneNumber);
+        }
 
     }
 }
