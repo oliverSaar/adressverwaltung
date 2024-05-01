@@ -27,7 +27,7 @@ public class PhoneNumberService {
         Optional<PhoneNumber> optionalPhoneNumber = phoneNumberDAO.getPhoneNumber(id);
 
         return optionalPhoneNumber
-                .orElseThrow(() -> new IllegalArgumentException("Telefonnummer mit der ID: " + id + " konnte nicht gefunden werden"));
+                .orElseThrow(() -> new IllegalArgumentException("Die Telefonnummer mit der ID: " + id + " konnte nicht gefunden werden!"));
     }
 
     public List<PhoneNumber> getAllPhoneNumbers() throws Exception {

@@ -18,7 +18,12 @@ public class PhoneNumberDAOImpl implements PhoneNumberDAO {
 
     @Override
     public Optional<PhoneNumber> getPhoneNumber(long id) throws Exception {
-        return Optional.ofNullable(phoneNumbers.get((int) id));
+        for (PhoneNumber phoneNumber : phoneNumbers) {
+            if (phoneNumber.getId() == id) {
+                return Optional.of(phoneNumber);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override
