@@ -40,8 +40,9 @@ public class MainView implements View {
             }
         } else {
             loginService.register();
-            defaultView();
+            loginView();
         }
+
 
     }
 

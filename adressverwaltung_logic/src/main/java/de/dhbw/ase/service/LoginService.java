@@ -89,15 +89,15 @@ public class LoginService {
 
     }
 
-    public void register() throws Exception {
+    public boolean register() throws Exception {
 
         userPassword = getUserPassword();
 
-        System.out.print("Bitte geben Sie Ihren Benutzernamen ein: ");
+        System.out.print("Bitte geben Sie Ihren Benutzernamen ein (Muster: Vorname Nachname): ");
         String username = scanner.nextLine();
         String[] usernameSplit = username.split(" ");
         if (userPassword.containsKey(username)) {
-            System.out.println("Benutzername ist bereits vergeben");
+            System.out.println("Benutzername ist bereits vergeben. Bitte setzen Sie eine 1 (bzw. 2 und fortlaufend) an Ihren Nachnamen.");
             System.out.println("------------------------------------------");
             register();
         }
@@ -120,20 +120,18 @@ public class LoginService {
         while (year < 1900 || year > LocalDate.now().getYear()) {
             System.out.println("Falsches Jahr! Bitte geben Sie ihr Geburtsjahr erneut ein: ");
             year = scanner.nextInt();
-            //consume unneccesary nextLine
-            scanner.nextLine();
         }
-
-        personService.addPerson(new Person(1, usernameSplit[0], usernameSplit[1], day, month, year, null, null));
-        userPassword.put(username, password);
-        userPasswordDAO.insertUserPassword(username, password);
 
         //consume unneccesary nextLine
         scanner.nextLine();
-
-        System.out.println("Registrierung erfolgreich");
-
-        login();
+        try {
+            personService.addPerson(new Person(1, usernameSplit[0], usernameSplit[1], day, month, year, null, null));
+            userPassword.put(username, password);
+            userPasswordDAO.insertUserPassword(username, password);
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void getBirthdayView() throws Exception {

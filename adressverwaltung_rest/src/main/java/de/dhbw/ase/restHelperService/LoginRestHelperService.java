@@ -25,13 +25,15 @@ public class LoginRestHelperService {
         }
     }
 
-    public void register() {
+    public boolean register() {
         try {
             loginService.register();
             System.out.println("Die Registrierung war erfolgreich!");
         } catch (Exception e) {
             System.out.println("Die Registrierung konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut.");
+            return false;
         }
+        return false;
     }
 
     public Person getLoggedInUser() {
