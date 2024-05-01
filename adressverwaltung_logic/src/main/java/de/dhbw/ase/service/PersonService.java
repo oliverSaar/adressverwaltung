@@ -43,8 +43,15 @@ public class PersonService {
     }
 
     public void addPerson(Person person) throws Exception {
+        //TODO sollte man eine Person hinzufügen können oder nur durch Registrierung?
         person.setId(getNextId());
-        personDAO.insertPerson(person);
+        if (personDAO.getPersons().stream().anyMatch(p -> Objects.equals(p.getFirstName(), person.getFirstName()))
+                && personDAO.getPersons().stream().anyMatch(p -> Objects.equals(p.getLastName(), person.getLastName()))) {
+            throw new RuntimeException("Die Person mit dem Namen: " + person.getFirstName() + " " + person.getLastName() + " existiert bereits!" +
+                    " Sind Sie das nicht und möchten einen neuen Account anlegen, dann hängen Sie eine 1 (2, bzw. fortlaufend) an das Ende Ihres Nachnamens!");
+        } else {
+            personDAO.insertPerson(person);
+        }
 
     }
 
@@ -97,31 +104,59 @@ public class PersonService {
 
 
     public void followPerson(long follower, long personToFollow) throws Exception {
-        //TODO checken ob nicht selbst + checken ob Personen vorhanden
+        if (follower == personToFollow) {
+            throw new RuntimeException("Sie können sich nicht selbst folgen!");
+        } else if (personDAO.getPerson(personToFollow).isPresent()) {
+            personDAO.followPerson(follower, personToFollow);
+        } else {
+            throw new RuntimeException("Der Person mit der ID: " + personToFollow + " konnte nicht gefunden werden!");
+        }
 
-        personDAO.followPerson(follower, personToFollow);
     }
 
     public void unfollowPerson(long follower, long personToUnfollow) throws Exception {
-        personDAO.unfollowPerson(follower, personToUnfollow);
+
+        if (personDAO.getPerson(follower).get().getFollowing().contains(personDAO.getPerson(personToUnfollow).get())) {
+            personDAO.unfollowPerson(follower, personToUnfollow);
+        } else {
+            throw new RuntimeException("Der Person mit der ID: " + personToUnfollow + " wird nicht gefolgt!");
+        }
     }
 
 
     public void addAddress(long PersonID, Address address) throws Exception {
 
-        personDAO.addAddress(PersonID, address);
+        if (personDAO.getPerson(PersonID).isEmpty()) {
+            throw new RuntimeException("Die Person konnte nicht gefunden werden!");
+        } else if (personDAO.getPerson(PersonID).get().getAddresses().contains(address)) {
+            throw new RuntimeException("Die Adresse wurde bereits zu der Person hinzugefügt!");
+        } else {
+            personDAO.addAddress(PersonID, address);
+        }
 
     }
 
     public void removeAddress(long personID, Address address) throws Exception {
+        if (personDAO.getPerson(personID).isEmpty()) {
+            throw new RuntimeException("Die Person konnte nicht gefunden werden!");
+        } else if (!personDAO.getPerson(personID).get().getAddresses().contains(address)) {
+            throw new RuntimeException("Die Adresse ist nicht mit der Person verknüpft!");
+        } else {
+            personDAO.removeAddress(personID, address);
+        }
 
-        personDAO.removeAddress(personID, address);
 
     }
 
     public void removePhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
 
-        personDAO.removePhoneNumber(personID, phoneNumber);
+        if (personDAO.getPerson(personID).isEmpty()) {
+            throw new RuntimeException("Die Person konnte nicht gefunden werden!");
+        } else if (!personDAO.getPerson(personID).get().getPhoneNumbers().contains(phoneNumber)) {
+            throw new RuntimeException("Die Telefonnummer ist nicht mit der Person verknüpft!");
+        } else {
+            personDAO.removePhoneNumber(personID, phoneNumber);
+        }
 
     }
 

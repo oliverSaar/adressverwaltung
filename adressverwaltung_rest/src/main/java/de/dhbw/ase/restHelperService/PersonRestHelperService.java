@@ -25,7 +25,7 @@ public class PersonRestHelperService {
         try {
             return personService.getPerson(id);
         } catch (Exception e) {
-            System.out.println("Person mit der ID: " + id + " konnte nicht gefunden werden");
+            System.out.println(e.getMessage());
             return null;
         }
 
@@ -45,7 +45,7 @@ public class PersonRestHelperService {
             personService.removePhoneNumber(personID, phoneNumber);
             System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
         } catch (Exception e) {
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden");
+            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden. " + e.getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ public class PersonRestHelperService {
             personService.addPhoneNumber(personID, phoneNumber);
             System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich zu der Person mit der ID: " + personID + " hinzugefügt");
         } catch (Exception e) {
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden");
+            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden. " + e.getMessage());
         }
     }
 
@@ -64,7 +64,7 @@ public class PersonRestHelperService {
             personService.removeAddress(personID, address);
             System.out.println("Die Adresse mit der ID: " + address.getId() + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
         } catch (Exception e) {
-            System.out.println("Die Adresse mit der ID: " + address.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden");
+            System.out.println("Die Adresse mit der ID: " + address.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden. " + e.getMessage());
         }
     }
 
@@ -73,12 +73,14 @@ public class PersonRestHelperService {
             personService.addAddress(personID, address);
             System.out.println("Die Adresse wurde zu der Person mit ID:+ " + personID + "hinzugefügt.");
         } catch (Exception e) {
-            System.out.println("Die Adresse konnte nicht zu der Person mit ID:+ " + personID + "hinzugefügt werden");
+            System.out.println("Die Adresse konnte nicht zu der Person mit ID:+ " + personID + "hinzugefügt werden. " + e.getMessage());
         }
     }
 
 
     public void deletePerson(long id) {
+
+        //TODO person löschen implementieren
     }
 
     public void updatePerson(Person person, long loggedInUserID) {
@@ -86,7 +88,7 @@ public class PersonRestHelperService {
             personService.updatePerson(person, loggedInUserID);
             System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich aktualisiert.");
         } catch (Exception e) {
-            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht aktualisiert werden.");
+            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht aktualisiert werden. " + e.getMessage());
         }
     }
 
@@ -96,7 +98,7 @@ public class PersonRestHelperService {
             personService.addPerson(person);
             System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich hinzugefügt.");
         } catch (Exception e) {
-            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht hinzugefügt werden.");
+            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht hinzugefügt werden. " + e.getMessage());
         }
     }
 
