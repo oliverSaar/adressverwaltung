@@ -20,7 +20,13 @@ public class AddressDAOImpl implements AddressDAO {
 
     @Override
     public Optional<Address> getAddress(long id) throws Exception {
-        return Optional.ofNullable(addresses.get((int) id));
+
+        for (Address address : addresses) {
+            if (address.getId() == id) {
+                return Optional.of(address);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override

@@ -37,7 +37,7 @@ public class AddressService {
     }
 
     public List<Address> getAllAddresses() throws Exception {
-        if(addressDAO.getAddresses().isEmpty()) {
+        if (addressDAO.getAddresses().isEmpty()) {
             throw new Exception("Keine Adressen gefunden!");
         }
         return addressDAO.getAddresses();
