@@ -81,7 +81,7 @@ public class LoginService {
                 return person;
             }
         }
-        throw new RuntimeException("Keine eingeloggte Person gefunden");
+        throw new RuntimeException("Keine eingeloggte Person gefunden!");
 
 
     }
@@ -102,7 +102,6 @@ public class LoginService {
         String password = scanner.nextLine();
 
         System.out.println("Bitte geben Sie Ihr Geburtsdatum ein, um die Registrierung abzuschließen: ");
-
 
         System.out.print("Tag:");
         int day = scanner.nextInt();
