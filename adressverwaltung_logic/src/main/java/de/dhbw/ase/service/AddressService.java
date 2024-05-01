@@ -13,7 +13,6 @@ public class AddressService {
     private AddressDAO addressDAO;
 
 
-    @Inject
     public AddressService(final AddressDAO addressDAO) {
         this.addressDAO = addressDAO;
     }

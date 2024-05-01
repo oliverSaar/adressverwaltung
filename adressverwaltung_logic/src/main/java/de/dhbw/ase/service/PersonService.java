@@ -17,7 +17,6 @@ public class PersonService {
     private PersonDAO personDAO;
 
 
-    @Inject
     public PersonService(final PersonDAO personDAO) {
         this.personDAO = personDAO;
     }

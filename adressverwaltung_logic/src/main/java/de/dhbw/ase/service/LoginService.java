@@ -19,7 +19,6 @@ public class LoginService {
     Scanner scanner = new Scanner(System.in);
 
 
-    @Inject
     public LoginService(final UserPasswordDAO userPasswordDAO, PersonService personService) {
         this.userPasswordDAO = userPasswordDAO;
         this.personService = personService;
@@ -83,8 +82,7 @@ public class LoginService {
                 return person;
             }
         }
-        System.out.println("Keine eingeloggte Person gefunden");
-        return null;
+        throw new RuntimeException("Keine eingeloggte Person gefunden");
 
 
     }

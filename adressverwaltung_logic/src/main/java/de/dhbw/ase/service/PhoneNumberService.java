@@ -13,7 +13,6 @@ public class PhoneNumberService {
     private PhoneNumberDAO phoneNumberDAO;
 
 
-    @Inject
     public PhoneNumberService(final PhoneNumberDAO phoneNumberDAO) {
         this.phoneNumberDAO = phoneNumberDAO;
     }
