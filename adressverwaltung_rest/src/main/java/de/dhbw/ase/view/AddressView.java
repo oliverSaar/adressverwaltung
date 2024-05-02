@@ -93,25 +93,32 @@ public class AddressView implements View {
 
         long id = 0;
         String country;
-        int zipCode;
+        int zipCode = 0;
         String city;
         String streetName;
         String houseNumber;
 
+        //remove unused nextLine
+        scanner.nextLine();
+
         System.out.print("Bitte geben Sie das Land ein: ");
-        country = scanner.next();
+        country = scanner.nextLine();
         System.out.println();
-        System.out.println("Bitte geben Sie die Postleitzahl ein:");
-        zipCode = scanner.nextInt();
+        while (zipCode < 10000 || zipCode > 99999) {
+            System.out.println("Bitte geben Sie die Postleitzahl ein (fünfstellig):");
+            zipCode = scanner.nextInt();
+            scanner.nextLine();
+        }
         System.out.println();
         System.out.println("Bitte geben Sie die Stadt / den Ort ein:");
-        city = scanner.next();
+        city = scanner.nextLine();
         System.out.println();
         System.out.println("Bitte geben Sie den Straßennamen ein:");
-        streetName = scanner.next();
+        streetName = scanner.nextLine();
         System.out.println();
         System.out.println("Bitte geben Sie die Hausnummer ein:");
-        houseNumber = scanner.next();
+        houseNumber = scanner.nextLine();
+        System.out.println();
 
         Address address = new Address(id, country, zipCode, city, streetName, houseNumber);
         addressRestHelperService.addAddress(address);
