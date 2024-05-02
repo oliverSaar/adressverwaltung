@@ -20,7 +20,7 @@ public class PhoneNumberRestHelperService {
         try {
             return phoneNumberService.getPhoneNumber(id);
         } catch (Exception e) {
-            System.out.println("Die Telefonnummer mit der ID: " + id + " konnte nicht gefunden werden!");
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -29,7 +29,7 @@ public class PhoneNumberRestHelperService {
         try {
             return phoneNumberService.getAllPhoneNumbers();
         } catch (Exception e) {
-            System.out.println("Es konnten keine Telefonnummern gefunden werden!");
+            System.out.println(e.getMessage());
             return null;
         }
     }
@@ -38,7 +38,7 @@ public class PhoneNumberRestHelperService {
         try {
             phoneNumberService.addPhoneNumber(phoneNumber);
         } catch (Exception e) {
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht hinzugefügt werden!");
+            System.out.println("Die Telefonnummer konnte nicht hinzugefügt werden!");
         }
     }
 }

@@ -40,6 +40,24 @@ public class PersonRestHelperService {
         }
     }
 
+    public void updatePerson(Person person, long loggedInUserID) {
+        try {
+            personService.updatePerson(person, loggedInUserID);
+            System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich aktualisiert.");
+        } catch (Exception e) {
+            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht aktualisiert werden. " + e.getMessage());
+        }
+    }
+
+    public void addPerson(Person person) {
+        try {
+            personService.addPerson(person);
+            System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich hinzugefügt.");
+        } catch (Exception e) {
+            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht hinzugefügt werden. " + e.getMessage());
+        }
+    }
+
     public void removePhoneNumber(long personID, PhoneNumber phoneNumber) {
         try {
             personService.removePhoneNumber(personID, phoneNumber);
@@ -81,25 +99,6 @@ public class PersonRestHelperService {
     public void deletePerson(long id) {
 
         //TODO person löschen implementieren
-    }
-
-    public void updatePerson(Person person, long loggedInUserID) {
-        try {
-            personService.updatePerson(person, loggedInUserID);
-            System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich aktualisiert.");
-        } catch (Exception e) {
-            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht aktualisiert werden. " + e.getMessage());
-        }
-    }
-
-    public void addPerson(Person person) {
-        try {
-
-            personService.addPerson(person);
-            System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich hinzugefügt.");
-        } catch (Exception e) {
-            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht hinzugefügt werden. " + e.getMessage());
-        }
     }
 
     public void followPerson(long follower, long personToFollow) {
