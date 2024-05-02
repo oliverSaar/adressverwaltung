@@ -32,7 +32,7 @@ public class PersonDAOImpl implements PersonDAO {
                 return Optional.of(p);
             }
         }
-        return Optional.empty();
+        throw new Exception("Person konnte nicht gefunden werden");
 
     }
 
@@ -132,8 +132,7 @@ public class PersonDAOImpl implements PersonDAO {
                 if (p.getId() == follower) {
                     if (p.getFollowing().contains(getPerson(personToUnfollow).get())) {
                         p.removeFollowing(toUnfollow.get());
-                    }
-                    else{
+                    } else {
                         throw new Exception("Der Person mit der ID: " + personToUnfollow + " wird nicht gefolgt!");
                     }
                 }

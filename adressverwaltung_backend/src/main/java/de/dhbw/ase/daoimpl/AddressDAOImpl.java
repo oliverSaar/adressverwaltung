@@ -26,7 +26,7 @@ public class AddressDAOImpl implements AddressDAO {
                 return Optional.of(address);
             }
         }
-        return Optional.empty();
+        throw new Exception("Die Adresse mit der ID: " + id + " konnte nicht gefunden werden.");
     }
 
     @Override

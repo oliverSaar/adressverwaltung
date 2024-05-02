@@ -23,7 +23,7 @@ public class PhoneNumberDAOImpl implements PhoneNumberDAO {
                 return Optional.of(phoneNumber);
             }
         }
-        return Optional.empty();
+        throw new Exception("Keine Telefonnummer mit der ID: " + id + " gefunden");
     }
 
     @Override
