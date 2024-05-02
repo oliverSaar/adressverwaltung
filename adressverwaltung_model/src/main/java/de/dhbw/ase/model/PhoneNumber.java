@@ -32,19 +32,9 @@ public class PhoneNumber {
         return mobile;
     }
 
-    public void setMobile(boolean mobile) {
-        this.mobile = mobile;
-        setLastModified(LocalDateTime.now());
-    }
 
     public String getNumber() {
         return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-        setLastModified(LocalDateTime.now());
-
     }
 
     public LocalDateTime getCreated() {
