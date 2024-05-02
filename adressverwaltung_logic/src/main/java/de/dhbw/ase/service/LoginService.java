@@ -137,8 +137,9 @@ public class LoginService {
 
         List<Person> following = getLoggedInUser().getFollowing();
         for (Person person : following) {
-            if (person.getDateOfBirth().getDayOfMonth() == LocalDate.now().getDayOfMonth() && person.getDateOfBirth().getMonthValue() == LocalDate.now().getMonthValue()) {
-                System.out.println(ANSI_CYAN + person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG!\n" + ANSI_RESET);
+            if (person.getDateOfBirth().isToday()) {
+                System.out.println(ANSI_CYAN + person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG und wird " +
+                        person.getDateOfBirth().getAge() + " Jahre alt!\n" + ANSI_RESET);
             } else {
                 System.out.println("Heute hat niemand der Personen, denen Sie folgen Geburtstag!\n");
             }
