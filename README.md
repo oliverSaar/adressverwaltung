@@ -38,6 +38,7 @@ angesprochen.
 Views werden für jede Modellklasse eine benötigt, also Personen-, Adressen- und Telefonnummernview.
 Zusätzlich gibt es eine Mainview, welche den Startpunkt und das Hauptmenü darstellt.
 
+//TODO hier noch anpassen
 # Ubiquitous Language
 DAO - Data Object
 DAO -> DAOImpl -> Service -> RestHelperService -> (RestService) -> View (Frontend)
@@ -45,6 +46,9 @@ DAO -> DAOImpl -> Service -> RestHelperService -> (RestService) -> View (Fronten
 Attribute von Person:
 boolean loggedIn -> wenn dieser User eingeloggt ist, geht der boolean auf true
 List<Person> following -> Die Personen, welchen der Nutzer folgt
+
+
+Entities sind im Model Package
 
 
 
