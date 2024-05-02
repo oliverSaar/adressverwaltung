@@ -8,10 +8,13 @@ import java.util.List;
 public class Person {
 
 
+    //TODO Personbuilder
+
     private long id;
     private String firstName;
     private String lastName;
 
+    //TODO Geburtstagsadapter
     private LocalDate dateOfBirth;
     private List<Address> addresses = new ArrayList<>();
     private List<PhoneNumber> phoneNumbers = new ArrayList<>();
