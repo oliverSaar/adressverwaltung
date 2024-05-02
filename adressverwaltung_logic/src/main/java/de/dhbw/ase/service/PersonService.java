@@ -15,16 +15,14 @@ public class PersonService {
 
     private PersonDAO personDAO;
 
-
     public PersonService(final PersonDAO personDAO) {
         this.personDAO = personDAO;
     }
 
-
     //TODO initial value anpassen, damit nicht zwei die gleiche id haben
     private final static AtomicLong ID_COUNTER = new AtomicLong(1);
 
-    public static long getNextId() {
+    private static long getNextId() {
         return ID_COUNTER.incrementAndGet();
     }
 
@@ -44,12 +42,12 @@ public class PersonService {
     }
 
     public void addPerson(Person person) throws Exception {
-        //TODO sollte man eine Person hinzufügen können oder nur durch Registrierung?
+        //TODO sollte man überhaupt eine Person hinzufügen können oder nur durch Registrierung?
         person.setId(getNextId());
         if (personDAO.getPersons().stream().anyMatch(p -> Objects.equals(p.getFirstName(), person.getFirstName()))
                 && personDAO.getPersons().stream().anyMatch(p -> Objects.equals(p.getLastName(), person.getLastName()))) {
             throw new RuntimeException("Die Person mit dem Namen: " + person.getFirstName() + " " + person.getLastName() + " existiert bereits!" +
-                    " Sind Sie das nicht und möchten einen neuen Account anlegen, dann hängen Sie eine 1 (2, bzw. fortlaufend) an das Ende Ihres Nachnamens!");
+                    " Sind Sie das nicht und möchten einen neuen Account anlegen, dann hängen Sie bei der Registrierung eine 1 (2, bzw. fortlaufend) an das Ende Ihres Nachnamens!");
         } else {
             personDAO.insertPerson(person);
         }

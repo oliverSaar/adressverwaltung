@@ -18,7 +18,7 @@ public class PhoneNumberService {
 
     private final static AtomicLong ID_COUNTER = new AtomicLong();
 
-    public static long getNextId() {
+    private static long getNextId() {
         return ID_COUNTER.incrementAndGet();
     }
 
@@ -33,7 +33,7 @@ public class PhoneNumberService {
     public List<PhoneNumber> getAllPhoneNumbers() throws Exception {
 
         if (phoneNumberDAO.getPhoneNumbers().isEmpty()) {
-            throw new Exception("Keine Telefonnummern gefunden!");
+            throw new Exception("Es konnten keine Telefonnummern gefunden werden!");
         }
         return phoneNumberDAO.getPhoneNumbers();
     }

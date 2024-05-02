@@ -18,7 +18,7 @@ public class AddressService {
 
     private final static AtomicLong ID_COUNTER = new AtomicLong();
 
-    public static long getNextId() {
+    private static long getNextId() {
         return ID_COUNTER.incrementAndGet();
     }
 
@@ -32,13 +32,13 @@ public class AddressService {
         Optional<Address> optionalAddress = addressDAO.getAddress(id);
 
         return optionalAddress
-                .orElseThrow(() -> new IllegalArgumentException("Adresse mit der ID: " + id + " konnte nicht gefunden werden"));
+                .orElseThrow(() -> new IllegalArgumentException("Adresse mit der ID: " + id + " konnte nicht gefunden werden!"));
 
     }
 
     public List<Address> getAllAddresses() throws Exception {
         if (addressDAO.getAddresses().isEmpty()) {
-            throw new Exception("Keine Adressen gefunden!");
+            throw new Exception("Es konnten keine Adressen gefunden werden!");
         }
         return addressDAO.getAddresses();
     }
