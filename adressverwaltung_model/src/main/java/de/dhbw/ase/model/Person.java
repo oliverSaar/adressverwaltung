@@ -1,5 +1,7 @@
 package de.dhbw.ase.model;
 
+import de.dhbw.ase.model.adapter.Birthday;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ public class Person {
     private String lastName;
 
     //TODO Geburtstagsadapter
-    private LocalDate dateOfBirth;
+    private Birthday dateOfBirth;
     private List<Address> addresses = new ArrayList<>();
     private List<PhoneNumber> phoneNumbers = new ArrayList<>();
     private boolean loggedIn = false;
@@ -27,10 +29,11 @@ public class Person {
 
     public Person(long id, String firstName, String lastName, int day, int month, int year, List<Address> addresses, List<PhoneNumber> phoneNumbers) {
 
+
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.dateOfBirth = LocalDate.of(year, month, day);
+        this.dateOfBirth = new Birthday(LocalDate.of(year, month, day));
 
         if (addresses != null) {
             if (!addresses.isEmpty()) {
@@ -76,11 +79,11 @@ public class Person {
 
     }
 
-    public LocalDate getDateOfBirth() {
+    public Birthday getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDate dateOfBirth) {
+    public void setDateOfBirth(Birthday dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -167,7 +170,7 @@ public class Person {
         sb.append("ID = ").append(id).append("\n")
                 .append("Vorname = ").append(firstName).append('\n')
                 .append("Nachname = ").append(lastName).append('\n')
-                .append("Geburtsdatum = ").append(dateOfBirth).append('\n')
+                .append("Geburtsdatum = ").append(dateOfBirth.getBirthday()).append('\n')
                 .append("Adresse(n) = ").append(addresses).append('\n')
                 .append("Telefonnummer(n) = ").append(phoneNumbers).append('\n')
                 .append("folgt = ").append(following).append('\n');

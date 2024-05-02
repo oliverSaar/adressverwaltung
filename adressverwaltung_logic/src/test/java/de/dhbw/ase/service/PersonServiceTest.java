@@ -3,6 +3,7 @@ package de.dhbw.ase.service;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.model.PhoneNumber;
+import de.dhbw.ase.model.adapter.Birthday;
 import de.dhbw.ase.service.mocks.PersonDAOMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -45,7 +46,8 @@ class PersonServiceTest {
 
         assertEquals("vorname", person.getFirstName());
         assertEquals("nachname", person.getLastName());
-        assertEquals(LocalDate.of(1990, 4, 29), person.getDateOfBirth());
+        assertEquals(Birthday.of(LocalDate.of(1990, 4, 29)).isToday(), person.getDateOfBirth().isToday());
+        assertEquals(34, person.getDateOfBirth().getAge());
     }
 
     @Test

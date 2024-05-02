@@ -128,7 +128,7 @@ public class PersonView implements View {
             for (Person person : following) {
                 followingIds.add(person.getId() + "");
             }
-            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth(), p.getAddresses(), p.getPhoneNumbers(), followingIds);
+            System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth().getBirthday(), p.getAddresses(), p.getPhoneNumbers(), followingIds);
         }
         System.out.format("+-------+-----------------+-----------------+-----------------+--------------------------------------------------------------------------------------------+-------------------------------------------+----------------------+%n");
 
