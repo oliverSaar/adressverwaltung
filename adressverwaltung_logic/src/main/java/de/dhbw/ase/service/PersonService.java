@@ -82,23 +82,23 @@ public class PersonService {
 
         if (person.getFirstName() != null) {
             databasePerson.setFirstName(person.getFirstName());
+        } else {
+            databasePerson.setFirstName(databasePerson.getFirstName());
         }
         if (person.getLastName() != null) {
             databasePerson.setLastName(person.getLastName());
+        } else {
+            databasePerson.setLastName(databasePerson.getLastName());
         }
         if (person.getDateOfBirth() != null) {
             databasePerson.setDateOfBirth(person.getDateOfBirth());
-        }
-        if (person.getAddresses() != null) {
-            databasePerson.setAddresses(person.getAddresses());
-        }
-        if (person.getPhoneNumbers() != null) {
-            databasePerson.setPhoneNumbers(person.getPhoneNumbers());
-        }
-        if (person.getCreated() != null) {
-            databasePerson.setCreated(Objects.requireNonNull(databasePerson.getCreated()));
+        } else {
+            databasePerson.setDateOfBirth(databasePerson.getDateOfBirth());
         }
 
+        databasePerson.setAddresses(databasePerson.getAddresses());
+        databasePerson.setPhoneNumbers(databasePerson.getPhoneNumbers());
+        databasePerson.setCreated(Objects.requireNonNull(databasePerson.getCreated()));
         databasePerson.setLastModified(LocalDateTime.now());
 
         return databasePerson;

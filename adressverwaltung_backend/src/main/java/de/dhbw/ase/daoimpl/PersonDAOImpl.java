@@ -56,6 +56,8 @@ public class PersonDAOImpl implements PersonDAO {
                 p.setFirstName(person.getFirstName());
                 p.setLastName(person.getLastName());
                 p.setDateOfBirth(person.getDateOfBirth());
+                p.setCreated(p.getCreated());
+                p.setLastModified(person.getLastModified());
             }
         }
 
