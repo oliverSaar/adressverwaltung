@@ -4,6 +4,7 @@ import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.model.PhoneNumber;
 import de.dhbw.ase.model.adapter.Birthday;
+import de.dhbw.ase.model.singleton.LoggedInPersonSingleton;
 import de.dhbw.ase.service.mocks.PersonDAOMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -84,15 +85,18 @@ class PersonServiceTest {
 
     @Test
     void updatePerson() throws Exception {
+        LoggedInPersonSingleton.setLoggedInUserID(0);
+
         assertEquals("vorname", personService.getPerson(0).getFirstName());
-        personService.updatePerson(toAdd, toAdd.getId());
+        personService.updatePerson(toAdd);
         assertEquals("testV", personService.getPerson(0).getFirstName());
     }
 
     @Test
     void updatePersonNotFound() throws Exception {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.updatePerson(follow, 4));
+        LoggedInPersonSingleton.setLoggedInUserID(4);
+        Exception exception = assertThrows(Exception.class, () -> personService.updatePerson(follow));
 
         String expectedMessage = "Es konnte keine Person mit der ID: 4 gefunden werden";
         String actualMessage = exception.getMessage();
@@ -102,7 +106,9 @@ class PersonServiceTest {
     @Test
     void updatePersonOtherPerson() {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.updatePerson(follow, 1));
+        LoggedInPersonSingleton.setLoggedInUserID(1);
+
+        Exception exception = assertThrows(Exception.class, () -> personService.updatePerson(follow));
 
         String expectedMessage = "Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine anderen Benutzer ändern!";
         String actualMessage = exception.getMessage();
@@ -113,14 +119,17 @@ class PersonServiceTest {
     @Test
     void followPerson() throws Exception {
         assertEquals(0, personService.getPerson(0).getFollowing().size());
-        personService.followPerson(0, 1);
+        LoggedInPersonSingleton.setLoggedInUserID(0);
+        personService.followPerson(1);
         assertEquals(1, personService.getPerson(0).getFollowing().size());
     }
 
     @Test
     void followPersonFollowSelf() {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(0, 0));
+        LoggedInPersonSingleton.setLoggedInUserID(0);
+
+        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(0));
 
         String expectedMessage = "Sie können sich nicht selbst folgen!";
         String actualMessage = exception.getMessage();
@@ -129,7 +138,9 @@ class PersonServiceTest {
 
     @Test
     void followPersonAlreadyFollowing() {
-        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(1, 0));
+        LoggedInPersonSingleton.setLoggedInUserID(1);
+
+        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(0));
 
         String expectedMessage = "Sie folgen dieser Person bereits!";
         String actualMessage = exception.getMessage();
@@ -140,7 +151,9 @@ class PersonServiceTest {
     @Test
     void followPersonWrongID() {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(1, 5));
+        LoggedInPersonSingleton.setLoggedInUserID(5);
+
+        Exception exception = assertThrows(Exception.class, () -> personService.followPerson(1));
 
         String expectedMessage = "Die Person mit der ID: 5 konnte nicht gefunden werden!";
         String actualMessage = exception.getMessage();
@@ -152,16 +165,20 @@ class PersonServiceTest {
     void unfollowPerson() throws Exception {
 
         assertEquals(1, personService.getPerson(1).getFollowing().size());
-        personService.unfollowPerson(1, 0);
+        LoggedInPersonSingleton.setLoggedInUserID(1);
+
+        personService.unfollowPerson(0);
         assertEquals(0, personService.getPerson(1).getFollowing().size());
     }
 
     @Test
     void unfollowPersonNotFollowed() {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.unfollowPerson(1, 2));
+        LoggedInPersonSingleton.setLoggedInUserID(2);
 
-        String expectedMessage = "Der Person mit der ID: 2 wird nicht gefolgt!";
+        Exception exception = assertThrows(Exception.class, () -> personService.unfollowPerson(1));
+
+        String expectedMessage = "Der Person mit der ID: 1 wird nicht gefolgt!";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }

@@ -40,9 +40,9 @@ public class PersonRestHelperService {
         }
     }
 
-    public void updatePerson(Person person, long loggedInUserID) {
+    public void updatePerson(Person person) {
         try {
-            personService.updatePerson(person, loggedInUserID);
+            personService.updatePerson(person);
             System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich aktualisiert.");
         } catch (Exception e) {
             System.out.println("Person mit der ID: " + person.getId() + " konnte nicht aktualisiert werden. " + e.getMessage());
@@ -101,18 +101,18 @@ public class PersonRestHelperService {
         //TODO person löschen implementieren
     }
 
-    public void followPerson(long follower, long personToFollow) {
+    public void followPerson(long personToFollow) {
         try {
-            personService.followPerson(follower, personToFollow);
+            personService.followPerson(personToFollow);
             System.out.println("Der Person mit der ID: " + personToFollow + " wurde gefolgt.");
         } catch (Exception e) {
             System.out.println("Person mit der ID: " + personToFollow + " konnte nicht gefolgt werden. " + e.getMessage());
         }
     }
 
-    public void unFollowPerson(long follower, long personToUnfollow) {
+    public void unFollowPerson(long personToUnfollow) {
         try {
-            personService.unfollowPerson(follower, personToUnfollow);
+            personService.unfollowPerson(personToUnfollow);
         } catch (Exception e) {
             System.out.println("Person mit der ID: " + personToUnfollow + " konnte nicht entfolgt werden. " + e.getMessage());
 

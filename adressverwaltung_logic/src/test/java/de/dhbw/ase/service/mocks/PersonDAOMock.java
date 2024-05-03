@@ -160,14 +160,11 @@ public class PersonDAOMock extends PersonDAOImpl {
         try {
             Optional<Person> toUnfollow = getPerson(personToUnfollow);
 
-            System.out.println("außen");
             if (toUnfollow.isPresent()) {
 
-                System.out.println("drinne");
                 for (Person p : persons) {
                     if (p.getId() == follower) {
 
-                        System.out.println("if schleife");
                         System.out.println(toUnfollow.get().getFirstName());
                         p.removeFollowing(toUnfollow.get());
                     }

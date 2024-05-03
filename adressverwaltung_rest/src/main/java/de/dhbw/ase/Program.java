@@ -43,7 +43,7 @@ public class Program {
 
         MainView mainView = new MainView(personRestHelperService, addressRestHelperService, phoneNumberRestHelperService, loginRestHelperService);
 
-        //TODO private was geht
+        //TODO Login aus Constructors entfernen
 
         mainView.loginView();
     }

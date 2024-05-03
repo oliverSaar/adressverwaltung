@@ -2,6 +2,7 @@ package de.dhbw.ase.service;
 
 import de.dhbw.ase.dao.UserPasswordDAO;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.model.singleton.LoggedInPersonSingleton;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -30,6 +31,7 @@ public class LoginService {
 
     public boolean login() throws Exception {
 
+        //TODO remove
         resetLoginFlags();
 
         userPassword = getUserPassword();
@@ -53,8 +55,15 @@ public class LoginService {
                         .orElseThrow(() ->
                                 new IllegalArgumentException("Es konnte keine Person mit dem Benutzernamen: " + usernameSplit[0] + " " + usernameSplit[1] + " gefunden werden"));
 
-                user.setLoggedIn(true);
-                personService.updatePerson(user, getLoggedInUser().getId());
+                //TODO remove
+//                user.setLoggedIn(true);
+//                personService.updatePerson(user, getLoggedInUser().getId());
+
+                //TODO working?
+                LoggedInPersonSingleton.setLoggedInUserID(user.getId());
+                System.out.println("loggedin User: " + LoggedInPersonSingleton.getLoggedInUserID());
+
+
                 System.out.println("Login erfolgreich\n\n");
                 return true;
             } else {
@@ -68,6 +77,7 @@ public class LoginService {
 
     }
 
+    //TODO remove
     private void resetLoginFlags() throws Exception {
         for (Person person : personService.getAllPersons()) {
             person.setLoggedIn(false);
@@ -76,12 +86,17 @@ public class LoginService {
 
     public Person getLoggedInUser() throws Exception {
 
-        for (Person person : personService.getAllPersons()) {
-            if (person.isLoggedIn()) {
-                return person;
-            }
+        //TODO person durch Singleton finden
+//        for (Person person : personService.getAllPersons()) {
+//            if (person.isLoggedIn()) {
+//                return person;
+//            }
+//        }
+        try {
+            return personService.getPerson(LoggedInPersonSingleton.getLoggedInUserID());
+        } catch (Exception e) {
+            throw new RuntimeException("Keine eingeloggte Person gefunden!");
         }
-        throw new RuntimeException("Keine eingeloggte Person gefunden!");
 
 
     }

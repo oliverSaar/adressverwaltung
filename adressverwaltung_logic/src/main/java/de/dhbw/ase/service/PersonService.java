@@ -4,6 +4,7 @@ import de.dhbw.ase.dao.PersonDAO;
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
 import de.dhbw.ase.model.PhoneNumber;
+import de.dhbw.ase.model.singleton.LoggedInPersonSingleton;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -54,7 +55,9 @@ public class PersonService {
 
     }
 
-    public void updatePerson(final Person person, final long loggedInUserID) throws Exception {
+    public void updatePerson(final Person person) throws Exception {
+
+        long loggedInUserID = LoggedInPersonSingleton.getLoggedInUserID();
 
         if (person.getId() == loggedInUserID || loggedInUserID == 0) {
             Person databasePerson = personDAO
@@ -102,22 +105,27 @@ public class PersonService {
     }
 
 
-    public void followPerson(long follower, long personToFollow) throws Exception {
-        if (follower == personToFollow) {
+    public void followPerson(long personToFollow) throws Exception {
+
+        long loggedInUserID = LoggedInPersonSingleton.getLoggedInUserID();
+
+        if (loggedInUserID == personToFollow) {
             throw new RuntimeException("Sie können sich nicht selbst folgen!");
-        } else if (personDAO.getPerson(follower).get().getFollowing().contains(personDAO.getPerson(personToFollow).get())) {
+        } else if (personDAO.getPerson(loggedInUserID).get().getFollowing().contains(personDAO.getPerson(personToFollow).get())) {
             throw new RuntimeException("Sie folgen dieser Person bereits!");
         } else if (personDAO.getPerson(personToFollow).isPresent()) {
-            personDAO.followPerson(follower, personToFollow);
+            personDAO.followPerson(loggedInUserID, personToFollow);
         } else {
             throw new RuntimeException("Die Person mit der ID: " + personToFollow + " konnte nicht gefunden werden!");
         }
     }
 
-    public void unfollowPerson(long follower, long personToUnfollow) throws Exception {
+    public void unfollowPerson(long personToUnfollow) throws Exception {
 
-        if (personDAO.getPerson(follower).get().getFollowing().contains(personDAO.getPerson(personToUnfollow).get())) {
-            personDAO.unfollowPerson(follower, personToUnfollow);
+        long loggedInUserID = LoggedInPersonSingleton.getLoggedInUserID();
+
+        if (personDAO.getPerson(loggedInUserID).get().getFollowing().contains(personDAO.getPerson(personToUnfollow).get())) {
+            personDAO.unfollowPerson(loggedInUserID, personToUnfollow);
         } else {
             throw new RuntimeException("Der Person mit der ID: " + personToUnfollow + " wird nicht gefolgt!");
         }

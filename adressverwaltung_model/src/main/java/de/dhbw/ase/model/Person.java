@@ -16,10 +16,11 @@ public class Person {
     private String firstName;
     private String lastName;
 
-    //TODO Geburtstagsadapter
     private Birthday dateOfBirth;
     private List<Address> addresses = new ArrayList<>();
     private List<PhoneNumber> phoneNumbers = new ArrayList<>();
+
+    //TODO lieber Singleton machen, welcher den eingeloggten User hält
     private boolean loggedIn = false;
 
     private List<Person> following = new ArrayList<>();

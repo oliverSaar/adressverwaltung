@@ -2,6 +2,7 @@ package de.dhbw.ase.view;
 
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.model.singleton.LoggedInPersonSingleton;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
@@ -43,8 +44,6 @@ public class PersonView implements View {
             switch (input) {
                 case 1:
                     getAllPersons();
-                    //TODO
-//                    System.out.println("eingeloggte Person: " + loginService.getLoggedInUser().toString());
                     break;
                 case 2:
                     System.out.println(inputPersonID + ", die angezeigt werden soll: ");
@@ -180,14 +179,14 @@ public class PersonView implements View {
         System.out.println(inputPersonID + ", der Sie folgen möchten: ");
         int id = scanner.nextInt();
 
-        personRestService.followPerson(loginRestHelperService.getLoggedInUser().getId(), id);
+        personRestService.followPerson(id);
     }
 
 
     private void unFollowPerson() {
         System.out.println(inputPersonID + ", der Sie nicht mehr folgen möchten: ");
         int id = scanner.nextInt();
-        personRestService.unFollowPerson(loginRestHelperService.getLoggedInUser().getId(), id);
+        personRestService.unFollowPerson(id);
     }
 
     private void deletePerson() {
@@ -201,11 +200,14 @@ public class PersonView implements View {
 
         System.out.println(inputPersonID + ", die Sie ändern möchten: ");
         long id = scanner.nextInt();
-        Person person = dataInput();
-        person.setId(id);
+        if (id == LoggedInPersonSingleton.getInstance().getLoggedInUserID()) {
+            Person person = dataInput();
+            person.setId(id);
+            personRestService.updatePerson(person);
+        } else {
+            System.out.println("Sie dürfen keine anderen Benutzer ändern. Sie können nur Ihre eigenen Daten ändern!");
+        }
 
-        //TODO vllt hier Logik einbauen, damit die ID direkt geprüft wird (Logik und Anzeige mischen?)
-        personRestService.updatePerson(person, loginRestHelperService.getLoggedInUser().getId());
     }
 
 
