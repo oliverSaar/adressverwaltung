@@ -5,7 +5,7 @@ public class LoggedInPersonSingleton {
     private static LoggedInPersonSingleton instance;
 
     // Instance variable to hold the currently logged-in user
-    private static long loggedInUserID;
+    private static long loggedInUserID = -1;
 
     // Private constructor to prevent instantiation from outside
     private LoggedInPersonSingleton() {

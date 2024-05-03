@@ -60,7 +60,6 @@ public class PersonDAOImpl implements PersonDAO {
                 p.setLastModified(person.getLastModified());
             }
         }
-
     }
 
     @Override
