@@ -31,9 +31,6 @@ public class LoginService {
 
     public boolean login() throws Exception {
 
-        //TODO remove
-        resetLoginFlags();
-
         userPassword = getUserPassword();
         String username;
         String password;
@@ -55,43 +52,22 @@ public class LoginService {
                         .orElseThrow(() ->
                                 new IllegalArgumentException("Es konnte keine Person mit dem Benutzernamen: " + usernameSplit[0] + " " + usernameSplit[1] + " gefunden werden"));
 
-                //TODO remove
-//                user.setLoggedIn(true);
-//                personService.updatePerson(user, getLoggedInUser().getId());
 
-                //TODO working?
                 LoggedInPersonSingleton.setLoggedInUserID(user.getId());
                 System.out.println("loggedin User: " + LoggedInPersonSingleton.getLoggedInUserID());
-
 
                 System.out.println("Login erfolgreich\n\n");
                 return true;
             } else {
-                System.out.println("Login fehlgeschlagen\n");
-                return false;
+                throw new Exception("Login fehlgeschlagen!");
             }
         } else {
-            System.out.println("Login fehlgeschlagen\n");
-            return false;
+            throw new Exception("Login fehlgeschlagen!");
         }
 
-    }
-
-    //TODO remove
-    private void resetLoginFlags() throws Exception {
-        for (Person person : personService.getAllPersons()) {
-            person.setLoggedIn(false);
-        }
     }
 
     public Person getLoggedInUser() throws Exception {
-
-        //TODO person durch Singleton finden
-//        for (Person person : personService.getAllPersons()) {
-//            if (person.isLoggedIn()) {
-//                return person;
-//            }
-//        }
         try {
             return personService.getPerson(LoggedInPersonSingleton.getLoggedInUserID());
         } catch (Exception e) {
