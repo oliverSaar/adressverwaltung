@@ -14,13 +14,13 @@ public class MainView implements View {
     private final PersonRestHelperService personRestHelperService;
     private final AddressRestHelperService addressRestHelperService;
     private final PhoneNumberRestHelperService phoneNumberRestHelperService;
-    private final LoginRestHelperService loginService;
+    private final LoginRestHelperService loginRestHelperService;
 
-    public MainView(PersonRestHelperService personRestHelperService, AddressRestHelperService addressRestHelperService, PhoneNumberRestHelperService phoneNumberRestHelperService, LoginRestHelperService loginService) {
+    public MainView(PersonRestHelperService personRestHelperService, AddressRestHelperService addressRestHelperService, PhoneNumberRestHelperService phoneNumberRestHelperService, LoginRestHelperService loginRestHelperService) {
         this.personRestHelperService = personRestHelperService;
         this.addressRestHelperService = addressRestHelperService;
         this.phoneNumberRestHelperService = phoneNumberRestHelperService;
-        this.loginService = loginService;
+        this.loginRestHelperService = loginRestHelperService;
     }
 
 
@@ -33,13 +33,13 @@ public class MainView implements View {
         System.out.println("2. Nein");
         input = scanner.nextInt();
         if (input == 1) {
-            if (loginService.login()) {
+            if (loginRestHelperService.login()) {
                 defaultView();
             } else {
                 System.out.println("Login fehlgeschlagen");
             }
         } else {
-            loginService.register();
+            loginRestHelperService.register();
             loginView();
         }
 
@@ -49,7 +49,7 @@ public class MainView implements View {
 
     public void defaultView() {
 
-        loginService.getBirthdayView();
+        loginRestHelperService.getBirthdayView();
 
         int input;
 
@@ -60,13 +60,13 @@ public class MainView implements View {
 
         switch (input) {
             case 1:
-                new PersonView(personRestHelperService, addressRestHelperService, phoneNumberRestHelperService, loginService).defaultView();
+                new PersonView(personRestHelperService, addressRestHelperService, phoneNumberRestHelperService, loginRestHelperService).defaultView();
                 break;
             case 2:
-                new AddressView(addressRestHelperService, personRestHelperService, phoneNumberRestHelperService, loginService).defaultView();
+                new AddressView(addressRestHelperService, personRestHelperService, phoneNumberRestHelperService, loginRestHelperService).defaultView();
                 break;
             case 3:
-                new PhoneNumberView(phoneNumberRestHelperService, personRestHelperService, addressRestHelperService, loginService).defaultView();
+                new PhoneNumberView(phoneNumberRestHelperService, personRestHelperService, addressRestHelperService, loginRestHelperService).defaultView();
                 break;
             default:
                 break;
