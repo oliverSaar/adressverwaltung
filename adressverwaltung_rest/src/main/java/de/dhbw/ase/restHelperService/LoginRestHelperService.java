@@ -49,7 +49,7 @@ public class LoginRestHelperService {
         try {
             loginService.getBirthdayView();
         } catch (Exception e) {
-            System.out.println("Die Geburtstagsanzeige konnte nicht geladen werden! Bitte versuchen Sie es erneut.");
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -33,7 +33,6 @@ public class AddressService {
 
         return optionalAddress
                 .orElseThrow(() -> new IllegalArgumentException("Adresse mit der ID: " + id + " konnte nicht gefunden werden!"));
-
     }
 
     public List<Address> getAllAddresses() throws Exception {

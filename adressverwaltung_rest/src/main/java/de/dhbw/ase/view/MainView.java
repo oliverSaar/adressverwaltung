@@ -55,7 +55,6 @@ public class MainView implements View {
 
         consoleMenu();
 
-
         input = scanner.nextInt();
 
         switch (input) {

@@ -1,5 +1,6 @@
 package de.dhbw.ase.service;
 
+import de.dhbw.ase.model.singleton.LoggedInPersonSingleton;
 import de.dhbw.ase.service.mocks.PersonDAOMock;
 import de.dhbw.ase.service.mocks.UserPasswordDAOMock;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,7 +42,7 @@ class LoginServiceTest {
     void getLoggedInUserException() {
 
         Exception exception = assertThrows(Exception.class, () -> loginService.getLoggedInUser());
-        String expectedMessage = "Keine eingeloggte Person gefunden!";
+        String expectedMessage = "Es wurde keine eingeloggte Person gefunden!";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
     }
@@ -51,12 +52,22 @@ class LoginServiceTest {
     }
 
     @Test
-    void getBirthdayViewThrowsException() throws Exception {
+    void getBirthdayViewThrowsException() {
 
         Exception exception = assertThrows(Exception.class, () -> loginService.getBirthdayView());
-        String expectedMessage = "Keine eingeloggte Person gefunden!";
+        String expectedMessage = "Es wurde keine eingeloggte Person gefunden!";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
 
+    }
+
+    @Test
+    void getBirthdayViewNoBirthdays(){
+
+        LoggedInPersonSingleton.setLoggedInUserID(1);
+        Exception exception = assertThrows(Exception.class, () -> loginService.getBirthdayView());
+        String expectedMessage = "Heute hat niemand der Personen, denen Sie folgen Geburtstag!\n";
+        String actualMessage = exception.getMessage();
+        assertTrue(actualMessage.contains(expectedMessage));
     }
 }

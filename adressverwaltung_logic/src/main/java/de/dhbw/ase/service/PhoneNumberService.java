@@ -11,7 +11,6 @@ public class PhoneNumberService {
 
     private PhoneNumberDAO phoneNumberDAO;
 
-
     public PhoneNumberService(final PhoneNumberDAO phoneNumberDAO) {
         this.phoneNumberDAO = phoneNumberDAO;
     }

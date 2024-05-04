@@ -194,7 +194,8 @@ class PersonServiceTest {
     @Test
     void addAddressPersonNotFound() {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.addAddress(4, new Address(0, "test", 12345, "test", "test", "test")));
+        Exception exception = assertThrows(Exception.class, () ->
+                personService.addAddress(4, new Address(0, "test", 12345, "test", "test", "test")));
 
         String expectedMessage = "Die Person konnte nicht gefunden werden!";
         String actualMessage = exception.getMessage();

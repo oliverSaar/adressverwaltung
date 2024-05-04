@@ -14,9 +14,8 @@ public class LoginService {
     private UserPasswordDAO userPasswordDAO;
 
     private PersonService personService;
-    private Person user;
-    HashMap<String, String> userPassword;
-    Scanner scanner = new Scanner(System.in);
+    private HashMap<String, String> userPassword;
+    private Scanner scanner = new Scanner(System.in);
 
 
     public LoginService(final UserPasswordDAO userPasswordDAO, PersonService personService) {
@@ -32,6 +31,7 @@ public class LoginService {
     public boolean login() throws Exception {
 
         userPassword = getUserPassword();
+        Person user;
         String username;
         String password;
 
@@ -71,7 +71,7 @@ public class LoginService {
         try {
             return personService.getPerson(LoggedInPersonSingleton.getLoggedInUserID());
         } catch (Exception e) {
-            throw new RuntimeException("Keine eingeloggte Person gefunden!");
+            throw new RuntimeException("Es wurde keine eingeloggte Person gefunden!");
         }
 
 
@@ -132,7 +132,7 @@ public class LoginService {
                 System.out.println(ANSI_CYAN + person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG und wird " +
                         person.getDateOfBirth().getAge() + " Jahre alt!\n" + ANSI_RESET);
             } else {
-                System.out.println("Heute hat niemand der Personen, denen Sie folgen Geburtstag!\n");
+               throw new Exception("Heute hat niemand der Personen, denen Sie folgen Geburtstag!\n");
             }
         }
     }
