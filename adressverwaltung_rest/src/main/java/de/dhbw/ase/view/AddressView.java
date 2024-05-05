@@ -5,6 +5,7 @@ import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
+import de.dhbw.ase.utils.AddressSorter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -34,17 +35,21 @@ public class AddressView implements View {
             consoleMenu();
 
             int input = scanner.nextInt();
+            scanner.nextLine();
             switch (input) {
                 case 1:
                     getAllAddresses();
                     break;
                 case 2:
-                    getAddress();
+                    getAllAddressesSorted();
                     break;
                 case 3:
-                    addAddress();
+                    getAddress();
                     break;
                 case 4:
+                    addAddress();
+                    break;
+                case 5:
                     done = true;
                     break;
                 default:
@@ -81,18 +86,54 @@ public class AddressView implements View {
         }
 
 
-        formatting(addresses);
+        format(addresses);
 
     }
 
     private void getAllAddresses() {
         List<Address> addresses = addressRestHelperService.getAllAddresses();
 
-        formatting(addresses);
+        format(addresses);
 
     }
 
-    private static void formatting(List<Address> addresses) {
+    private void getAllAddressesSorted() {
+
+        AddressSorter addressSorter = new AddressSorter();
+
+        List<Address> addresses = addressRestHelperService.getAllAddresses();
+        System.out.println("Nach was möchten Sie sortieren?: ");
+
+        System.out.println("1. Nach Land sortiert");
+        System.out.println("2. Nach PLZ sortiert");
+        System.out.println("3. Nach Ort sortiert");
+        System.out.println("4. Nach Straße sortiert");
+        System.out.println("5. Nach Hausnummer sortiert");
+        System.out.println("6. Zurück zur Adressansicht");
+
+        int input = scanner.nextInt();
+        switch (input) {
+            case 1:
+                format(addressSorter.sortByCountry(addresses));
+                break;
+            case 2:
+               format(addressSorter.sortByZipCode(addresses));
+                break;
+            case 3:
+                format(addressSorter.sortByCity(addresses));
+                break;
+            case 4:
+                format(addressSorter.sortByStreet(addresses));
+                break;
+            case 5:
+                format(addressSorter.sortByHouseNumber(addresses));
+                break;
+            default:
+                defaultView();
+        }
+    }
+
+    private static void format(List<Address> addresses) {
         String leftAlignFormat = "| %-4d | %-15s | %-15d | %-15s | %-15s | %-15s |%n";
         System.out.format("+------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
 
@@ -165,8 +206,9 @@ public class AddressView implements View {
         System.out.println("Bitte geben Sie die Zahl der Aktion ein: ");
 
         System.out.println("1. Alle Adressen anzeigen");
-        System.out.println("2. Eine Adresse anzeigen (ID benötigt)");
-        System.out.println("3. Eine Adresse hinzufügen");
-        System.out.println("4. Zurück zum Hauptmenü");
+        System.out.println("2. Alle Adressen anzeigen (Sortiert)");
+        System.out.println("3. Eine Adresse anzeigen (ID benötigt)");
+        System.out.println("4. Eine Adresse hinzufügen");
+        System.out.println("5. Zurück zum Hauptmenü");
     }
 }

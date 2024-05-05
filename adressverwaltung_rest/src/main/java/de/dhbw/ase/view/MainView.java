@@ -74,7 +74,7 @@ public class MainView implements View {
                 new PhoneNumberView(phoneNumberRestHelperService, personRestHelperService, addressRestHelperService, loginRestHelperService).defaultView();
                 break;
             case 4:
-                System.out.println("Programm wird beendet, bis bald!");
+                System.out.println("\nProgramm wird beendet, bis bald!");
                 break;
             default:
                 System.out.println("Falsche Eingabe");

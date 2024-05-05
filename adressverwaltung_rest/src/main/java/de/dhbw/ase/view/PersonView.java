@@ -96,7 +96,7 @@ public class PersonView implements View {
 
     private void getPerson() {
         System.out.println(inputPersonID + ", die angezeigt werden soll: ");
-        formatting(List.of(personRestService.getPerson(scanner.nextInt())));
+        format(List.of(personRestService.getPerson(scanner.nextInt())));
     }
 
 
@@ -116,16 +116,16 @@ public class PersonView implements View {
         scanner.nextLine();
         switch (input) {
             case 1:
-                formatting(personSorter.sortByFirstName((personRestService.getAllPersons())));
+                format(personSorter.sortByFirstName((personRestService.getAllPersons())));
                 break;
             case 2:
-                formatting(personSorter.sortByLastName((personRestService.getAllPersons())));
+                format(personSorter.sortByLastName((personRestService.getAllPersons())));
                 break;
             case 3:
-                formatting(personSorter.sortByAgeYoungest((personRestService.getAllPersons())));
+                format(personSorter.sortByAgeYoungest((personRestService.getAllPersons())));
                 break;
             case 4:
-                formatting(personSorter.sortByAgeOldest((personRestService.getAllPersons())));
+                format(personSorter.sortByAgeOldest((personRestService.getAllPersons())));
             default:
                 defaultView();
                 break;
@@ -158,12 +158,12 @@ public class PersonView implements View {
 
         List<Person> persons = personRestService.getAllPersons();
 
-        formatting(persons);
+        format(persons);
 
 //                personRestService.getAllPersons();
     }
 
-    private static void formatting(List<Person> persons) {
+    private static void format(List<Person> persons) {
         String leftAlignFormat = "| %-5d | %-15s | %-15s | %-15s | %-85s | %-40s | %-9s |%n";
         System.out.format("+-------+-----------------+-----------------+-----------------+---------------------------------------------------------------------------------------+------------------------------------------+-----------+%n");
         System.out.format("| ID    | Vorname         | Nachname        | Geburtsdatum    | Adresse(n)                                                                            | Telefonnummer(n)                         | Gefolgt   |%n");

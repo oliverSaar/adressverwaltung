@@ -5,6 +5,7 @@ import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
+import de.dhbw.ase.utils.PhoneNumberSorter;
 
 import java.util.List;
 import java.util.Scanner;
@@ -40,9 +41,12 @@ public class PhoneNumberView implements View {
                     getAllPhoneNumbers();
                     break;
                 case 2:
-                    addPhoneNumber();
+                    getAllPhoneNumbersSorted();
                     break;
                 case 3:
+                    addPhoneNumber();
+                    break;
+                case 4:
                     done = true;
                     break;
                 default:
@@ -53,6 +57,30 @@ public class PhoneNumberView implements View {
             }
         }
         new MainView(personRestHelperService, addressRestHelperService, phoneNumberRestHelperService, loginService).defaultView();
+    }
+
+    private void getAllPhoneNumbersSorted() {
+
+        PhoneNumberSorter phoneNumberSorter = new PhoneNumberSorter();
+
+        List<PhoneNumber> phoneNumbers = phoneNumberRestHelperService.getAllPhoneNumbers();
+        System.out.println("Nach was möchten Sie sortieren?: ");
+
+        System.out.println("1. Nach Nummer sortiert");
+        System.out.println("2. Nach Art der Nummer sortiert (mobil oder Festnetz)");
+        System.out.println("3. Zurück zur Telefonnummernansicht");
+
+        int input = scanner.nextInt();
+        switch (input) {
+            case 1:
+                format(phoneNumberSorter.sortByNumber(phoneNumbers));
+                break;
+            case 2:
+                format(phoneNumberSorter.sortByMobile(phoneNumbers));
+                break;
+            default:
+                defaultView();
+        }
     }
 
 
@@ -96,7 +124,8 @@ public class PhoneNumberView implements View {
         System.out.println("Bitte geben Sie die Zahl der Aktion ein: ");
 
         System.out.println("1. Alle Telefonnummern anzeigen");
-        System.out.println("2. Eine Telefonnummer hinzufügen");
-        System.out.println("3. Zurück zum Hauptmenü");
+        System.out.println("2. Alle Telefonnummern anzeigen (Sortiert)");
+        System.out.println("3. Eine Telefonnummer hinzufügen");
+        System.out.println("4. Zurück zum Hauptmenü");
     }
 }
