@@ -52,4 +52,16 @@ public class LoginRestHelperService {
             System.out.println(e.getMessage());
         }
     }
+
+    public int getYear() {
+        return loginService.getYear();
+    }
+
+    public int getMonth() {
+        return loginService.getMonth();
+    }
+
+    public int getDay(int year, int month) {
+        return loginService.getDay(year, month);
+    }
 }

@@ -8,7 +8,6 @@ import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -226,70 +225,13 @@ public class PersonView implements View {
         System.out.println();
         System.out.println("Geburtsdatum : ");
 
-
+        //consume newline
         scanner.nextLine();
 
 
-        while (true) {
-            System.out.print("Jahr (z.B. 1990): ");
-            try {
-                year = scanner.nextInt();
-
-                while (year < 1900 || year > LocalDate.now().getYear()) {
-                    System.out.println("Falsches Jahr! Bitte geben Sie Ihr Geburtsjahr erneut ein: ");
-                    year = scanner.nextInt();
-                }
-
-                scanner.nextLine();
-                break;
-            } catch (java.util.InputMismatchException e) {
-                scanner.nextLine();
-            }
-        }
-        System.out.println();
-
-        while (true) {
-            System.out.print("Monat (1-12): ");
-            try {
-                month = scanner.nextInt();
-
-                while (month < 1 || month > 12) {
-                    System.out.println("Falscher Monat! Bitte geben Sie den Monat erneut ein: ");
-                    month = scanner.nextInt();
-                }
-
-                scanner.nextLine();
-                break;
-            } catch (java.util.InputMismatchException e) {
-                scanner.nextLine();
-            }
-        }
-
-        System.out.println();
-
-        LocalDate length = LocalDate.of(year, month, 1);
-
-
-        while (true) {
-            System.out.print("Tag: ");
-            try {
-                day = scanner.nextInt();
-
-                while (day < 1 || day > length.lengthOfMonth()) {
-                    System.out.println("Falscher Tag! Bitte geben Sie den Tag erneut ein: ");
-                    day = scanner.nextInt();
-                }
-
-                scanner.nextLine();
-                break;
-            } catch (java.util.InputMismatchException e) {
-                scanner.nextLine();
-            }
-        }
-
-
-        System.out.println();
-
+        year = loginRestHelperService.getYear();
+        month = loginRestHelperService.getMonth();
+        day = loginRestHelperService.getDay(year, month);
 
         System.out.println("Sie können später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen");
 

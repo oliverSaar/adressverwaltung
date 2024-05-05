@@ -104,11 +104,26 @@ public class AddressView implements View {
         System.out.print("Bitte geben Sie das Land ein: ");
         country = scanner.nextLine();
         System.out.println();
-        while (zipCode < 10000 || zipCode > 99999) {
-            System.out.println("Bitte geben Sie die Postleitzahl ein (fünfstellig):");
-            zipCode = scanner.nextInt();
-            scanner.nextLine();
+
+
+        while (true) {
+            System.out.print("Bitte geben Sie die Postleitzahl ein: ");
+            try {
+                zipCode = scanner.nextInt();
+
+                while (zipCode < 10000 || zipCode > 99999) {
+                    System.out.println("Bitte geben Sie die korrekte Postleitzahl ein (fünfstellig):");
+                    zipCode = scanner.nextInt();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
         }
+
+
         System.out.println();
         System.out.println("Bitte geben Sie die Stadt / den Ort ein:");
         city = scanner.nextLine();
