@@ -58,7 +58,6 @@ public class PersonDAOImpl implements PersonDAO {
                 p.setLastModified(person.getLastModified());
             }
         }
-        throw new Exception(personNotFound);
     }
 
     @Override
@@ -69,7 +68,6 @@ public class PersonDAOImpl implements PersonDAO {
                 persons.remove(p);
             }
         }
-        throw new Exception(personNotFound);
     }
 
     @Override
@@ -80,7 +78,6 @@ public class PersonDAOImpl implements PersonDAO {
                 p.addAddress(address);
             }
         }
-        throw new Exception(personNotFound);
     }
 
     @Override
@@ -90,7 +87,6 @@ public class PersonDAOImpl implements PersonDAO {
                 p.removeAddress(address);
             }
         }
-        throw new Exception(personNotFound);
     }
 
     @Override
@@ -101,7 +97,6 @@ public class PersonDAOImpl implements PersonDAO {
                 p.addPhoneNumber(phoneNumber);
             }
         }
-        throw new Exception(personNotFound);
     }
 
     @Override
@@ -111,8 +106,6 @@ public class PersonDAOImpl implements PersonDAO {
                 p.removePhoneNumber(phoneNumber);
             }
         }
-        throw new Exception(personNotFound);
-
     }
 
     @Override
@@ -131,8 +124,6 @@ public class PersonDAOImpl implements PersonDAO {
                     p.addFollowing(toFollow.get());
                 }
             }
-            throw new Exception(personNotFound);
-
         }
         throw new Exception("Der Person mit der ID: " + personToFollow + " konnte nicht gefolgt werden, da sie nicht vorhanden ist!");
 
@@ -155,7 +146,6 @@ public class PersonDAOImpl implements PersonDAO {
                     }
                 }
             }
-            throw new Exception(personNotFound);
         }
         throw new Exception("Der Person mit der ID: " + personToUnfollow + " konnte nicht entfolgt werden, da sie nicht vorhanden ist!");
     }

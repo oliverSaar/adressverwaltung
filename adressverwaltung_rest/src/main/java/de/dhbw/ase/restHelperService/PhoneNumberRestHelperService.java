@@ -37,8 +37,9 @@ public class PhoneNumberRestHelperService {
     public void addPhoneNumber(PhoneNumber phoneNumber) {
         try {
             phoneNumberService.addPhoneNumber(phoneNumber);
+            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich hinzugefügt!");
         } catch (Exception e) {
-            System.out.println("Die Telefonnummer konnte nicht hinzugefügt werden!");
+            System.out.println("Die Telefonnummer konnte nicht hinzugefügt werden!" + e.getMessage());
         }
     }
 }

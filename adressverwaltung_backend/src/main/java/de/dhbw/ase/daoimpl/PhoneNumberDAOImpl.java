@@ -33,7 +33,6 @@ public class PhoneNumberDAOImpl implements PhoneNumberDAO {
 
     @Override
     public void insertPhoneNumber(PhoneNumber phoneNumber) throws Exception {
-
         phoneNumbers.add(phoneNumber);
     }
 
