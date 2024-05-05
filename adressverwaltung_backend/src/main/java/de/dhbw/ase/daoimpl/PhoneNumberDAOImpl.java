@@ -12,18 +12,8 @@ public class PhoneNumberDAOImpl implements PhoneNumberDAO {
     private List<PhoneNumber> phoneNumbers = new ArrayList<>();
 
     public PhoneNumberDAOImpl() {
-        PhoneNumber phoneNumber = new PhoneNumber(0, "0123456789", false);
+        PhoneNumber phoneNumber = new PhoneNumber("0123456789", false);
         phoneNumbers.add(phoneNumber);
-    }
-
-    @Override
-    public Optional<PhoneNumber> getPhoneNumber(long id) throws Exception {
-        for (PhoneNumber phoneNumber : phoneNumbers) {
-            if (phoneNumber.getId() == id) {
-                return Optional.of(phoneNumber);
-            }
-        }
-        throw new Exception("Keine Telefonnummer mit der ID: " + id + " gefunden");
     }
 
     @Override

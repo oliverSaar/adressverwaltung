@@ -5,7 +5,7 @@ import de.dhbw.ase.service.mocks.PhoneNumberDAOMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PhoneNumberServiceTest {
 
@@ -20,25 +20,8 @@ class PhoneNumberServiceTest {
         phoneNumberDAOMock = new PhoneNumberDAOMock();
         phoneNumberService = new PhoneNumberService(phoneNumberDAOMock);
 
-        toAdd = new PhoneNumber(0, "1234", false);
+        toAdd = new PhoneNumber("1234", false);
 
-    }
-
-    @Test
-    void getPhoneNumber() throws Exception {
-
-        assertEquals("111111111", phoneNumberService.getPhoneNumber(0).getNumber());
-        assertFalse(phoneNumberService.getPhoneNumber(0).isMobile());
-    }
-
-    @Test
-    void getPhoneNumberException() throws Exception {
-
-        Exception exception = assertThrows(Exception.class, () -> phoneNumberService.getPhoneNumber(4));
-
-        String expectedMessage = "Die Telefonnummer mit der ID: 4 konnte nicht gefunden werden!";
-        String actualMessage = exception.getMessage();
-        assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test

@@ -16,15 +16,6 @@ public class PhoneNumberRestHelperService {
         this.phoneNumberService = phoneNumberService;
     }
 
-    public PhoneNumber getPhoneNumber(long id) {
-        try {
-            return phoneNumberService.getPhoneNumber(id);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
     public List<PhoneNumber> getAllPhoneNumbers() {
         try {
             return phoneNumberService.getAllPhoneNumbers();
@@ -37,7 +28,7 @@ public class PhoneNumberRestHelperService {
     public void addPhoneNumber(PhoneNumber phoneNumber) {
         try {
             phoneNumberService.addPhoneNumber(phoneNumber);
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich hinzugefügt!");
+            System.out.println("Die Telefonnummer: " + phoneNumber.getNumber() + " wurde erfolgreich hinzugefügt!");
         } catch (Exception e) {
             System.out.println("Die Telefonnummer konnte nicht hinzugefügt werden!" + e.getMessage());
         }

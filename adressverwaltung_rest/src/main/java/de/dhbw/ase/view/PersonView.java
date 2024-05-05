@@ -2,6 +2,7 @@ package de.dhbw.ase.view;
 
 import de.dhbw.ase.model.Address;
 import de.dhbw.ase.model.Person;
+import de.dhbw.ase.model.PhoneNumber;
 import de.dhbw.ase.model.singleton.LoggedInPersonSingleton;
 import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.LoginRestHelperService;
@@ -40,6 +41,7 @@ public class PersonView implements View {
             consoleMenu();
 
             input = scanner.nextInt();
+            scanner.nextLine();
             switch (input) {
                 case 1:
                     getAllPersons();
@@ -132,20 +134,46 @@ public class PersonView implements View {
 
     private void deletePhoneNumber() {
         System.out.print(inputPersonID + ", von welcher Sie eine Telefonnummer löschen möchten: ");
+        //TODO id schauen
         long personID = scanner.nextLong();
+        scanner.nextLine();
+
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen: ");
+        String phoneNumber = scanner.nextLine();
+        System.out.println("ist mobil?");
+        boolean isMobile = scanner.nextLine().equalsIgnoreCase("Ja");
+        PhoneNumber phoneNumber1 = new PhoneNumber(phoneNumber, isMobile);
+        if (phoneNumberRestService.getAllPhoneNumbers().stream().anyMatch(p -> p.getNumber().equals(phoneNumber) && p.isMobile() == isMobile)) {
+            personRestService.removePhoneNumber(personID, phoneNumber1);
+        } else {
+            System.out.println("Diese Nummer ist nicht mit der Person verknüpft!");
 
-        personRestService.removePhoneNumber(personID, phoneNumberRestService.getPhoneNumber(scanner.nextLong()));
-
+        }
     }
 
     private void addPhoneNumber() {
+
         System.out.print(inputPersonID + ", zu der Sie eine Telefonnummer hinzufügen wollen: ");
+        //TODO id schauen
         long personID = scanner.nextLong();
+        scanner.nextLine();
+
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen: ");
-        personRestService.addPhoneNumber(personID, phoneNumberRestService.getPhoneNumber(scanner.nextLong()));
+
+        String phoneNumber = scanner.nextLine();
+        System.out.println("ist mobil?");
+        boolean isMobile = scanner.nextLine().equalsIgnoreCase("Ja");
+        PhoneNumber phoneNumber1 = new PhoneNumber(phoneNumber, isMobile);
+        if (phoneNumberRestService.getAllPhoneNumbers().stream().noneMatch(p -> p.equals(phoneNumber1))) {
+            phoneNumberRestService.addPhoneNumber(phoneNumber1);
+        } else {
+        }
+        personRestService.addPhoneNumber(personID, phoneNumber1);
+
+
+//        personRestService.addPhoneNumber(personID, phoneNumberRestService.getPhoneNumber(scanner.nextLong()));
     }
 
     private void removeAddress() {

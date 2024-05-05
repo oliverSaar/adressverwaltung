@@ -249,7 +249,7 @@ class PersonServiceTest {
     @Test
     void removePhoneNumberPersonNotFound() {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.removePhoneNumber(4, new PhoneNumber(0, "0123456789", false)));
+        Exception exception = assertThrows(Exception.class, () -> personService.removePhoneNumber(4, new PhoneNumber("0123456789", false)));
         String expectedMessage = "Die Person konnte nicht gefunden werden!";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
@@ -258,7 +258,7 @@ class PersonServiceTest {
     @Test
     void removePhoneNumberNotConnected() {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.removePhoneNumber(1, new PhoneNumber(0, "0123456789", false)));
+        Exception exception = assertThrows(Exception.class, () -> personService.removePhoneNumber(2, new PhoneNumber("0123456789", false)));
         String expectedMessage = "Die Telefonnummer ist nicht mit der Person verknüpft!";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));
@@ -268,14 +268,14 @@ class PersonServiceTest {
     void addPhoneNumber() throws Exception {
 
         assertEquals(0, personService.getPerson(0).getPhoneNumbers().size());
-        personService.addPhoneNumber(0, new PhoneNumber(0, "0123456789", false));
+        personService.addPhoneNumber(0, new PhoneNumber("0123456789", false));
         assertEquals(1, personService.getPerson(0).getPhoneNumbers().size());
     }
 
     @Test
     void addPhoneNumberPersonNotFound() {
 
-        Exception exception = assertThrows(Exception.class, () -> personService.addPhoneNumber(4, new PhoneNumber(0, "0123456789", false)));
+        Exception exception = assertThrows(Exception.class, () -> personService.addPhoneNumber(4, new PhoneNumber("0123456789", false)));
         String expectedMessage = "Die Person konnte nicht gefunden werden!";
         String actualMessage = exception.getMessage();
         assertTrue(actualMessage.contains(expectedMessage));

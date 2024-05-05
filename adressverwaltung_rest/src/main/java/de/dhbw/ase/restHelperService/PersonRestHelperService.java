@@ -70,18 +70,18 @@ public class PersonRestHelperService {
     public void removePhoneNumber(long personID, PhoneNumber phoneNumber) {
         try {
             personService.removePhoneNumber(personID, phoneNumber);
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
+            System.out.println("Die Telefonnummer: " + phoneNumber + " wurde erfolgreich von der Person mit der ID: " + personID + " gelöscht");
         } catch (Exception e) {
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden. " + e.getMessage());
+            System.out.println("Die Telefonnummer: " + phoneNumber + " konnte nicht von der Person mit der ID: " + personID + " gelöscht werden. " + e.getMessage());
         }
     }
 
     public void addPhoneNumber(long personID, PhoneNumber phoneNumber) {
         try {
             personService.addPhoneNumber(personID, phoneNumber);
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " wurde erfolgreich zu der Person mit der ID: " + personID + " hinzugefügt");
+            System.out.println("Die Telefonnummer: " + phoneNumber + " wurde erfolgreich zu der Person mit der ID: " + personID + " hinzugefügt");
         } catch (Exception e) {
-            System.out.println("Die Telefonnummer mit der ID: " + phoneNumber.getId() + " konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden. " + e.getMessage());
+            System.out.println("Die Telefonnummer: " + phoneNumber + " konnte nicht zu der Person mit der ID: " + personID + " hinzugefügt werden. " + e.getMessage());
         }
     }
 

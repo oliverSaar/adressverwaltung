@@ -20,7 +20,7 @@ public class PersonDAOMock extends PersonDAOImpl {
 
     private Address address = new Address(0, "test", 0, "test", "test", "test");
 
-    private PhoneNumber phoneNumber = new PhoneNumber(0, "0123456789", false);
+    private PhoneNumber phoneNumber = new PhoneNumber("0123456789", false);
 
     private List<Person> persons = new ArrayList<>();
 

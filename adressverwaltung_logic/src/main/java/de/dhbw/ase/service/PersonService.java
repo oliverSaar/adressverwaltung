@@ -169,7 +169,7 @@ public class PersonService {
 
         if (personDAO.getPerson(personID).isEmpty()) {
             throw new RuntimeException("Die Person konnte nicht gefunden werden!");
-        } else if (!personDAO.getPerson(personID).get().getPhoneNumbers().contains(phoneNumber)) {
+        } else if (personDAO.getPerson(personID).get().getPhoneNumbers().stream().noneMatch(p -> p.equals(phoneNumber))) {
             throw new RuntimeException("Die Telefonnummer ist nicht mit der Person verknüpft!");
         } else {
             personDAO.removePhoneNumber(personID, phoneNumber);
@@ -180,7 +180,7 @@ public class PersonService {
 
         if (personDAO.getPerson(personID).isEmpty()) {
             throw new RuntimeException("Die Person konnte nicht gefunden werden!");
-        } else if (personDAO.getPerson(personID).get().getPhoneNumbers().contains(phoneNumber)) {
+        } else if (personDAO.getPerson(personID).get().getPhoneNumbers().stream().anyMatch(p -> p.equals(phoneNumber))) {
             throw new RuntimeException("Die Telefonnummer wurde bereits zu der Person hinzugefügt!");
         } else {
             personDAO.addPhoneNumber(personID, phoneNumber);

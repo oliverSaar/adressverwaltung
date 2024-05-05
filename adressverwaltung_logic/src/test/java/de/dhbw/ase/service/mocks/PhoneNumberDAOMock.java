@@ -5,15 +5,14 @@ import de.dhbw.ase.model.PhoneNumber;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class PhoneNumberDAOMock extends PhoneNumberDAOImpl {
 
     List<PhoneNumber> phoneNumbers = new ArrayList<>();
 
-    private PhoneNumber phoneNumber = new PhoneNumber(0, "111111111", false);
-    private PhoneNumber phoneNumber2 = new PhoneNumber(1, "2222", false);
-    private PhoneNumber phoneNumber3 = new PhoneNumber(2, "333333333", false);
+    private PhoneNumber phoneNumber = new PhoneNumber("111111111", false);
+    private PhoneNumber phoneNumber2 = new PhoneNumber("2222", false);
+    private PhoneNumber phoneNumber3 = new PhoneNumber("333333333", false);
 
 
     public PhoneNumberDAOMock() {
@@ -21,16 +20,6 @@ public class PhoneNumberDAOMock extends PhoneNumberDAOImpl {
         phoneNumbers.add(phoneNumber);
         phoneNumbers.add(phoneNumber2);
         phoneNumbers.add(phoneNumber3);
-    }
-
-    @Override
-    public Optional<PhoneNumber> getPhoneNumber(long id) throws Exception {
-        for (PhoneNumber phoneNumber : phoneNumbers) {
-            if (phoneNumber.getId() == id) {
-                return Optional.of(phoneNumber);
-            }
-        }
-        return Optional.empty();
     }
 
     @Override
