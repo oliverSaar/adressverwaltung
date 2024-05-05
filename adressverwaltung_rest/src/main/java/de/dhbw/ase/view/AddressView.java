@@ -6,7 +6,6 @@ import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -49,8 +48,8 @@ public class AddressView implements View {
                     done = true;
                     break;
                 default:
-                    scanner.close();
-                    done = true;
+                    System.out.println("Falsche Eingabe");
+                    defaultView();
                     break;
 
             }
@@ -60,10 +59,28 @@ public class AddressView implements View {
 
     private void getAddress() {
 
-        System.out.print("Bitte geben Sie die ID der Adresse ein: ");
 
-        List<Address> addresses = new ArrayList<>();
-        addresses.add(addressRestHelperService.getAddress(scanner.nextLong()));
+        long id;
+        List<Address> addresses = addressRestHelperService.getAllAddresses();
+
+        while (true) {
+            System.out.print("Bitte geben Sie die ID der Adresse ein: ");
+            try {
+                id = scanner.nextInt();
+
+                while (id < 0 || id > addresses.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID ein: ");
+                    id = scanner.nextInt();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
+
         formatting(addresses);
 
     }
@@ -141,6 +158,9 @@ public class AddressView implements View {
 
 
     public void consoleMenu() {
+
+        System.out.println("\n---------------------------------------------------------------------\n");
+
         System.out.println("Bitte geben Sie die Zahl der Aktion ein: ");
 
         System.out.println("1. Alle Adressen anzeigen");

@@ -79,8 +79,8 @@ public class PersonView implements View {
                     done = true;
                     break;
                 default:
-                    done = true;
-                    scanner.close();
+                    System.out.println("Falsche Eingabe!");
+                    defaultView();
                     break;
             }
         }
@@ -91,9 +91,7 @@ public class PersonView implements View {
 
 
     public void consoleMenu() {
-        System.out.println();
-        System.out.println("---------------------------------------------------------------------");
-        System.out.println();
+        System.out.println("\n---------------------------------------------------------------------\n");
         System.out.println("Welche Operation wollen Sie ausführen? Tippen Sie dazu die Nummer ein und bestätigen mit Enter.");
         System.out.println("1. Alle Personen anzeigen");
         System.out.println("2. Eine Person anzeigen (ID benötigt)");
@@ -173,30 +171,107 @@ public class PersonView implements View {
     }
 
     private void followPerson() {
-        System.out.println(inputPersonID + ", der Sie folgen möchten: ");
-        long id = scanner.nextLong();
+
+        long id;
+        List<Person> persons = personRestService.getAllPersons();
+
+        while (true) {
+            System.out.println(inputPersonID + ", der Sie folgen möchten: ");
+            try {
+                id = scanner.nextLong();
+
+                while (id < 0 || id > persons.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person der Sie folgen möchten ein: ");
+                    id = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
 
         personRestService.followPerson(id);
     }
 
 
     private void unFollowPerson() {
-        System.out.println(inputPersonID + ", der Sie nicht mehr folgen möchten: ");
-        long id = scanner.nextLong();
+
+        long id;
+        List<Person> persons = personRestService.getAllPersons();
+
+        while (true) {
+            System.out.println(inputPersonID + ", der Sie nicht mehr folgen möchten: ");
+            try {
+                id = scanner.nextLong();
+
+                while (id < 0 || id > persons.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person der Sie entfolgen möchten ein: ");
+                    id = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
         personRestService.unFollowPerson(id);
     }
 
     private void deletePerson() {
 
-        System.out.println(inputPersonID + ", die gelöscht werden soll: ");
-        long id = scanner.nextLong();
+
+        long id;
+        List<Person> persons = personRestService.getAllPersons();
+
+        while (true) {
+            System.out.println(inputPersonID + ", die gelöscht werden soll: ");
+            try {
+                id = scanner.nextLong();
+
+                while (id < 0 || id > persons.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person die gelöscht werden soll ein: ");
+                    id = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
         personRestService.deletePerson(id);
     }
 
     private void changePerson() {
 
-        System.out.println(inputPersonID + ", die Sie ändern möchten: ");
-        long id = scanner.nextLong();
+
+        long id;
+        List<Person> persons = personRestService.getAllPersons();
+
+        while (true) {
+            System.out.println(inputPersonID + ", die Sie ändern möchten: ");
+            try {
+                id = scanner.nextLong();
+
+                while (id < 0 || id > persons.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person die gelöscht werden soll ein: ");
+                    id = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+
+        }
+
+
         if (id == LoggedInPersonSingleton.getLoggedInUserID()) {
             Person person = dataInput();
             person.setId(id);

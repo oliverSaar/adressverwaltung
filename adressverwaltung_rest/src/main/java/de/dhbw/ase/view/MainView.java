@@ -28,6 +28,7 @@ public class MainView implements View {
 
         int input;
 
+        System.out.println("\n-----------------------------------------------\n");
         System.out.println("Haben Sie schon ein Konto? Bitte geben Sie die Nummer ein und bestätigen mit Enter");
         System.out.println("1. Ja");
         System.out.println("2. Nein");
@@ -37,11 +38,8 @@ public class MainView implements View {
         scanner.nextLine();
 
         if (input == 1) {
-            if (loginRestHelperService.login()) {
-                defaultView();
-            } else {
-                System.out.println("Login fehlgeschlagen");
-            }
+            loginRestHelperService.login();
+            loginView();
         } else {
             loginRestHelperService.register();
             loginView();
@@ -71,7 +69,11 @@ public class MainView implements View {
             case 3:
                 new PhoneNumberView(phoneNumberRestHelperService, personRestHelperService, addressRestHelperService, loginRestHelperService).defaultView();
                 break;
+            case 4:
+                break;
             default:
+                System.out.println("Falsche Eingabe");
+                defaultView();
                 break;
         }
         scanner.close();
@@ -85,5 +87,6 @@ public class MainView implements View {
         System.out.println("1. Personen");
         System.out.println("2. Adressen");
         System.out.println("3. Telefonnummern");
+        System.out.println("4. Beenden");
     }
 }

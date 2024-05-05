@@ -157,7 +157,6 @@ class PersonServiceTest {
 
         String expectedMessage = "Die Person mit der ID: 5 konnte nicht gefunden werden!";
         String actualMessage = exception.getMessage();
-        System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
     }
 

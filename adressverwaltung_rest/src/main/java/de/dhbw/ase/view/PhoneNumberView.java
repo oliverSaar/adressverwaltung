@@ -49,7 +49,8 @@ public class PhoneNumberView implements View {
                     done = true;
                     break;
                 default:
-                    done = true;
+                    System.out.println("Falsche Eingabe!");
+                    defaultView();
                     break;
 
             }
@@ -59,7 +60,24 @@ public class PhoneNumberView implements View {
 
     private void getPerson() {
 
-        System.out.print("Bitte geben Sie die ID der Telefonnummer ein: ");
+        long id;
+        List<PhoneNumber> phoneNumbers = phoneNumberRestHelperService.getAllPhoneNumbers();
+
+        while (true) {
+            System.out.print("Bitte geben Sie die ID der Telefonnummer ein: ");
+            try {
+                id = scanner.nextInt();
+
+                while (id < 0 || id > phoneNumbers.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID ein: ");
+                    id = scanner.nextInt();
+                }
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
         format(List.of(phoneNumberRestHelperService.getPhoneNumber(scanner.nextLong())));
 
     }
@@ -101,6 +119,8 @@ public class PhoneNumberView implements View {
 
 
     public void consoleMenu() {
+        System.out.println("\n---------------------------------------------------------------------\n");
+
         System.out.println("Bitte geben Sie die Zahl der Aktion ein: ");
 
         System.out.println("1. Alle Telefonnummern anzeigen");
