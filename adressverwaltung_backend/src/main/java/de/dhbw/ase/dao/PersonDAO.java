@@ -18,6 +18,8 @@ public interface PersonDAO {
 
     void updatePerson(Person person) throws Exception;
 
+    void deletePerson(long personId) throws Exception;
+
     void addAddress(long personID, Address address) throws Exception;
 
     void removeAddress(long personID, Address address) throws Exception;
