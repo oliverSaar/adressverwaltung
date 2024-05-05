@@ -40,7 +40,7 @@ public class AddressRestHelperService {
             addressService.addAddress(address);
             System.out.println("Die Adresse wurde hinzugefügt!");
         } catch (Exception e) {
-            System.out.println("Die Adresse konnte nicht hinzugefügt werden! Bitte versuchen Sie es erneut!");
+            System.out.println("Die Adresse konnte nicht hinzugefügt werden! Bitte versuchen Sie es erneut!" + e.getMessage());
         }
     }
 }

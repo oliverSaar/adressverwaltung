@@ -182,10 +182,28 @@ public class PersonView implements View {
     }
 
     private void deletePhoneNumber() {
-        System.out.print(inputPersonID + ", von welcher Sie eine Telefonnummer löschen möchten: ");
-        //TODO id schauen
-        long personID = scanner.nextLong();
+
+        List<Person> persons = personRestService.getAllPersons();
+        long personID;
         scanner.nextLine();
+
+
+        while (true) {
+            System.out.print(inputPersonID + ", von welcher Sie eine Telefonnummer löschen möchten: ");
+            try {
+                personID = scanner.nextLong();
+
+                while (personID < 0 || personID > persons.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person von der Sie die Telefonnummer löschen wollen ein: ");
+                    personID = scanner.nextLong();
+                }
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
 
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen: ");
@@ -203,10 +221,27 @@ public class PersonView implements View {
 
     private void addPhoneNumber() {
 
-        System.out.print(inputPersonID + ", zu der Sie eine Telefonnummer hinzufügen wollen: ");
-        //TODO id schauen
-        long personID = scanner.nextLong();
-        scanner.nextLine();
+        List<Person> persons = personRestService.getAllPersons();
+
+        long personID;
+
+        while (true) {
+            System.out.print(inputPersonID + ", zu der Sie eine Telefonnummer hinzufügen wollen: ");
+            try {
+                personID = scanner.nextLong();
+
+                while (personID < 0 || personID > persons.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person der Sie eine Telefonnummer hinzufügen möchten: ");
+                    personID = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
 
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen: ");
@@ -251,6 +286,7 @@ public class PersonView implements View {
 
         long id;
         List<Person> persons = personRestService.getAllPersons();
+
 
         while (true) {
             System.out.println(inputPersonID + ", der Sie folgen möchten: ");
