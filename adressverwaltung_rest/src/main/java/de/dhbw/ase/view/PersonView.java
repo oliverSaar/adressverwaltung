@@ -8,6 +8,7 @@ import de.dhbw.ase.restHelperService.AddressRestHelperService;
 import de.dhbw.ase.restHelperService.LoginRestHelperService;
 import de.dhbw.ase.restHelperService.PersonRestHelperService;
 import de.dhbw.ase.restHelperService.PhoneNumberRestHelperService;
+import de.dhbw.ase.utils.PersonSorter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,37 +48,39 @@ public class PersonView implements View {
                     getAllPersons();
                     break;
                 case 2:
-                    System.out.println(inputPersonID + ", die angezeigt werden soll: ");
-                    System.out.println(personRestService.getPerson(scanner.nextInt()).toString());
+                    getAllPersonsSorted();
                     break;
                 case 3:
-                    addPerson();
+                    getPerson();
                     break;
                 case 4:
-                    changePerson();
+                    addPerson();
                     break;
                 case 5:
-                    deletePerson();
+                    changePerson();
                     break;
                 case 6:
-                    followPerson();
+                    deletePerson();
                     break;
                 case 7:
-                    unFollowPerson();
+                    followPerson();
                     break;
                 case 8:
-                    addAddress();
+                    unFollowPerson();
                     break;
                 case 9:
-                    removeAddress();
+                    addAddress();
                     break;
                 case 10:
-                    addPhoneNumber();
+                    removeAddress();
                     break;
                 case 11:
-                    deletePhoneNumber();
+                    addPhoneNumber();
                     break;
                 case 12:
+                    deletePhoneNumber();
+                    break;
+                case 13:
                     done = true;
                     break;
                 default:
@@ -91,28 +94,76 @@ public class PersonView implements View {
 
     }
 
+    private void getPerson() {
+        System.out.println(inputPersonID + ", die angezeigt werden soll: ");
+        formatting(List.of(personRestService.getPerson(scanner.nextInt())));
+    }
+
+
+    private void getAllPersonsSorted() {
+
+        System.out.println("\n--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        System.out.println("Welche Operation wollen Sie ausführen? Tippen Sie dazu die Nummer ein und bestätigen mit Enter.");
+        System.out.println("1. Nach Vornamen sortiert ausgeben");
+        System.out.println("2. Nach Nachnamen sortiert ausgeben");
+        System.out.println("3. Nach Alter sortiert ausgeben (Jüngste zuerst)");
+        System.out.println("4. Nach Alter sortiert ausgeben (Älteste zuerst)");
+        System.out.println("5. Zurück zum Personenmenü");
+
+        PersonSorter personSorter = new PersonSorter();
+
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        switch (input) {
+            case 1:
+                formatting(personSorter.sortByFirstName((personRestService.getAllPersons())));
+                break;
+            case 2:
+                formatting(personSorter.sortByLastName((personRestService.getAllPersons())));
+                break;
+            case 3:
+                formatting(personSorter.sortByAgeYoungest((personRestService.getAllPersons())));
+                break;
+            case 4:
+                formatting(personSorter.sortByAgeOldest((personRestService.getAllPersons())));
+            default:
+                defaultView();
+                break;
+
+
+        }
+
+    }
+
 
     public void consoleMenu() {
         System.out.println("\n--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println("Welche Operation wollen Sie ausführen? Tippen Sie dazu die Nummer ein und bestätigen mit Enter.");
         System.out.println("1. Alle Personen anzeigen");
-        System.out.println("2. Eine Person anzeigen (ID benötigt)");
-        System.out.println("3. Eine Person hinzufügen");
-        System.out.println("4. Eine Person aktualisieren");
-        System.out.println("5. Eine Person löschen");
-        System.out.println("6. Einer Person folgen");
-        System.out.println("7. Einer Person entfolgen");
-        System.out.println("8. Adresse zu Person hinzufügen");
-        System.out.println("9. Adresse von Person entfernen");
-        System.out.println("10. Telefonnummer zu Person hinzufügen");
-        System.out.println("11. Telefonnummer von Person entfernen");
-        System.out.println("12. Zurück zum Hauptmenü");
+        System.out.println("2. Alle Personen sortiert ausgeben");
+        System.out.println("3. Eine Person anzeigen (ID benötigt)");
+        System.out.println("4. Eine Person hinzufügen");
+        System.out.println("5. Eine Person aktualisieren");
+        System.out.println("6. Eine Person löschen");
+        System.out.println("7. Einer Person folgen");
+        System.out.println("8. Einer Person entfolgen");
+        System.out.println("9. Adresse zu Person hinzufügen");
+        System.out.println("10. Adresse von Person entfernen");
+        System.out.println("11. Telefonnummer zu Person hinzufügen");
+        System.out.println("12. Telefonnummer von Person entfernen");
+        System.out.println("13. Zurück zum Hauptmenü");
     }
 
     private void getAllPersons() {
 
         List<Person> persons = personRestService.getAllPersons();
 
+        formatting(persons);
+
+//                personRestService.getAllPersons();
+    }
+
+    private static void formatting(List<Person> persons) {
         String leftAlignFormat = "| %-5d | %-15s | %-15s | %-15s | %-85s | %-40s | %-9s |%n";
         System.out.format("+-------+-----------------+-----------------+-----------------+---------------------------------------------------------------------------------------+------------------------------------------+-----------+%n");
         System.out.format("| ID    | Vorname         | Nachname        | Geburtsdatum    | Adresse(n)                                                                            | Telefonnummer(n)                         | Gefolgt   |%n");
@@ -128,8 +179,6 @@ public class PersonView implements View {
             System.out.format(leftAlignFormat, p.getId(), p.getFirstName(), p.getLastName(), p.getDateOfBirth().getBirthday(), p.getAddresses(), p.getPhoneNumbers(), followingIds);
         }
         System.out.format("+-------+-----------------+-----------------+-----------------+---------------------------------------------------------------------------------------+------------------------------------------+-----------+%n");
-
-//                personRestService.getAllPersons();
     }
 
     private void deletePhoneNumber() {
