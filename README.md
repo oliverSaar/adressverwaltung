@@ -53,5 +53,8 @@ Entities sind im Model Package
 
 
 # How to RUN
+mvn package
+move in: adressverwaltung_rest -> target 
+java -jar adressverwaltung_rest-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-adressverwaltung_rest -> src -> main -> java -> de.dhbw.ase -> Program.java
+Falls das Probleme macht, einfach die Program.java Klasse im adressverwaltung_rest package ausführen
