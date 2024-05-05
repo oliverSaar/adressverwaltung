@@ -135,7 +135,7 @@ public class PersonView implements View {
 
     private void deletePhoneNumber() {
         System.out.print(inputPersonID + ", von welcher Sie eine Telefonnummer löschen möchten: ");
-        long personID = scanner.nextInt();
+        long personID = scanner.nextLong();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen: ");
 
@@ -145,7 +145,7 @@ public class PersonView implements View {
 
     private void addPhoneNumber() {
         System.out.print(inputPersonID + ", zu der Sie eine Telefonnummer hinzufügen wollen: ");
-        long personID = scanner.nextInt();
+        long personID = scanner.nextLong();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen: ");
         personRestService.addPhoneNumber(personID, phoneNumberRestService.getPhoneNumber(scanner.nextLong()));
@@ -153,7 +153,7 @@ public class PersonView implements View {
 
     private void removeAddress() {
         System.out.print(inputPersonID + ", von welcher Sie eine Adresse löschen möchten: ");
-        long personID = scanner.nextInt();
+        long personID = scanner.nextLong();
         System.out.println();
         System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen: ");
         Address address = addressRestService.getAddress(scanner.nextLong());
@@ -175,7 +175,7 @@ public class PersonView implements View {
 
     private void followPerson() {
         System.out.println(inputPersonID + ", der Sie folgen möchten: ");
-        int id = scanner.nextInt();
+        long id = scanner.nextLong();
 
         personRestService.followPerson(id);
     }
@@ -183,22 +183,22 @@ public class PersonView implements View {
 
     private void unFollowPerson() {
         System.out.println(inputPersonID + ", der Sie nicht mehr folgen möchten: ");
-        int id = scanner.nextInt();
+        long id = scanner.nextLong();
         personRestService.unFollowPerson(id);
     }
 
     private void deletePerson() {
 
         System.out.println(inputPersonID + ", die gelöscht werden soll: ");
-        int id = scanner.nextInt();
+        long id = scanner.nextLong();
         personRestService.deletePerson(id);
     }
 
     private void changePerson() {
 
         System.out.println(inputPersonID + ", die Sie ändern möchten: ");
-        long id = scanner.nextInt();
-        if (id == LoggedInPersonSingleton.getInstance().getLoggedInUserID()) {
+        long id = scanner.nextLong();
+        if (id == LoggedInPersonSingleton.getLoggedInUserID()) {
             Person person = dataInput();
             person.setId(id);
             personRestService.updatePerson(person);
@@ -225,20 +225,71 @@ public class PersonView implements View {
         lastName = scanner.next();
         System.out.println();
         System.out.println("Geburtsdatum : ");
-        System.out.print("Tag:");
-        day = scanner.nextInt();
-        System.out.println();
-        System.out.print("Monat (1-12): ");
-        month = scanner.nextInt();
-        System.out.println();
-        System.out.print("Jahr (z.B. 1990): ");
 
-        year = scanner.nextInt();
 
-        while (year < 1900 || year > LocalDate.now().getYear()) {
-            System.out.println("Falsches Jahr! Bitte geben Sie ihr Geburtsjahr erneut ein: ");
-            year = scanner.nextInt();
+        scanner.nextLine();
+
+
+        while (true) {
+            System.out.print("Jahr (z.B. 1990): ");
+            try {
+                year = scanner.nextInt();
+
+                while (year < 1900 || year > LocalDate.now().getYear()) {
+                    System.out.println("Falsches Jahr! Bitte geben Sie Ihr Geburtsjahr erneut ein: ");
+                    year = scanner.nextInt();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
         }
+        System.out.println();
+
+        while (true) {
+            System.out.print("Monat (1-12): ");
+            try {
+                month = scanner.nextInt();
+
+                while (month < 1 || month > 12) {
+                    System.out.println("Falscher Monat! Bitte geben Sie den Monat erneut ein: ");
+                    month = scanner.nextInt();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
+        System.out.println();
+
+        LocalDate length = LocalDate.of(year, month, 1);
+
+
+        while (true) {
+            System.out.print("Tag: ");
+            try {
+                day = scanner.nextInt();
+
+                while (day < 1 || day > length.lengthOfMonth()) {
+                    System.out.println("Falscher Tag! Bitte geben Sie den Tag erneut ein: ");
+                    day = scanner.nextInt();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
+
+        System.out.println();
+
 
         System.out.println("Sie können später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen");
 

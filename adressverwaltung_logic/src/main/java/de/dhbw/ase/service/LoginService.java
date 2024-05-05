@@ -92,21 +92,68 @@ public class LoginService {
         System.out.print("Bitte geben Sie Ihr Passwort ein: ");
         String password = scanner.nextLine();
 
+
+        //TODO möglicherweise auslagern
         System.out.println("Bitte geben Sie Ihr Geburtsdatum ein, um die Registrierung abzuschließen: ");
 
-        System.out.print("Tag:");
-        int day = scanner.nextInt();
-        System.out.println();
-        System.out.print("Monat (1-12): ");
-        int month = scanner.nextInt();
-        System.out.println();
-        System.out.print("Jahr (z.B. 1990): ");
 
-        int year = scanner.nextInt();
+        int year, month, day;
 
-        while (year < 1900 || year > LocalDate.now().getYear()) {
-            System.out.println("Falsches Jahr! Bitte geben Sie ihr Geburtsjahr erneut ein: ");
-            year = scanner.nextInt();
+        while (true) {
+            System.out.print("Jahr (z.B. 1990): ");
+            try {
+                year = scanner.nextInt();
+
+                while (year < 1900 || year > LocalDate.now().getYear()) {
+                    System.out.println("Falsches Jahr! Bitte geben Sie Ihr Geburtsjahr erneut ein: ");
+                    year = scanner.nextInt();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+        System.out.println();
+
+        while (true) {
+            System.out.print("Monat (1-12): ");
+            try {
+                month = scanner.nextInt();
+
+                while (month < 1 || month > 12) {
+                    System.out.println("Falscher Monat! Bitte geben Sie den Monat erneut ein: ");
+                    month = scanner.nextInt();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
+        System.out.println();
+
+        LocalDate length = LocalDate.of(year, month, 1);
+
+
+        while (true) {
+            System.out.print("Tag: ");
+            try {
+                day = scanner.nextInt();
+
+                while (day < 1 || day > length.lengthOfMonth()) {
+                    System.out.println("Falscher Tag! Bitte geben Sie den Tag erneut ein: ");
+                    day = scanner.nextInt();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
         }
 
         //consume unneccesary nextLine
@@ -132,7 +179,7 @@ public class LoginService {
                 System.out.println(ANSI_CYAN + person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG und wird " +
                         person.getDateOfBirth().getAge() + " Jahre alt!\n" + ANSI_RESET);
             } else {
-               throw new Exception("Heute hat niemand der Personen, denen Sie folgen Geburtstag!\n");
+                throw new Exception("Heute hat niemand der Personen, denen Sie folgen Geburtstag!\n");
             }
         }
     }
