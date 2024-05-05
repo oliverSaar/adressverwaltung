@@ -119,7 +119,7 @@ public class PhoneNumberView implements View {
 
 
     public void consoleMenu() {
-        System.out.println("\n---------------------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------\n");
 
         System.out.println("Bitte geben Sie die Zahl der Aktion ein: ");
 

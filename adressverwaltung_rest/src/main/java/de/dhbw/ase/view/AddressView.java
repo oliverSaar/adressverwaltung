@@ -93,17 +93,17 @@ public class AddressView implements View {
     }
 
     private static void formatting(List<Address> addresses) {
-        String leftAlignFormat = "| %-15s | %-15d | %-15s | %-15s | %-15s |%n";
-        System.out.format("+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
+        String leftAlignFormat = "| %-4d | %-15s | %-15d | %-15s | %-15s | %-15s |%n";
+        System.out.format("+------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
 
-        System.out.format("|      Land       |   Postleitzahl  |   Stadt / Ort   |     Straße      |    Hausnummer   |%n");
-        System.out.format("+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
+        System.out.format("| ID   |      Land       |   Postleitzahl  |   Stadt / Ort   |     Straße      |    Hausnummer   |%n");
+        System.out.format("+------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
 
         for (Address a : addresses) {
 
-            System.out.format(leftAlignFormat, a.getCountry(), a.getZipCode(), a.getCity(), a.getStreetName(), a.getHouseNumber());
+            System.out.format(leftAlignFormat, a.getId(), a.getCountry(), a.getZipCode(), a.getCity(), a.getStreetName(), a.getHouseNumber());
         }
-        System.out.format("+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
+        System.out.format("+------+-----------------+-----------------+-----------------+-----------------+-----------------+%n");
     }
 
     public void addAddress() {
@@ -159,7 +159,8 @@ public class AddressView implements View {
 
     public void consoleMenu() {
 
-        System.out.println("\n---------------------------------------------------------------------\n");
+        System.out.format("\n--------------------------------------------------------------------------------------------------\n");
+
 
         System.out.println("Bitte geben Sie die Zahl der Aktion ein: ");
 

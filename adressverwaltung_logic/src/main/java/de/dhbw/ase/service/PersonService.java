@@ -43,7 +43,7 @@ public class PersonService {
     }
 
     public void addPerson(Person person) throws Exception {
-        //TODO sollte man überhaupt eine Person hinzufügen können oder nur durch Registrierung?
+        //TODO sollte man so überhaupt eine Person hinzufügen können oder nur durch Registrierung?
         person.setId(getNextId());
         if (personDAO.getPersons().stream().anyMatch(p -> Objects.equals(p.getFirstName(), person.getFirstName()))
                 && personDAO.getPersons().stream().anyMatch(p -> Objects.equals(p.getLastName(), person.getLastName()))) {
@@ -55,7 +55,6 @@ public class PersonService {
     }
 
     public void deletePerson(long id) throws Exception {
-        personDAO.deletePerson(id);
         if (personDAO.getPerson(id).isPresent()) {
 
             if (LoggedInPersonSingleton.getLoggedInUserID() == id) {

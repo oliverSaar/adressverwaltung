@@ -10,8 +10,6 @@ import java.util.List;
 public class Person {
 
 
-    //TODO Personbuilder
-
     private long id;
     private String firstName;
     private String lastName;
@@ -19,9 +17,6 @@ public class Person {
     private Birthday dateOfBirth;
     private List<Address> addresses = new ArrayList<>();
     private List<PhoneNumber> phoneNumbers = new ArrayList<>();
-
-    //TODO lieber Singleton machen, welcher den eingeloggten User hält
-    private boolean loggedIn = false;
 
     private List<Person> following = new ArrayList<>();
     private LocalDateTime created;
@@ -86,15 +81,6 @@ public class Person {
 
     public void setDateOfBirth(Birthday dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
-    }
-
-
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
     }
 
     public List<Address> getAddresses() {

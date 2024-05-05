@@ -91,7 +91,7 @@ public class PersonView implements View {
 
 
     public void consoleMenu() {
-        System.out.println("\n---------------------------------------------------------------------\n");
+        System.out.println("\n--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         System.out.println("Welche Operation wollen Sie ausführen? Tippen Sie dazu die Nummer ein und bestätigen mit Enter.");
         System.out.println("1. Alle Personen anzeigen");
         System.out.println("2. Eine Person anzeigen (ID benötigt)");
@@ -306,7 +306,7 @@ public class PersonView implements View {
         month = loginRestHelperService.getMonth();
         day = loginRestHelperService.getDay(year, month);
 
-        System.out.println("Sie können später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen");
+        System.out.println("\nSie können später eine bestehende Adresse oder Telefonnummer hinzufügen oder ganz neue Einträge erstellen\n");
 
         return new Person(id, firstName, lastName, day, month, year, null, null);
 

@@ -63,7 +63,6 @@ public class LoginService {
         } else {
             throw new Exception("Nutzer wurde nicht gefunden!");
         }
-
     }
 
     public Person getLoggedInUser() throws Exception {
@@ -91,17 +90,12 @@ public class LoginService {
         System.out.print("Bitte geben Sie Ihr Passwort ein: ");
         String password = scanner.nextLine();
 
-
-        //TODO möglicherweise auslagern
         System.out.println("Bitte geben Sie Ihr Geburtsdatum ein, um die Registrierung abzuschließen: ");
-
 
         int year, month, day;
 
         year = getYear();
-
         month = getMonth();
-
         day = getDay(year, month);
 
         try {

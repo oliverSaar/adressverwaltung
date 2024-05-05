@@ -63,11 +63,7 @@ public class PersonDAOImpl implements PersonDAO {
     @Override
     public void deletePerson(long personId) throws Exception {
 
-        for (Person p : persons) {
-            if (p.getId() == personId) {
-                persons.remove(p);
-            }
-        }
+        persons.removeIf(p -> p.getId() == personId);
     }
 
     @Override
