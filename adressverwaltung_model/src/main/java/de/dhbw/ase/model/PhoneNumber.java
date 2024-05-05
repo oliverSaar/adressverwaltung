@@ -48,7 +48,7 @@ public class PhoneNumber {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(number).append(", mobil: ").append(mobile).append("}");
+        sb.append(number).append(", mobil: ").append(mobile ? "Ja" : "Nein");
         return sb.toString();
     }
 

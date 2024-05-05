@@ -185,8 +185,6 @@ public class PersonView implements View {
 
         List<Person> persons = personRestService.getAllPersons();
         long personID;
-        scanner.nextLine();
-
 
         while (true) {
             System.out.print(inputPersonID + ", von welcher Sie eine Telefonnummer löschen möchten: ");
@@ -206,9 +204,9 @@ public class PersonView implements View {
 
 
         System.out.println();
-        System.out.print("Bitte geben Sie die ID der Telefonnummer an, um sie zu entfernen: ");
+        System.out.print("Bitte geben Sie die Telefonnummer an, um sie zu entfernen: ");
         String phoneNumber = scanner.nextLine();
-        System.out.println("ist mobil?");
+        System.out.println("Handelt es sich um eine mobile Nummer? (Ja/Nein)");
         boolean isMobile = scanner.nextLine().equalsIgnoreCase("Ja");
         PhoneNumber phoneNumber1 = new PhoneNumber(phoneNumber, isMobile);
         if (phoneNumberRestService.getAllPhoneNumbers().stream().anyMatch(p -> p.getNumber().equals(phoneNumber) && p.isMobile() == isMobile)) {
@@ -231,7 +229,7 @@ public class PersonView implements View {
                 personID = scanner.nextLong();
 
                 while (personID < 0 || personID > persons.size() - 1) {
-                    System.out.println("Bitte geben Sie die korrekte ID, der Person der Sie eine Telefonnummer hinzufügen möchten: ");
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person zu welcher Sie eine Telefonnummer hinzufügen möchten: ");
                     personID = scanner.nextLong();
                 }
 
@@ -244,10 +242,10 @@ public class PersonView implements View {
 
 
         System.out.println();
-        System.out.print("Bitte geben Sie die ID der Telefonnummer an, um Sie hinzuzufügen: ");
+        System.out.print("Bitte geben Sie die Telefonnummer ein, um Sie hinzuzufügen: ");
 
         String phoneNumber = scanner.nextLine();
-        System.out.println("ist mobil?");
+        System.out.println("Handelt es sich um eine mobile Nummer? (Ja/Nein)");
         boolean isMobile = scanner.nextLine().equalsIgnoreCase("Ja");
         PhoneNumber phoneNumber1 = new PhoneNumber(phoneNumber, isMobile);
         if (phoneNumberRestService.getAllPhoneNumbers().stream().noneMatch(p -> p.equals(phoneNumber1))) {
@@ -261,23 +259,103 @@ public class PersonView implements View {
     }
 
     private void removeAddress() {
-        System.out.print(inputPersonID + ", von welcher Sie eine Adresse löschen möchten: ");
-        long personID = scanner.nextLong();
+
+        long personID;
+        long addressID;
+        List<Person> persons = personRestService.getAllPersons();
+        List<Address> addresses = addressRestService.getAllAddresses();
+
+
+        while (true) {
+            System.out.print(inputPersonID + ", von welcher Sie eine Adresse löschen möchten: ");
+            try {
+                personID = scanner.nextLong();
+
+                while (personID < 0 || personID > persons.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person von welcher Sie die Adresse löschen möchten: ");
+                    personID = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
+
         System.out.println();
-        System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen: ");
+
+
+        while (true) {
+            System.out.print("Bitte geben Sie die ID der Adresse an, um sie zu entfernen: ");
+            try {
+                addressID = scanner.nextLong();
+
+                while (addressID < 0 || addressID > addresses.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID der Adresse ein: ");
+                    addressID = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
+
         Address address = addressRestService.getAddress(scanner.nextLong());
         personRestService.removeAddress(personID, address);
     }
 
     private void addAddress() {
 
-        System.out.print(inputPersonID + ", zu der Sie eine Adresse hinzufügen wollen: ");
-        long personID = scanner.nextLong();
+        List<Person> persons = personRestService.getAllPersons();
+        List<Address> addresses = addressRestService.getAllAddresses();
+        long personID;
+        long addressID;
+
+
+        while (true) {
+            System.out.print(inputPersonID + ", zu der Sie eine Adresse hinzufügen wollen: ");
+            try {
+                personID = scanner.nextLong();
+
+                while (personID < 0 || personID > persons.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Person zu welcher Sie die Adresse hinzufügen möchten: ");
+                    personID = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
+
         System.out.println();
 
-        System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen: ");
 
-        Address address = addressRestService.getAddress(scanner.nextLong());
+        while (true) {
+            System.out.print("Bitte geben Sie die ID der Adresse an, um Sie hinzuzufügen: ");
+            try {
+                addressID = scanner.nextLong();
+
+                while (addressID < 0 || addressID > addresses.size() - 1) {
+                    System.out.println("Bitte geben Sie die korrekte ID, der Adresse an: ");
+                    addressID = scanner.nextLong();
+                }
+
+                scanner.nextLine();
+                break;
+            } catch (java.util.InputMismatchException e) {
+                scanner.nextLine();
+            }
+        }
+
+        Address address = addressRestService.getAddress(addressID);
 
         personRestService.addAddress(personID, address);
     }

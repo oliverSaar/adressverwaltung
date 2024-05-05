@@ -82,6 +82,9 @@ public class LoginService {
         System.out.print("Bitte geben Sie Ihren Benutzernamen ein (Muster: Vorname Nachname): ");
         String username = scanner.nextLine();
         String[] usernameSplit = username.split(" ");
+        if(usernameSplit.length != 2){
+            throw new Exception("Benutzername ist ungültig! Sie müssen zuerst Ihren Vornamen dann Ihren Nachnamen eingeben (Max Mustermann).");
+        }
         if (userPassword.containsKey(username)) {
             System.out.println("Benutzername ist bereits vergeben. Bitte setzen Sie eine 1 (bzw. 2 und fortlaufend) an Ihren Nachnamen.");
             System.out.println("------------------------------------------");

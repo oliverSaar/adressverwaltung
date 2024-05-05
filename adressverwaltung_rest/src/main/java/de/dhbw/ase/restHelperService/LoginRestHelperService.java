@@ -28,9 +28,9 @@ public class LoginRestHelperService {
     public boolean register() {
         try {
             loginService.register();
-            System.out.println("Die Registrierung war erfolgreich!");
+            System.out.println("Die Registrierung war erfolgreich! Sie können sich nun einloggen.");
         } catch (Exception e) {
-            System.out.println("Die Registrierung konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut. " + e.getMessage());
+            System.out.println("Die Registrierung konnte nicht erfolgreich durchgeführt werden! " + e.getMessage());
             return false;
         }
         return false;

@@ -57,7 +57,7 @@ public class PersonService {
     public void deletePerson(long id) throws Exception {
         if (personDAO.getPerson(id).isPresent()) {
 
-            if (LoggedInPersonSingleton.getLoggedInUserID() == id) {
+            if (LoggedInPersonSingleton.getLoggedInUserID() == id || LoggedInPersonSingleton.getLoggedInUserID() == 0) {
                 personDAO.deletePerson(id);
             } else {
                 throw new Exception("Person mit der ID: " + id + " konnte nicht gelöscht werden. Sie können keine anderen Benutzer löschen!");
@@ -144,46 +144,71 @@ public class PersonService {
     }
 
 
-    public void addAddress(long PersonID, Address address) throws Exception {
+    public void addAddress(long personID, Address address) throws Exception {
 
-        if (personDAO.getPerson(PersonID).isEmpty()) {
-            throw new RuntimeException("Die Person konnte nicht gefunden werden!");
-        } else if (personDAO.getPerson(PersonID).get().getAddresses().contains(address)) {
-            throw new RuntimeException("Die Adresse wurde bereits zu der Person hinzugefügt!");
+        long loggedInUserID = LoggedInPersonSingleton.getLoggedInUserID();
+
+        if (loggedInUserID == personID || loggedInUserID == 0) {
+
+            if (personDAO.getPerson(personID).isEmpty()) {
+                throw new RuntimeException("Die Person konnte nicht gefunden werden!");
+            } else if (personDAO.getPerson(personID).get().getAddresses().contains(address)) {
+                throw new RuntimeException("Die Adresse wurde bereits zu der Person hinzugefügt!");
+            } else {
+                personDAO.addAddress(personID, address);
+            }
         } else {
-            personDAO.addAddress(PersonID, address);
+            throw new Exception("Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine Adressen zu anderen Benutzern hinzufügen!");
         }
     }
 
     public void removeAddress(long personID, Address address) throws Exception {
-        if (personDAO.getPerson(personID).isEmpty()) {
-            throw new RuntimeException("Die Person konnte nicht gefunden werden!");
-        } else if (!personDAO.getPerson(personID).get().getAddresses().contains(address)) {
-            throw new RuntimeException("Die Adresse ist nicht mit der Person verknüpft!");
+
+        long loggedInUserID = LoggedInPersonSingleton.getLoggedInUserID();
+        if (loggedInUserID == personID || loggedInUserID == 0) {
+            if (personDAO.getPerson(personID).isEmpty()) {
+                throw new RuntimeException("Die Person konnte nicht gefunden werden!");
+            } else if (!personDAO.getPerson(personID).get().getAddresses().contains(address)) {
+                throw new RuntimeException("Die Adresse ist nicht mit der Person verknüpft!");
+            } else {
+                personDAO.removeAddress(personID, address);
+            }
         } else {
-            personDAO.removeAddress(personID, address);
+            throw new Exception("Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine Adressen von anderen Benutzern entfernen!");
         }
     }
 
     public void removePhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
 
-        if (personDAO.getPerson(personID).isEmpty()) {
-            throw new RuntimeException("Die Person konnte nicht gefunden werden!");
-        } else if (personDAO.getPerson(personID).get().getPhoneNumbers().stream().noneMatch(p -> p.equals(phoneNumber))) {
-            throw new RuntimeException("Die Telefonnummer ist nicht mit der Person verknüpft!");
+        long loggedInUserID = LoggedInPersonSingleton.getLoggedInUserID();
+        if (loggedInUserID == personID || loggedInUserID == 0) {
+
+            if (personDAO.getPerson(personID).isEmpty()) {
+                throw new RuntimeException("Die Person konnte nicht gefunden werden!");
+            } else if (personDAO.getPerson(personID).get().getPhoneNumbers().stream().noneMatch(p -> p.equals(phoneNumber))) {
+                throw new RuntimeException("Die Telefonnummer ist nicht mit der Person verknüpft!");
+            } else {
+                personDAO.removePhoneNumber(personID, phoneNumber);
+            }
         } else {
-            personDAO.removePhoneNumber(personID, phoneNumber);
+            throw new Exception("Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine Telefonnummern von anderen Benutzern entfernen!");
         }
     }
 
     public void addPhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
 
-        if (personDAO.getPerson(personID).isEmpty()) {
-            throw new RuntimeException("Die Person konnte nicht gefunden werden!");
-        } else if (personDAO.getPerson(personID).get().getPhoneNumbers().stream().anyMatch(p -> p.equals(phoneNumber))) {
-            throw new RuntimeException("Die Telefonnummer wurde bereits zu der Person hinzugefügt!");
+        long loggedInUserID = LoggedInPersonSingleton.getLoggedInUserID();
+        if (loggedInUserID == personID || loggedInUserID == 0) {
+
+            if (personDAO.getPerson(personID).isEmpty()) {
+                throw new RuntimeException("Die Person konnte nicht gefunden werden!");
+            } else if (personDAO.getPerson(personID).get().getPhoneNumbers().stream().anyMatch(p -> p.equals(phoneNumber))) {
+                throw new RuntimeException("Die Telefonnummer wurde bereits zu der Person hinzugefügt!");
+            } else {
+                personDAO.addPhoneNumber(personID, phoneNumber);
+            }
         } else {
-            personDAO.addPhoneNumber(personID, phoneNumber);
+            throw new Exception("Die ID der zu ändernden Person stimmt nicht mit Ihrer ID überein. Sie dürfen keine Telefonnummern zu anderen Benutzern hinzufügen!");
         }
     }
 }
