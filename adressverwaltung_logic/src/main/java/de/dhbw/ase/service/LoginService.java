@@ -99,14 +99,35 @@ public class LoginService {
 
         int year, month, day;
 
-        while (true) {
-            System.out.print("Jahr (z.B. 1990): ");
-            try {
-                year = scanner.nextInt();
+        year = getYear();
 
-                while (year < 1900 || year > LocalDate.now().getYear()) {
-                    System.out.println("Falsches Jahr! Bitte geben Sie Ihr Geburtsjahr erneut ein: ");
-                    year = scanner.nextInt();
+        month = getMonth();
+
+        day = getDay(year, month);
+
+        try {
+            personService.addPerson(new Person(1, usernameSplit[0], usernameSplit[1], day, month, year, null, null));
+            userPassword.put(username, password);
+            userPasswordDAO.insertUserPassword(username, password);
+            return true;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public int getDay(int year, int month) {
+
+        LocalDate length = LocalDate.of(year, month, 1);
+        int day;
+
+        while (true) {
+            System.out.print("Tag: ");
+            try {
+                day = scanner.nextInt();
+
+                while (day < 1 || day > length.lengthOfMonth()) {
+                    System.out.println("Falscher Tag! Bitte geben Sie den Tag erneut ein: ");
+                    day = scanner.nextInt();
                 }
 
                 scanner.nextLine();
@@ -115,8 +136,11 @@ public class LoginService {
                 scanner.nextLine();
             }
         }
-        System.out.println();
+        return day;
+    }
 
+    public int getMonth() {
+        int month;
         while (true) {
             System.out.print("Monat (1-12): ");
             try {
@@ -135,18 +159,19 @@ public class LoginService {
         }
 
         System.out.println();
+        return month;
+    }
 
-        LocalDate length = LocalDate.of(year, month, 1);
-
-
+    public int getYear() {
+        int year;
         while (true) {
-            System.out.print("Tag: ");
+            System.out.print("Jahr (z.B. 1990): ");
             try {
-                day = scanner.nextInt();
+                year = scanner.nextInt();
 
-                while (day < 1 || day > length.lengthOfMonth()) {
-                    System.out.println("Falscher Tag! Bitte geben Sie den Tag erneut ein: ");
-                    day = scanner.nextInt();
+                while (year < 1900 || year > LocalDate.now().getYear()) {
+                    System.out.println("Falsches Jahr! Bitte geben Sie Ihr Geburtsjahr erneut ein: ");
+                    year = scanner.nextInt();
                 }
 
                 scanner.nextLine();
@@ -155,17 +180,8 @@ public class LoginService {
                 scanner.nextLine();
             }
         }
-
-        //consume unneccesary nextLine
-        scanner.nextLine();
-        try {
-            personService.addPerson(new Person(1, usernameSplit[0], usernameSplit[1], day, month, year, null, null));
-            userPassword.put(username, password);
-            userPasswordDAO.insertUserPassword(username, password);
-            return true;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println();
+        return year;
     }
 
     public void getBirthdayView() throws Exception {

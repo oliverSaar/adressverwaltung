@@ -32,13 +32,15 @@ public class PhoneNumberView implements View {
             consoleMenu();
 
             int input = scanner.nextInt();
+
+            //consume last line
+            scanner.nextLine();
             switch (input) {
                 case 1:
                     getAllPhoneNumbers();
                     break;
                 case 2:
-                    System.out.print("Bitte geben Sie die ID der Telefonnummer ein: ");
-                    phoneNumberRestHelperService.getPhoneNumber(scanner.nextLong());
+                    getPerson();
                     break;
                 case 3:
                     addPhoneNumber();
@@ -47,7 +49,6 @@ public class PhoneNumberView implements View {
                     done = true;
                     break;
                 default:
-                    scanner.close();
                     done = true;
                     break;
 
@@ -56,21 +57,31 @@ public class PhoneNumberView implements View {
         new MainView(personRestHelperService, addressRestHelperService, phoneNumberRestHelperService, loginService).defaultView();
     }
 
+    private void getPerson() {
+
+        System.out.print("Bitte geben Sie die ID der Telefonnummer ein: ");
+        format(List.of(phoneNumberRestHelperService.getPhoneNumber(scanner.nextLong())));
+
+    }
+
     private void getAllPhoneNumbers() {
         List<PhoneNumber> phoneNumbers = phoneNumberRestHelperService.getAllPhoneNumbers();
+        format(phoneNumbers);
 
-        String leftAlignFormat = "| %-5d | %-15s | %-5s |%n";
-        System.out.format("+-------+-----------------+-------+%n");
+    }
 
-        System.out.format("|   ID  |   Nummer        | Mobil |%n");
-        System.out.format("+-------+-----------------+-------+%n");
+    private static void format(List<PhoneNumber> phoneNumbers) {
+        String leftAlignFormat = "| %-5d | %-25s | %-5s |%n";
+        System.out.format("+-------+---------------------------+-------+%n");
+
+        System.out.format("|   ID  |   Nummer                  | Mobil |%n");
+        System.out.format("+-------+---------------------------+-------+%n");
 
         for (PhoneNumber p : phoneNumbers) {
 
             System.out.format(leftAlignFormat, p.getId(), p.getNumber(), p.isMobile() ? "Ja" : "Nein");
         }
-        System.out.format("+-------+-----------------+-------+%n");
-
+        System.out.format("+-------+---------------------------+-------+%n");
     }
 
     public void addPhoneNumber() {
@@ -80,9 +91,9 @@ public class PhoneNumberView implements View {
         boolean mobile;
 
         System.out.println("Bitte geben Sie die Nummer ein: ");
-        number = scanner.next();
+        number = scanner.nextLine();
         System.out.println("Ist die Nummer mobil? (Ja/Nein)");
-        mobile = scanner.next().equals("Ja");
+        mobile = scanner.nextLine().equalsIgnoreCase("Ja");
 
         PhoneNumber phoneNumber = new PhoneNumber(id, number, mobile);
         phoneNumberRestHelperService.addPhoneNumber(phoneNumber);

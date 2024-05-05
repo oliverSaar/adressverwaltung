@@ -32,6 +32,10 @@ public class MainView implements View {
         System.out.println("1. Ja");
         System.out.println("2. Nein");
         input = scanner.nextInt();
+
+        //consume last line
+        scanner.nextLine();
+
         if (input == 1) {
             if (loginRestHelperService.login()) {
                 defaultView();
