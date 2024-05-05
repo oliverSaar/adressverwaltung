@@ -43,18 +43,27 @@ public class PersonRestHelperService {
     public void updatePerson(Person person) {
         try {
             personService.updatePerson(person);
-            System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich aktualisiert.");
+            System.out.println("Die Person mit der ID: " + person.getId() + " wurde erfolgreich aktualisiert.");
         } catch (Exception e) {
-            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht aktualisiert werden. " + e.getMessage());
+            System.out.println("Die Person mit der ID: " + person.getId() + " konnte nicht aktualisiert werden. " + e.getMessage());
         }
     }
 
     public void addPerson(Person person) {
         try {
             personService.addPerson(person);
-            System.out.println("Person mit der ID: " + person.getId() + " wurde erfolgreich hinzugefügt.");
+            System.out.println("Die Person mit der ID: " + person.getId() + " wurde erfolgreich hinzugefügt.");
         } catch (Exception e) {
-            System.out.println("Person mit der ID: " + person.getId() + " konnte nicht hinzugefügt werden. " + e.getMessage());
+            System.out.println("Die Person mit der ID: " + person.getId() + " konnte nicht hinzugefügt werden. " + e.getMessage());
+        }
+    }
+
+    public void deletePerson(long id) {
+        try {
+            personService.deletePerson(id);
+            System.out.println("Die Person mit der ID: " + id + " wurde erfolgreich gelöscht.");
+        } catch (Exception e) {
+            System.out.println("Die Person mit der ID: " + id + " konnte nicht gelöscht werden. " + e.getMessage());
         }
     }
 
@@ -95,12 +104,6 @@ public class PersonRestHelperService {
         }
     }
 
-
-    public void deletePerson(long id) {
-
-        //TODO person löschen implementieren
-    }
-
     public void followPerson(long personToFollow) {
         try {
             personService.followPerson(personToFollow);
@@ -114,7 +117,7 @@ public class PersonRestHelperService {
         try {
             personService.unfollowPerson(personToUnfollow);
         } catch (Exception e) {
-            System.out.println("Person mit der ID: " + personToUnfollow + " konnte nicht entfolgt werden. " + e.getMessage());
+            System.out.println("Der Person mit der ID: " + personToUnfollow + " konnte nicht entfolgt werden. " + e.getMessage());
 
         }
     }

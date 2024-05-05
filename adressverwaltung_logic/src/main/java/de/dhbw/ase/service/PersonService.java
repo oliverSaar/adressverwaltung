@@ -52,7 +52,20 @@ public class PersonService {
         } else {
             personDAO.insertPerson(person);
         }
+    }
 
+    public void deletePerson(long id) throws Exception {
+        personDAO.deletePerson(id);
+        if (personDAO.getPerson(id).isPresent()) {
+
+            if (LoggedInPersonSingleton.getLoggedInUserID() == id) {
+                personDAO.deletePerson(id);
+            } else {
+                throw new Exception("Person mit der ID: " + id + " konnte nicht gelöscht werden. Sie können keine anderen Benutzer löschen!");
+            }
+        } else {
+            throw new Exception("Person mit der ID: " + id + " konnte nicht gefunden werden");
+        }
     }
 
     public void updatePerson(final Person person) throws Exception {
@@ -141,7 +154,6 @@ public class PersonService {
         } else {
             personDAO.addAddress(PersonID, address);
         }
-
     }
 
     public void removeAddress(long personID, Address address) throws Exception {
@@ -152,8 +164,6 @@ public class PersonService {
         } else {
             personDAO.removeAddress(personID, address);
         }
-
-
     }
 
     public void removePhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
@@ -165,7 +175,6 @@ public class PersonService {
         } else {
             personDAO.removePhoneNumber(personID, phoneNumber);
         }
-
     }
 
     public void addPhoneNumber(long personID, PhoneNumber phoneNumber) throws Exception {
@@ -177,6 +186,5 @@ public class PersonService {
         } else {
             personDAO.addPhoneNumber(personID, phoneNumber);
         }
-
     }
 }

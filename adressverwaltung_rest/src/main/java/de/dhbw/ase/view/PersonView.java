@@ -223,7 +223,6 @@ public class PersonView implements View {
 
     private void deletePerson() {
 
-
         long id;
         List<Person> persons = personRestService.getAllPersons();
 
@@ -243,7 +242,6 @@ public class PersonView implements View {
                 scanner.nextLine();
             }
         }
-
         personRestService.deletePerson(id);
     }
 
