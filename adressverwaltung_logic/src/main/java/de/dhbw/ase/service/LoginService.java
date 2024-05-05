@@ -54,15 +54,14 @@ public class LoginService {
 
 
                 LoggedInPersonSingleton.setLoggedInUserID(user.getId());
-                System.out.println("loggedin User: " + LoggedInPersonSingleton.getLoggedInUserID());
 
-                System.out.println("Login erfolgreich\n\n");
+                System.out.println("\nLogin erfolgreich\n");
                 return true;
             } else {
-                throw new Exception("Login fehlgeschlagen!");
+                throw new Exception("Falsches Passwort!");
             }
         } else {
-            throw new Exception("Login fehlgeschlagen!");
+            throw new Exception("Nutzer wurde nicht gefunden!");
         }
 
     }

@@ -20,7 +20,7 @@ public class LoginRestHelperService {
         try {
             return loginService.login();
         } catch (Exception e) {
-            System.out.println("Der Login konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut.");
+            System.out.println("Der Login konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut. " + e.getMessage());
             return false;
         }
     }
@@ -30,7 +30,7 @@ public class LoginRestHelperService {
             loginService.register();
             System.out.println("Die Registrierung war erfolgreich!");
         } catch (Exception e) {
-            System.out.println("Die Registrierung konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut.");
+            System.out.println("Die Registrierung konnte nicht erfolgreich durchgeführt werden! Bitte versuchen Sie es erneut. " + e.getMessage());
             return false;
         }
         return false;
