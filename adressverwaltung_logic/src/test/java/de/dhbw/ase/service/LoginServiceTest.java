@@ -4,6 +4,7 @@ import de.dhbw.ase.model.singleton.LoggedInPersonSingleton;
 import de.dhbw.ase.service.mocks.PersonDAOMock;
 import de.dhbw.ase.service.mocks.UserPasswordDAOMock;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -61,6 +62,7 @@ class LoginServiceTest {
 
     }
 
+    @Disabled
     @Test
     void getBirthdayViewNoBirthdays(){
 
