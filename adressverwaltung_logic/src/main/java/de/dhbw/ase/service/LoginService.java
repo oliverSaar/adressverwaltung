@@ -82,7 +82,7 @@ public class LoginService {
         System.out.print("Bitte geben Sie Ihren Benutzernamen ein (Muster: Vorname Nachname): ");
         String username = scanner.nextLine();
         String[] usernameSplit = username.split(" ");
-        if(usernameSplit.length != 2){
+        if (usernameSplit.length != 2) {
             throw new Exception("Benutzername ist ungültig! Sie müssen zuerst Ihren Vornamen dann Ihren Nachnamen eingeben (Max Mustermann).");
         }
         if (userPassword.containsKey(username)) {
@@ -190,8 +190,6 @@ public class LoginService {
             if (person.getDateOfBirth().isToday()) {
                 System.out.println(ANSI_CYAN + person.getFirstName().toUpperCase() + " " + person.getLastName().toUpperCase() + " HAT HEUTE GEBURTSTAG und wird " +
                         person.getDateOfBirth().getAge() + " Jahre alt!\n" + ANSI_RESET);
-            } else {
-                throw new Exception("Heute hat niemand der Personen, denen Sie folgen Geburtstag!\n");
             }
         }
     }

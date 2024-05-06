@@ -16,7 +16,7 @@ public class AddressService {
         this.addressDAO = addressDAO;
     }
 
-    private final static AtomicLong ID_COUNTER = new AtomicLong();
+    private final static AtomicLong ID_COUNTER = new AtomicLong(3);
 
     private static long getNextId() {
         return ID_COUNTER.incrementAndGet();

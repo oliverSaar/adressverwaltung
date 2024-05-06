@@ -19,7 +19,16 @@ public class PersonDAOImpl implements PersonDAO {
         persons.add(admin);
         Person person = new Person(1, "test", "user", 1, 1, 1999, null, null);
         person.addFollowing(admin);
+        Person person1 = new Person(2, "Max", "Mustermann", 6, 5, 1977, null, null);
+        Person person2 = new Person(3, "Bert", "Ernie", 7, 5, 1993, null, null);
+        Person person3 = new Person(4, "Peter", "Lustig", 9, 9, 1959, null, null);
+        person.addFollowing(person1);
+        person.addFollowing(person2);
+
         persons.add(person);
+        persons.add(person1);
+        persons.add(person2);
+        persons.add(person3);
     }
 
     @Override
