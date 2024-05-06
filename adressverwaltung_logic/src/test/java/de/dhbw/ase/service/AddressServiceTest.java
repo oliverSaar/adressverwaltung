@@ -47,7 +47,6 @@ class AddressServiceTest {
 
         String expectedMessage = "Adresse mit der ID: 6 konnte nicht gefunden werden";
         String actualMessage = exception.getMessage();
-        System.out.println(actualMessage);
         assertTrue(actualMessage.contains(expectedMessage));
     }
 

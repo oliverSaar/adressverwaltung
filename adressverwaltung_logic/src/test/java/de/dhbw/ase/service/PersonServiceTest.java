@@ -185,6 +185,7 @@ class PersonServiceTest {
     @Test
     void addAddress() throws Exception {
 
+        LoggedInPersonSingleton.setLoggedInUserID(0);
         assertEquals(0, personService.getPerson(0).getAddresses().size());
         personService.addAddress(0, new Address(0, "test", 12345, "test", "test", "test"));
         assertEquals(1, personService.getPerson(0).getAddresses().size());
@@ -193,6 +194,7 @@ class PersonServiceTest {
     @Test
     void addAddressPersonNotFound() {
 
+        LoggedInPersonSingleton.setLoggedInUserID(4);
         Exception exception = assertThrows(Exception.class, () ->
                 personService.addAddress(4, new Address(0, "test", 12345, "test", "test", "test")));
 
@@ -204,6 +206,7 @@ class PersonServiceTest {
     @Test
     void addAddressPersonAlreadyHasAddress() {
 
+        LoggedInPersonSingleton.setLoggedInUserID(1);
         Exception exception = assertThrows(Exception.class, () -> personService.addAddress(1, personService.getPerson(1).getAddresses().get(0)));
         String expectedMessage = "Die Adresse wurde bereits zu der Person hinzugefügt!";
         String actualMessage = exception.getMessage();
@@ -213,7 +216,7 @@ class PersonServiceTest {
 
     @Test
     void removeAddress() throws Exception {
-
+LoggedInPersonSingleton.setLoggedInUserID(1);
         assertEquals(1, personService.getPerson(1).getAddresses().size());
         personService.removeAddress(1, personService.getPerson(1).getAddresses().get(0));
         assertEquals(0, personService.getPerson(1).getAddresses().size());
@@ -222,6 +225,7 @@ class PersonServiceTest {
     @Test
     void removeAddressPersonNotFound() {
 
+        LoggedInPersonSingleton.setLoggedInUserID(4);
         Exception exception = assertThrows(Exception.class, () -> personService.removeAddress(4, new Address(0, "test", 12345, "test", "test", "test")));
         String expectedMessage = "Die Person konnte nicht gefunden werden!";
         String actualMessage = exception.getMessage();
@@ -248,7 +252,7 @@ class PersonServiceTest {
 
     @Test
     void removePhoneNumberPersonNotFound() {
-
+LoggedInPersonSingleton.setLoggedInUserID(4);
         Exception exception = assertThrows(Exception.class, () -> personService.removePhoneNumber(4, new PhoneNumber("0123456789", false)));
         String expectedMessage = "Die Person konnte nicht gefunden werden!";
         String actualMessage = exception.getMessage();
@@ -267,6 +271,7 @@ class PersonServiceTest {
     @Test
     void addPhoneNumber() throws Exception {
 
+        LoggedInPersonSingleton.setLoggedInUserID(0);
         assertEquals(0, personService.getPerson(0).getPhoneNumbers().size());
         personService.addPhoneNumber(0, new PhoneNumber("0123456789", false));
         assertEquals(1, personService.getPerson(0).getPhoneNumbers().size());
@@ -275,6 +280,7 @@ class PersonServiceTest {
     @Test
     void addPhoneNumberPersonNotFound() {
 
+        LoggedInPersonSingleton.setLoggedInUserID(4);
         Exception exception = assertThrows(Exception.class, () -> personService.addPhoneNumber(4, new PhoneNumber("0123456789", false)));
         String expectedMessage = "Die Person konnte nicht gefunden werden!";
         String actualMessage = exception.getMessage();
